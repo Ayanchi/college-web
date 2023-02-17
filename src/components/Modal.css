@@ -1,0 +1,13 @@
+img{
+    width: 100%;
+    height: 740px;
+    position: absolute;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.MainHeader{
+    position: relative;
+    font-family: 'Ubuntu', sans-serif;
+}
