@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import { signInWithPopup, signOut } from "firebase/auth";
 import { googleProvider, auth } from "../../app/firebase";
 import { async } from "@firebase/util";
+import { useAuthState } from 'firebase/auth';
+
 
 function GoogleButtom(){
 
@@ -15,21 +17,42 @@ function GoogleButtom(){
             console.log(error)
         }
     }
-        
-    
 
-    return(
-        <div>
-            <p>Зарегистрируйтесь через GOOGLE</p>
+    const logout = async () => {
+        try{
+            await signOut(auth)
+        }catch (error){
+            console.log(error)
+        }
+    }
+
+    const [user] = useAuthState(auth);
+
+    if(user) {
+        return(
             <Stack spacing={2} direction="row">
                 <Button 
                     variant="contained"
-                    onClick={signInWithGoogle}>
+                    onClick={logout}>
                     
-                    Sing in with GOOGLE</Button>
+                    Sing out</Button>
             </Stack>
-        </div>
-    )
+        )
+    }else{
+        return(
+            <div>
+                <p>Зарегистрируйтесь через GOOGLE</p>
+                <Stack spacing={2} direction="row">
+                    <Button 
+                        variant="contained"
+                        onClick={signInWithGoogle}>
+                        
+                        Sing in with GOOGLE</Button>
+                </Stack>
+            </div>
+        )
+    }
+
 }
 
 export default GoogleButtom
