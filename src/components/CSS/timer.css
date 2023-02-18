@@ -1,0 +1,10 @@
+.time{
+    display: flex;   
+    justify-content: center
+}
+.box{
+    margin: 10px;
+}
+.date{
+    margin-top: 50px;
+}

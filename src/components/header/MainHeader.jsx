@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import GoogleButtom from "../google-register/Google-buttom"
+import Timer from '../timer/timer';
 
 
 function TabPanel(props) {
@@ -65,7 +66,7 @@ function MainHeader (){
                 <GoogleButtom />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Three
+                <Timer />
             </TabPanel>
       </Box>
 

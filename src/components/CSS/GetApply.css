@@ -7,7 +7,9 @@
     width: 300px;
     height: 446px;    
     background-blend-mode: normal, soft-light;
-    border-radius: 8px;              
+    border-radius: 8px;       
+    margin-left: 224px;
+       
 }
 .butoon{
     width: 110px;
