@@ -43,3 +43,10 @@ input{
 }
 
 
+@media (max-width: 767px){
+    .form{
+        margin-left: 10px;
+    }
+}
+
+
