@@ -4,12 +4,14 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { signInWithPopup, signOut } from "firebase/auth";
 import { googleProvider, auth } from "../../app/firebase";
-import { async } from "@firebase/util";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Registration from "../apply/GetApply";
 
-function GoogleButtom(){
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/artur
+function GoogleButtom(){
     const signInWithGoogle = async () => {
         try{
             await signInWithPopup(auth, googleProvider)
@@ -31,7 +33,7 @@ function GoogleButtom(){
     if(user) {
         return(  
             <div>
-                <Registration />
+                <Registration current={user}/>
                 <Stack spacing={2} direction="row">
                     <Button 
                         variant="contained"
@@ -49,8 +51,12 @@ function GoogleButtom(){
                     <Button 
                         variant="contained"
                         onClick={signInWithGoogle}>
+<<<<<<< HEAD
                         Sing in with GOOGLE
                     </Button>
+=======
+                        Sing in with GOOGLE</Button>
+>>>>>>> origin/artur
                 </Stack>
             </div>
         )
