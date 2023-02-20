@@ -8,9 +8,6 @@ import { async } from "@firebase/util";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Registration from "../apply/GetApply";
 
-
-
-
 function GoogleButtom(){
 
     const signInWithGoogle = async () => {
@@ -38,22 +35,22 @@ function GoogleButtom(){
                 <Stack spacing={2} direction="row">
                     <Button 
                         variant="contained"
-                        onClick={logout}>
-                        
-                        Sing out</Button>
+                        onClick={logout}>  
+                            Sing out
+                    </Button>
                 </Stack>
             </div>
         )
     }else{
         return(
             <div>
-                <p>Зарегистрируйтесь через GOOGLE</p>
+                <div className="little">Зарегистрируйтесь через GOOGLE</div>
                 <Stack spacing={2} direction="row">
                     <Button 
                         variant="contained"
                         onClick={signInWithGoogle}>
-                        
-                        Sing in with GOOGLE</Button>
+                        Sing in with GOOGLE
+                    </Button>
                 </Stack>
             </div>
         )
