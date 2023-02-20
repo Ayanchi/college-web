@@ -1,54 +1,41 @@
 import { useEffect, useState } from "react"
 import { database } from "../../app/firebase"
-import { getDocs, collection, addDoc } from "firebase/firestore"
-import { async } from "@firebase/util"
+import { getDocs, collection, setDoc, doc, query, where, limit} from "firebase/firestore"
 import "../CSS/GetApply.css"
 import {useForm} from "react-hook-form";
 
 
 const Registration = (props) => {
-    const [formList, setFormList] = useState([])
-
-    const [name, setName] = useState("")
-    const [surename, setSurename] = useState("")
-    const [phone, setPhone] = useState(0)
-    const [skills, setSkills] = useState("")
-
     const {register, handleSubmit, formState: { errors } } = useForm();
-
-    const onSubmit = async data => {
-        console.log(data)
-    }
-
-
-    const formCollection = collection(database, 'college-web')
+    const [userData, setUserData] = useState([])
 
     useEffect(() => {
         const getFormList = async() => {
             try{
-                const data = await getDocs(formCollection)
+                const q = query(collection(database, "users"), where("idUser", "==", props.current.uid), limit(1));
+                const data = await getDocs(q)
                 const filterForm = data.docs.map((doc) => ({
                     ...doc.data(),
                      id: doc.id,
                 }))
-                console.log(filterForm)
+                setUserData(filterForm)
             }catch (error){
                 console.log(error)
             }
-            
         }
-
         getFormList()
     }, [])
 
-    const onSubmitForm = async () => {
+    const onSubmitForm = async (data) => {
         try{
-            await addDoc(formCollection, {
-                name: name,
-                surename: surename,
-                phone: phone,
-                skills: skills
-            })
+            await setDoc(doc(database, "users", props.current.email), {
+                idUser: props.current.uid,
+                email: props.current.email,
+                name: data.name,
+                surename: data.surename,
+                phone: data.phone,
+                skills: data.skills
+            });
         }catch(error) {
             console.log(error)
         }
@@ -64,8 +51,8 @@ const Registration = (props) => {
                             <div className="forms">
                                 <input type="text"
                                 placeholder="Name"
-                                onChange={(e) => setName(e.target.value)}
-                                name="name" 
+                                name="name"
+                                defaultValue={userData[0]?.name || ''}
                                 {...register('name', {
                                     required: "Параметр обязателен",
                                     maxLength: {
@@ -84,8 +71,8 @@ const Registration = (props) => {
                             <div className="forms">
                                 <input type="text"
                                 placeholder="Surename"
-                                onChange={(e) => setSurename(e.target.value)}
-                                name="surename" 
+                                name="surename"
+                                defaultValue={userData[0]?.surename || ''}
                                 {...register('surename', {
                                     required: "Параметр обязателен",
                                     maxLength: {
@@ -103,8 +90,8 @@ const Registration = (props) => {
                             <div className="forms">
                                 <input type="number"
                                 placeholder="Phone number"
-                                onChange={(e) => setPhone(e.target.value)}
                                 name="phone" 
+                                defaultValue={userData[0]?.phone || ''}
                                 {...register("phone", {
                                     required: "Параметр обязателен",
                                     minLength: {
@@ -123,7 +110,7 @@ const Registration = (props) => {
                             <div className="forms">
                                 <input type="text"
                                 placeholder="Skills"
-                                onChange={(e) => setSkills(e.target.value)}
+                                defaultValue={userData[0]?.skills || ''}
                                 name="skills" 
                                 {...register("skills", {
                                     required: "Параметр обязателен"
