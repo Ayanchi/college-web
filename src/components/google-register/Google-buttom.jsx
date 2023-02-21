@@ -7,10 +7,6 @@ import { googleProvider, auth } from "../../app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Registration from "../apply/GetApply";
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/artur
 function GoogleButtom(){
     const signInWithGoogle = async () => {
         try{
@@ -51,12 +47,7 @@ function GoogleButtom(){
                     <Button 
                         variant="contained"
                         onClick={signInWithGoogle}>
-<<<<<<< HEAD
-                        Sing in with GOOGLE
-                    </Button>
-=======
                         Sing in with GOOGLE</Button>
->>>>>>> origin/artur
                 </Stack>
             </div>
         )
