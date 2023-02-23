@@ -4,6 +4,7 @@ import Galaxy from "../assets/galaxy.jpg"
 import Timer from "./timer/timer"
 import Location from "./stages/stage"
 import GoogleButtom from "./google-register/Google-buttom"
+import { ReactDOM } from "react"
 
 function Modal() {
 
@@ -51,10 +52,14 @@ function Modal() {
                 <p className="street">Кыргызстан, г. Бишкек, ул. Анкара 1/8а</p>
                 <p className="college">StartUp Hub Международного университета Ала-Тоо</p>
             </div>
-            <div className="realMap"
-                style={cursor: `url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur)`}
-            >
-
+            <div className="realMap">
+                <iframe 
+                    width="770" 
+                    height="510" 
+                    id="gmap_canvas" 
+                    src="https://maps.google.com/maps?q=alatoo university&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                    >
+                </iframe>
             </div>
         </div>
     </div>

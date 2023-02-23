@@ -3,7 +3,7 @@ import audanse from "../../assets/stageImg/audanse.jpg";
 import justFriends from "../../assets/stageImg/justFriends.jpg";
 import moneyStrasture from "../../assets/stageImg/moneyStrasture.jpg";
 import startUpImg from "../../assets/stageImg/sturtUpImg.png";
-import onse from "../../assets/stageImg/once.png";
+import once from "../../assets/stageImg/once.png";
 import double from "../../assets/stageImg/double.png"
 import "../CSS/stage.css"
 
@@ -12,29 +12,37 @@ const Location = () => {
     first: false,
     second: false,
     ground: false,
+
+  });
+  const [derection, setDerection] = useState({
     double: false,
     once: true
   });
-  const onClickHandler = (order, direct) => {
+  const onClickHandler = (order, directFirst, directSecond) => {
     setImageClicked((prevState) => ({
       ...prevState,
       [order]: !prevState[order]
     }));
-    chooseDiraction = (direct) => {
-        true ? imageClicked.once : imageClicked.double
-      }
+    setDerection( () => {
+        if(directFirst){
+          derection.once
+        }else if (directSecond){
+          derection.double
+        }
+      })
   };
 
   return (
     <div>
       <div className="Ccontainer">
         <div className="buttonClick">
-            <button onClick={() => onClickHandler("ground", "once")} className="ground">
+            <button onClick={() => onClickHandler("ground", "once", "double")} className="ground">
                 Ground Floor
             </button>
+            {derection.once && <img src={once} alt="once" />}
+            {derection.double && <img src={double} alt="double" />}
             <div className="border"></div>
-            {imageClicked.once && <img src={onse} alt="once" />}
-            {imageClicked.double && <img src={double} alt="double" />}
+
 
             {imageClicked.ground && <img src={audanse} alt="ground" className="stage-img" />}
         </div>
