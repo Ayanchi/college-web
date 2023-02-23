@@ -1,0 +1,32 @@
+.stage-img{
+    width: 100%;
+}
+.ground{
+    background-color: transparent;
+    color: aliceblue;
+    border: 0px;
+    border-bottom: 3px;
+    font-family: 'Open Sans';
+    font-size: 16pt;
+    line-height: 1.27;
+    margin-top: 18px;
+    font-weight: 400;
+}
+.Ccontainer{
+    display: flex;
+    margin: 0px;
+    padding: 0%;
+    justify-content: space-between;
+    margin-bottom: 100px;
+}
+.buttonClick{
+    display: flex;
+    flex-direction: column;
+    padding: 14px 8px;
+    width: 100%;
+    border-bottom: 2px;
+}
+.border{
+    border: 1px solid rgba(255,255,255,.4);
+}
+

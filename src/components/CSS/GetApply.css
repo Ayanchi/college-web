@@ -8,7 +8,7 @@
     height: 446px;    
     background-blend-mode: normal, soft-light;
     border-radius: 8px;       
-    margin-left: 224px;
+    margin: 0 auto;
        
 }
 .butoon{
@@ -43,10 +43,6 @@ input{
 }
 
 
-@media (max-width: 767px){
-    .form{
-        margin-left: 10px;
-    }
-}
+
 
 

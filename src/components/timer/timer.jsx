@@ -26,33 +26,39 @@ const Timer = () => {
   }, []);
 
   return (
-    <div className="timer">
-        <div className="date">
-            {deadline}
-        </div>
+    <div className="timerCclock">
         <div className="time" role="timer">
             <div className="col-4">
                 <div className="box">
-                <p id="day">{days < 10 ? "0" + days : days}</p>
-                <span className="text">Days</span>
+                  <div className="getTime">
+                    <p id="day">{days < 10 ? "0" + days : days}</p>
+                  </div>                  
+                  <span className="text">ДНЕЙ</span>
                 </div>
             </div>
             <div className="col-4">
                 <div className="box">
-                <p id="hour">{hours < 10 ? "0" + hours : hours}</p>
-                <span className="text">Hours</span>
+                  <div className="getTime">
+                    <p id="hour">{hours < 10 ? "0" + hours : hours}</p>
+                  </div>
+                  <span className="text">ЧАСОВ</span>
+                  
                 </div>
             </div>
             <div className="col-4">
                 <div className="box">
-                <p id="minute">{minutes < 10 ? "0" + minutes : minutes}</p>
-                <span className="text">Minutes</span>
+                  <div className="getTime">
+                    <p id="minute">{minutes < 10 ? "0" + minutes : minutes}</p>
+                  </div>
+                  <span className="text">МИНУТ</span>
                 </div>
             </div>
             <div className="col-4">
                 <div className="box">
-                <p id="second">{seconds < 10 ? "0" + seconds : seconds}</p>
-                <span className="text">Seconds</span>
+                  <div className="getTime">
+                    <p id="second">{seconds < 10 ? "0" + seconds : seconds}</p>
+                  </div>
+                  <span className="text">СЕКУНД</span>
                 </div>
             </div>
         </div>
