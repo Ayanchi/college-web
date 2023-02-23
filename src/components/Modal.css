@@ -174,3 +174,59 @@ a{
   line-height: 1.2;
   margin-top: 0px;
 }
+
+
+
+@media (max-width: 790px){
+  .applyBlock{
+    padding: 20px 3px 20px 3px;
+  }
+  h1{
+    font-size: 50px;
+  }
+  h2{
+    font-size: 15pt;
+  }
+}
+@media (max-width: 530px){
+  .backgraund-galaxy{
+    height: 100%;
+  }
+  .timerCclock{
+    margin-bottom: 111px;
+  }
+  .time-spending{
+    font-size: 24.0pt;
+  }
+  .shark-text{
+    font-size: 25px;
+  }
+  .box{
+    margin: 0px 10px;
+  }
+  .Ccontainer{
+    flex-direction: column;
+  }
+  .map{
+    padding: 20px 3px 20px 3px;
+  }
+  .college-text{
+    flex-direction: column;
+  }
+  .street {
+    width: 100%; 
+  }
+  .college {
+    width: 100%;
+  }
+  .preFooter{
+    padding: 20px 3px 20px 3px;
+  }
+  .footer{
+    padding: 20px 3px 20px 3px;
+  }
+  .addApply{
+    margin-top: 330px;
+  }
+ 
+}

@@ -44,5 +44,12 @@ input{
 
 
 
+@media (max-width: 790px){
+    .form{
+        width: fit-content;
+    }
+}
+
+
 
 
