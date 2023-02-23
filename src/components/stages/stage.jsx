@@ -12,35 +12,33 @@ const Location = () => {
     first: false,
     second: false,
     ground: false,
+    once: true,
+    double: false
+  });
 
-  });
-  const [derection, setDerection] = useState({
-    double: false,
-    once: true
-  });
-  const onClickHandler = (order, directFirst, directSecond) => {
+  const onClickHandler = (order) => {
     setImageClicked((prevState) => ({
       ...prevState,
       [order]: !prevState[order]
     }));
-    setDerection( () => {
-        if(directFirst){
-          derection.once
-        }else if (directSecond){
-          derection.double
-        }
-      })
+    if(imageClicked.order == false){
+      imageClicked.once
+    }else{
+      imageClicked.double
+    }
+    
   };
 
   return (
     <div>
       <div className="Ccontainer">
         <div className="buttonClick">
-            <button onClick={() => onClickHandler("ground", "once", "double")} className="ground">
+            <button onClick={() => onClickHandler("ground")} className="ground">
                 Ground Floor
             </button>
-            {derection.once && <img src={once} alt="once" />}
-            {derection.double && <img src={double} alt="double" />}
+            
+            {imageClicked.once && <img src={once} alt="once" />}
+            {imageClicked.double && <img src={double} alt="double" />}
             <div className="border"></div>
 
 

@@ -6,11 +6,12 @@
     color: aliceblue;
     border: 0px;
     border-bottom: 3px;
-    font-family: 'Open Sans';
     font-size: 16pt;
     line-height: 1.27;
     margin-top: 18px;
     font-weight: 400;
+    color: aliceblue;
+    font-family: Roboto, Arial;
 }
 .Ccontainer{
     display: flex;
@@ -25,6 +26,7 @@
     padding: 14px 8px;
     width: 100%;
     border-bottom: 2px;
+    
 }
 .border{
     border: 1px solid rgba(255,255,255,.4);
