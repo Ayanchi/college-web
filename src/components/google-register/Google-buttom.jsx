@@ -32,7 +32,7 @@ function GoogleButtom(){
     if(user) {
         return(  
             <div>
-                <Button onClick={() => setModal(true)}>Подать заявку</Button>
+                <Button className="text-3xl font-bold underline" onClick={() => setModal(true)}>Подать заявку</Button>
                 <Stack spacing={2} direction="row">
                     <Button 
                         variant="contained"

@@ -62,8 +62,7 @@ h2{
   text-align: center;
 }
 .wonnaStartUp{
-  background-color: transparent;
-  border: 1px solid rgb(255, 255, 255);
+  background-color: hsl(262deg 52% 47% / 49%);
   padding: 8px 50px;
   font-family: Roboto, Arial;
   color: aliceblue;
@@ -71,6 +70,7 @@ h2{
   border-radius: 8px;
   text-align: center;
   margin: auto;
+  width: fit-content;
 }
 
 
@@ -187,8 +187,11 @@ a{
   h2{
     font-size: 15pt;
   }
+  .timerCclock{
+    margin-bottom:auto
+  }
 }
-@media (max-width: 530px){
+@media (max-width: 751px){
   .backgraund-galaxy{
     height: 100%;
   }
