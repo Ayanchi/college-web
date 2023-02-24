@@ -11,3 +11,6 @@ p{
 .css-sghohy-MuiButtonBase-root-MuiButton-root{
     font-family: 'Ubuntu', sans-serif;
 }
+.stackRadius{
+    border-radius: 30px;
+}

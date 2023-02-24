@@ -16,11 +16,7 @@
     font-weight: 700;
     font-size: 25px;
 }
-span{
-    font-family: Roboto, Arial;
-    font-weight: 700;
-    color: #b2ff00;
-}
+
 #day, #hour, #minute ,#second{
     margin: 0;
 }

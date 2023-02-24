@@ -1,20 +1,16 @@
-.form{
+.form {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 40px;
-    width: 300px;
-    height: 446px;    
-    background-blend-mode: normal, soft-light;
-    border-radius: 8px;       
+    min-height: 500px;
     margin: 0 auto;
-    border-radius: 10px;
-    padding: 20px;
-       
+
 }
-.butoon{
+
+.butoon {
     width: 100%;
-    border: 1px solid #FFFFFF;    
+    border: 1px solid #FFFFFF;
     border-radius: 100px;
     background-color: #865924;
     background-blend-mode: normal, soft-light;
@@ -22,41 +18,134 @@
     padding: 5px 10px 5px 10px;
     font-size: 15px;
     color: #FFFFFF;
-    margin: 30px 0px;
+    margin: 20px 0px;
 }
-.inputs{
+
+.inputs {
     display: flex;
     flex-direction: column;
-    margin: 30px;
 }
-.post{
+
+.post {
     padding: 6px 10px;
 }
-input{
+
+.formTitle {
+    position: relative;
+    top: -35px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+}
+
+.forms span {
+    font-family: Roboto, Arial;
+    font-weight: 700;
+    color: rgb(215, 2, 2);
+}
+
+.forms {
     margin-top: 10px;
-    border: 1px solid #FFFFFF;    
-    border-radius: 3px;
+}
+
+.forms label {
+    font-weight: 500;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+input {
+    margin-top: 10px;
+    border: 1px solid #150b50;
+    border-radius: 20px;
+    width: 100%;
     background-blend-mode: normal, soft-light;
     box-sizing: border-box;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 10px 5px 15px;
+    outline: none;
     font-size: 15px;
-    color: rgb(60 11 80);
+    color: #0a0528;
+    font-weight: 500;
 }
-.css-vagkyp{
+
+textarea {
+    margin-top: 10px;
+    border: 1px solid #150b50;
+    border-radius: 20px;
+    width: 100%;
+    height: 70px;
+    background-blend-mode: normal, soft-light;
+    box-sizing: border-box;
+    padding: 10px 10px 5px 15px;
+    outline: none;
+    font-size: 15px;
+    color: #0a0528;
+    font-weight: 500;
+}
+
+.css-vagkyp {
     background-color: #150b50;
 }
+
 .form-input {
     border: 1px solid #865924;
     background-color: transparent;
 }
 
+.number::-webkit-outer-spin-button,
+.number::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+}
 
-@media (max-width: 790px){
-    .form{
-        width: fit-content;
+.closebutton {
+    position: relative;
+    font-family: cursive;
+    right: -160px;
+    top: -45px;
+    font-size: 40px;
+    font-weight: 600;
+    color: #0a0528;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+}
+
+.modalMessage {
+
+    text-align: center;
+    position: relative;
+    top: -30px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+@media (max-width: 790px) {
+    .form {
+        width: 100%;
+        min-height: 400px;
+    }
+    .inputs {
+        position: relative;
+        top: -30px;
+    }
+    .butoon{
+        margin: 0;
     }
 }
 
-
-
-
+@media (max-width: 480px) {
+    .form {
+        width: 80%;
+        min-height: 400px;
+    }
+    .formTitle {
+        position: relative;
+        top: -45px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 500;
+        font-size: 30px;
+    }
+}

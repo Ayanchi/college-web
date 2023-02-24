@@ -1,5 +1,5 @@
 import "../CSS/Google-buttom.css"
-import * as React from 'react';
+import React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { signInWithPopup, signOut } from "firebase/auth";
@@ -7,11 +7,13 @@ import { googleProvider, auth } from "../../app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { ModalContext } from '../../App'
 
-function GoogleButtom(){
+function GoogleButtom() {
+
+
     const signInWithGoogle = async () => {
-        try{
+        try {
             await signInWithPopup(auth, googleProvider)
-        }catch (error){
+        } catch (error) {
             console.log(error)
         }
     }
@@ -19,35 +21,35 @@ function GoogleButtom(){
     const [modal, setModal] = React.useContext(ModalContext)
 
     const logout = async () => {
-        try{
+        try {
             await signOut(auth)
             setUser(false)
-        }catch (error){
+        } catch (error) {
             console.log(error)
         }
     }
 
     const [user] = useAuthState(auth);
 
-    if(user) {
-        return(  
+    if (user) {
+        return (
             <div>
-                <Button className="text-3xl font-bold underline" onClick={() => setModal(true)}>Подать заявку</Button>
+                <Button onClick={() => setModal(true)}>Подать заявку</Button>
                 <Stack spacing={2} direction="row">
-                    <Button 
+                    <Button
                         variant="contained"
-                        onClick={logout}>  
-                            Sing out
+                        onClick={logout}>
+                        Sing out
                     </Button>
                 </Stack>
             </div>
         )
-    }else{
-        return(
+    } else {
+        return (
             <div>
                 <div className="little">Зарегистрируйтесь через GOOGLE</div>
                 <Stack spacing={2} direction="row">
-                    <Button 
+                    <Button
                         variant="contained"
                         onClick={signInWithGoogle}>
                         Sing in with GOOGLE</Button>

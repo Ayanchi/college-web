@@ -21,11 +21,11 @@ const Location = () => {
 
   return (
     <div>
-      <div className="Ccontainer">
+      <div className="stageContainer">
         <div className="buttonClick">
             <button onClick={() => onClickHandler("ground")} className="ground">
                 Этап 1
-                <img className={imageClicked.ground ? `arrow` : `arrow active`} src={once} alt="once" />
+                <img className={imageClicked.ground ? `arrow active` : `arrow` } src={once} alt="once" />
             </button>
 
             {imageClicked.ground && <StageFirst />}
@@ -33,14 +33,14 @@ const Location = () => {
         <div className="buttonClick">
             <button onClick={() => onClickHandler("first")} className="ground">
                 Этап 2
-                <img className={imageClicked.first ? `arrow` : `arrow active`} src={once} alt="once" />
+                <img className={imageClicked.first ? `arrow active` : `arrow`} src={once} alt="once" />
             </button>
             {imageClicked.first && <StageSecond />}
         </div>
         <div className="buttonClick">
             <button onClick={() => onClickHandler("second")} className="ground">
                 Этап 3
-                <img className={imageClicked.second ? `arrow` : `arrow active`} src={once} alt="once" />
+                <img className={imageClicked.second ? `arrow active` : `arrow`} src={once} alt="once" />
             </button>
             {imageClicked.second && <StageThird />}
         </div>
