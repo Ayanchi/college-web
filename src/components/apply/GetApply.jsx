@@ -3,7 +3,6 @@ import { database } from "../../app/firebase"
 import { getDocs, collection, setDoc, doc, query, where, limit} from "firebase/firestore"
 import "../CSS/GetApply.css"
 import {useForm} from "react-hook-form";
-import { async } from "@firebase/util";
 
 
 const Registration = (props) => {

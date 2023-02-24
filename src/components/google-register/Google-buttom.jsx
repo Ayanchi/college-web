@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { signInWithPopup, signOut } from "firebase/auth";
 import { googleProvider, auth } from "../../app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import Registration from "../apply/GetApply";
+import { ModalContext } from '../../App'
 
 function GoogleButtom(){
     const signInWithGoogle = async () => {
@@ -16,9 +16,12 @@ function GoogleButtom(){
         }
     }
 
+    const [modal, setModal] = React.useContext(ModalContext)
+
     const logout = async () => {
         try{
             await signOut(auth)
+            setUser(false)
         }catch (error){
             console.log(error)
         }
@@ -29,7 +32,7 @@ function GoogleButtom(){
     if(user) {
         return(  
             <div>
-                <Registration current={user}/>
+                <Button onClick={() => setModal(true)}>Подать заявку</Button>
                 <Stack spacing={2} direction="row">
                     <Button 
                         variant="contained"
