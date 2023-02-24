@@ -12,6 +12,8 @@
     font-weight: 400;
     color: aliceblue;
     font-family: Roboto, Arial;
+    position: relative;
+    border-bottom: 2px solid rgba(255,255,255,.4);
 }
 .Ccontainer{
     display: flex;
@@ -28,7 +30,12 @@
     border-bottom: 2px;
     
 }
-.border{
-    border: 1px solid rgba(255,255,255,.4);
+.ground .arrow {
+    position: absolute;
+    right: 10px;
+    top: -5px;
+    width: 36px;
 }
-
+.ground .arrow.active {
+    transform: rotate(180deg)
+}
