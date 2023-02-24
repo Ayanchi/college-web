@@ -30,13 +30,13 @@ function GoogleButtom(){
     const [user] = useAuthState(auth);
 
     if(user) {
-        return(  
+        return(
             <div>
                 <Button onClick={() => setModal(true)}>Подать заявку</Button>
                 <Stack spacing={2} direction="row">
                     <Button 
                         variant="contained"
-                        onClick={logout}>  
+                        onClick={logout}> 
                             Sing out
                     </Button>
                 </Stack>
@@ -50,7 +50,8 @@ function GoogleButtom(){
                     <Button 
                         variant="contained"
                         onClick={signInWithGoogle}>
-                        Sing in with GOOGLE</Button>
+                        Sing in with GOOGLE
+                    </Button>
                 </Stack>
             </div>
         )

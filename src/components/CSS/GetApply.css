@@ -41,7 +41,12 @@ input{
     font-size: 15px;
     color: #FFFFFF;
 }
-
+.number::-webkit-outer-spin-button,
+.number::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
 
 
 @media (max-width: 790px){
