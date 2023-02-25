@@ -11,8 +11,6 @@ const Registration = (props) => {
     const [isSending, setisSending] = useState(true)
     const [modal, setModal] = useContext(ModalContext)
 
-    
-
     useEffect(() => {
         const getFormList = async () => {
             try {
@@ -50,8 +48,6 @@ const Registration = (props) => {
         }
     }
 
-
-
     if (isSending) {
         return (
             <div className="form">
@@ -64,7 +60,7 @@ const Registration = (props) => {
                         <div className="forms">
                             <label>Напишите ваше имя...</label>
                             <input type="text"
-                                placeholder="Name"
+                                placeholder="Ваше имя"
                                 name="name"
                                 defaultValue={userData[0]?.name || ''}
                                 {...register('name', {
@@ -74,7 +70,7 @@ const Registration = (props) => {
                                         message: 'Ваше имя должно быть меньше 20 символов'
                                     },
                                     minLength: {
-                                        value: 2,
+                                        value: 3,
                                         message: 'Ваше имя должно быть больше 3 символов'
                                     },
                                 })} />
@@ -84,7 +80,7 @@ const Registration = (props) => {
                         <div className="forms">
                             <label>Напишите вашу фамилию...</label>
                             <input type="text"
-                                placeholder="Surname"
+                                placeholder="Ваша фамилия"
                                 name="surename"
                                 defaultValue={userData[0]?.surename || ''}
                                 {...register('surename', {
@@ -104,18 +100,18 @@ const Registration = (props) => {
                         <div className="forms">
                             <label>Напишите ваш номер телефона...</label>
                             <input type="number"
-                                placeholder="Phone number"
+                                placeholder="Ваш номер"
                                 name="phone"
                                 className="number"
                                 defaultValue={userData[0]?.phone || ''}
                                 {...register("phone", {
                                     required: "Параметр обязателен",
                                     minLength: {
-                                        value: 9,
+                                        value: 8,
                                         message: "Номер не полный"
                                     },
                                     maxLength: {
-                                        value: 22,
+                                        value: 18,
                                         message: "Перебор !!!"
                                     }
                                 })} />
@@ -124,31 +120,26 @@ const Registration = (props) => {
                         </div>
 
                         <div className="forms">
-                            <label>Write your skills...</label>
+                            <label>Опишите ваши способности...</label>
                             <textarea type="text"
-                                placeholder="Skills"
+                                placeholder="Ваши способности"
                                 name="skills"
                                 defaultValue={userData[0]?.skills || ''}
                                 {...register("skills", {
                                     required: "Параметр обязателен"
-
                                 })}>
-                                
                             </textarea>
+                            {errors.skills && <span className="error" role="alert">{errors.skills?.message}</span>}
                         </div>
-
                     </div>
                     <button
-                        className="butoon"
+                        className="b-center focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
                         type="submit"
                     >
                         {userData[0]?.name ? 'Обновить данные' : 'Сохранить данные'}
                     </button>
-
                 </form>
-
             </div>
-
         )
     } else {
         return (
