@@ -1,9 +1,8 @@
 import "../components/Modal.css"
-import Galaxy from "../assets/galaxy.jpg"
 import Timer from "./timer/timer"
 import Location from "./stages/stage"
 import GoogleButtom from "./google-register/Google-buttom"
-import { ReactDOM } from "react"
+
 
 function Modal() {
 
@@ -84,7 +83,7 @@ function Modal() {
             </div>
         </div>
 
-    </div>
+        </div>
     )
 }
 

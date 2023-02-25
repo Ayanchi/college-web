@@ -15,12 +15,11 @@
     position: relative;
     border-bottom: 2px solid rgba(255,255,255,.4);
 }
-.Ccontainer{
+.stageContainer{
     display: flex;
     margin: 0px;
     padding: 0%;
     justify-content: space-between;
-    margin-bottom: 100px;
 }
 .buttonClick{
     display: flex;
@@ -33,9 +32,33 @@
 .ground .arrow {
     position: absolute;
     right: 10px;
-    top: -5px;
-    width: 36px;
+    transition: 0.8s;
+    top: 0px;
+    width: 24px;
 }
 .ground .arrow.active {
     transform: rotate(180deg)
 }
+.stage-content{
+    width: 300px;
+    margin: 40px auto;
+}
+.stage-content img {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 751px) {
+    .stageContainer{
+        margin-top: 50px;
+        flex-wrap: wrap;
+    }
+    .ground{
+        margin: 5px auto;
+        width: 400px;
+        border-bottom: 1px solid rgba(255,255,255,.4);
+        padding: 0 0 20px 0;
+    }
+    .ground {
+        width: 300px;
+    }
+}    

@@ -1,4 +1,4 @@
-body{
+body {
   margin: 0px;
   padding: 0px;
 }
@@ -20,8 +20,7 @@ body{
   top: 0;
   width: 100%;
 
-}
-.timer{
+.timer {
   position: relative;
   color: white;
   display: flex;
@@ -31,14 +30,16 @@ body{
 .timerCclock{
   margin-bottom: 40px;
 }
-h1{
+
+h1 {
   font-family: Roboto, Arial;
   font-weight: 700;
   font-size: 83px;
   line-height: 1.25;
   margin: 0px;
 }
-h2{
+
+h2 {
   font-family: Roboto, Arial;
   font-size: 16pt;
   line-height: 1.27;
@@ -46,7 +47,8 @@ h2{
   font-weight: 400;
   margin-bottom: 0px;
 }
-.stattup-text{
+
+.stattup-text {
   padding: 14px;
   margin-top: 100px;
   text-align: center;
@@ -76,7 +78,8 @@ h2{
   font-size: 13pt;
   border-radius: 8px;
   text-align: center;
-  margin: auto;
+  margin: 0 auto;
+  width: 400px;
 }
 
 
@@ -98,14 +101,17 @@ h2{
 
 
 
-.map{
-  background-color: #00000021;;
+.map {
+  background-color: #00000021;
+  ;
   padding: 20px 100px 20px 100px;
   display: flex;
   flex-direction: column;
   font-family: Roboto, Arial;
 }
-.street, .college{
+
+.street,
+.college {
   color: black;
   font-size: 16pt;
   line-height: 1.27;
@@ -113,36 +119,49 @@ h2{
   font-weight: 400;
   text-align: left;
 }
-.college-text{
+
+.college-text {
   display: flex;
   justify-content: space-between
 }
-.street{
+
+.street {
   width: 30%;
 }
-h3{
+
+h3 {
   text-align: center;
   font-size: 28pt;
   line-height: 1.21;
   font-weight: 400;
 }
-.college{
+
+.college {
   width: 60%;
 }
-.realMap{
+
+.realMap {
   margin-bottom: 80px;
+  height: 400px;
+}
+
+.backgraund-galaxy {
+  background-position: center center;
+  background-image: url(/src/assets/galaxy.jpg);
+  background-size: cover;
+  transform: translate3d(0px, 0px, 0px);
 }
 
 
-.preFooter{
-  background-color: rgba(21,11,80,1);
+.preFooter {
+  background-color: rgba(21, 11, 80, 1);
   padding: 20px 100px 20px 100px;
   word-wrap: break-word;
   font-family: Roboto, Arial;
- 
+
 }
 
-.noTeam{
+.noTeam {
   font-family: 'Roboto Condensed';
   font-size: 28pt;
   line-height: 1.21;
@@ -151,7 +170,9 @@ h3{
   font-family: Roboto, Arial;
 
 }
-.wonnaTeam-button{
+
+.wonnaTeam-button {
+  margin-top: 40px;
   margin-bottom: 70px;
   display: flex;
   justify-content: center;
@@ -159,19 +180,20 @@ h3{
 
 
 }
-a{
+
+.wonnaTeam-button a {
   color: aliceblue;
   font-size: 13pt;
-  border: 2px solid rgb(255, 255, 255); 
+  border: 2px solid rgb(255, 255, 255);
   border-radius: 3px;
-  padding: 8px 34px;
+  padding: 8px 70px;
 }
 
-.footer{
-  padding: 20px 100px 20px 100px;
-  background-color:rgb(214, 214, 214);
+.footer {
+  background-color: rgb(214, 214, 214);
 }
-.hub{
+
+.hub {
   background-color: aliceblue;
   padding: 7px 100px 6px 100px;
   text-align: center;
@@ -183,14 +205,22 @@ a{
 
 
 
-@media (max-width: 790px){
-  .applyBlock{
+@media (max-width: 790px) {
+  .applyBlock {
     padding: 20px 3px 20px 3px;
   }
-  h1{
+
+  h1 {
     font-size: 50px;
   }
-  h2{
+
+  .stage-content {
+    width: 200px;
+    height: 300px;
+    margin: 40px auto;
+  }
+
+  h2 {
     font-size: 15pt;
   }
 }
@@ -204,35 +234,52 @@ a{
   .time-spending{
     font-size: 1.5rem;
   }
-  .shark-text{
+
+  .shark-text {
     font-size: 25px;
+    margin-top: 10px;
+
   }
-  .box{
+
+  .box {
     margin: 0px 10px;
   }
-  .Ccontainer{
+
+  .Ccontainer {
     flex-direction: column;
   }
-  .map{
+
+  .map {
     padding: 20px 3px 20px 3px;
   }
-  .college-text{
+
+  .college-text {
     flex-direction: column;
   }
+
   .street {
-    width: 100%; 
+    width: 100%;
   }
+
   .college {
     width: 100%;
   }
-  .preFooter{
+
+  .preFooter {
     padding: 20px 3px 20px 3px;
   }
-  .footer{
+
+  .footer {
     padding: 20px 3px 20px 3px;
   }
   .addApply{
     margin-top: 160px;
   }
- 
+
+  .noTeam {
+    font-size: 25px;
+    line-height: 1.21;
+    font-weight: 500;
+  }
 }
+

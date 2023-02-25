@@ -1,9 +1,10 @@
 import './App.css'
 import Main from './pages/autorization/Main'
 import {useState, createContext} from 'react'
-import {Modal, Box, Typography} from '@mui/material';
+import {Modal, Box} from '@mui/material';
 import Registration from './components/apply/GetApply'
 import { auth } from "./app/firebase";
+import './App.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const ModalContext = createContext()

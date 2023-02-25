@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext, createContext } from "react"
 import { database } from "../../app/firebase"
-import { getDocs, collection, setDoc, doc, query, where, limit} from "firebase/firestore"
+import { getDocs, collection, setDoc, doc, query, where, limit } from "firebase/firestore"
 import "../CSS/GetApply.css"
-import {useForm} from "react-hook-form";
-
+import { useForm } from "react-hook-form";
+import { ModalContext } from "../../App"
 
 const Registration = (props) => {
-    const {register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [userData, setUserData] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isSending, setisSending] = useState(true)
+    const [modal, setModal] = useContext(ModalContext)
 
     useEffect(() => {
-        const getFormList = async() => {
-            try{
+        const getFormList = async () => {
+            try {
                 const q = query(collection(database, "users"), where("idUser", "==", props.current.uid), limit(1));
                 const data = await getDocs(q)
                 const filterForm = data.docs.map((doc) => ({
@@ -20,15 +21,19 @@ const Registration = (props) => {
                     id: doc.id,
                 }))
                 setUserData(filterForm)
-            }catch (error){
+            } catch (error) {
                 console.log(error)
             }
         }
         getFormList()
-    }, [isLoading])
+    }, [])
+
+    useEffect(() => {
+        setModal(true)
+    }, [modal])
 
     const onSubmitForm = async (data) => {
-        try{
+        try {
             await setDoc(doc(database, "users", props.current.email), {
                 idUser: props.current.uid,
                 email: props.current.email,
@@ -37,108 +42,118 @@ const Registration = (props) => {
                 phone: data.phone,
                 skills: data.skills
             });
-        }catch(error) {
+            setisSending(false)
+        } catch (error) {
             console.log(error)
         }
     }
-    const check = async() => {
-        onSubmitForm ? alert('отправдено') : alert('форма не отправленна')
+
+    if (isSending) {
+        return (
+            <div className="form">
+                <button className="closebutton" onClick={() => setModal(false)}>x</button>
+                <form className="modal-form" onSubmit={handleSubmit(onSubmitForm)}>
+                    <h3 className="formTitle">
+                        Регистрация
+                    </h3>
+                    <div className="inputs">
+                        <div className="forms">
+                            <label>Напишите ваше имя...</label>
+                            <input type="text"
+                                placeholder="Ваше имя"
+                                name="name"
+                                defaultValue={userData[0]?.name || ''}
+                                {...register('name', {
+                                    required: "Параметр обязателен",
+                                    maxLength: {
+                                        value: 15,
+                                        message: 'Ваше имя должно быть меньше 20 символов'
+                                    },
+                                    minLength: {
+                                        value: 3,
+                                        message: 'Ваше имя должно быть больше 3 символов'
+                                    },
+                                })} />
+                            {errors.name && <span className="error" role="alert">{errors.name?.message}</span>}
+                        </div>
+
+                        <div className="forms">
+                            <label>Напишите вашу фамилию...</label>
+                            <input type="text"
+                                placeholder="Ваша фамилия"
+                                name="surename"
+                                defaultValue={userData[0]?.surename || ''}
+                                {...register('surename', {
+                                    required: "Параметр обязателен",
+                                    maxLength: {
+                                        value: 30,
+                                        message: 'Вашa фамилия должна быть меньше 30 символов'
+                                    },
+                                    minLength: {
+                                        value: 5,
+                                        message: 'Вашa фамилия должна быть больше 5 символов'
+                                    }
+                                })} />
+                            {errors.surename && <span className="error" role="alert">{errors.surename?.message}</span>}
+                        </div>
+
+                        <div className="forms">
+                            <label>Напишите ваш номер телефона...</label>
+                            <input type="number"
+                                placeholder="Ваш номер"
+                                name="phone"
+                                className="number"
+                                defaultValue={userData[0]?.phone || ''}
+                                {...register("phone", {
+                                    required: "Параметр обязателен",
+                                    minLength: {
+                                        value: 8,
+                                        message: "Номер не полный"
+                                    },
+                                    maxLength: {
+                                        value: 18,
+                                        message: "Перебор !!!"
+                                    }
+                                })} />
+                            {errors.phone && <span className="error" role="alert">{errors.phone?.message}</span>}
+
+                        </div>
+
+                        <div className="forms">
+                            <label>Опишите ваши способности...</label>
+                            <textarea type="text"
+                                placeholder="Ваши способности"
+                                name="skills"
+                                defaultValue={userData[0]?.skills || ''}
+                                {...register("skills", {
+                                    required: "Параметр обязателен"
+                                })}>
+                            </textarea>
+                            {errors.skills && <span className="error" role="alert">{errors.skills?.message}</span>}
+                        </div>
+                    </div>
+                    <button
+                        className="b-center b-block focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                        type="submit"
+                    >
+                        {userData[0]?.name ? 'Обновить данные' : 'Сохранить данные'}
+                    </button>
+                </form>
+            </div>
+        )
+    } else {
+        return (
+            <div className="modal">
+                <button className="closebutton" onClick={() => setModal(false)}>x</button>
+                <div className="modalMessage">{userData[0] ? "Ваши данные успешно обновлены" : "Ваши данные успешно сохранены"}</div>
+            </div>
+        )
     }
-
-
-    return(
-        <div className="form">
-            <form className="modal-form" onSubmit={handleSubmit(onSubmitForm)}>
-                <div className="inputs">
-    
-                    <div className="forms">
-                        <input type="text"
-                        placeholder="Name"
-                        name="name"
-                        defaultValue={userData[0]?.name || ''}
-                        {...register('name', {
-                            required: "Параметр обязателен",
-                            maxLength: {
-                                value: 15,
-                                message: 'Ваше имя должно быть меньше 20 символов'
-                            },
-                            minLength: {
-                                value: 2,
-                                message: 'Ваше имя должно быть больше 3 символов'
-                            },
-                        })} />
-                        {errors.name && <span className="error" role="alert">{errors.name?.message}</span>}
-    
-                    </div>
-    
-                    <div className="forms">
-                        <input type="text"
-                        placeholder="Surename"
-                        name="surename"
-                        defaultValue={userData[0]?.surename || ''}
-                        {...register('surename', {
-                            required: "Параметр обязателен",
-                            maxLength: {
-                                value: 30,
-                                message: 'Вашa фамилия должна быть меньше 30 символов'
-                            },
-                            minLength: {
-                                value: 5,
-                                message: 'Вашa фамилия должна быть больше 5 символов'
-                            }
-                        })} />
-                        {errors.surename && <span className="error" role="alert">{errors.surename?.message}</span>}                       
-                    </div>
-    
-                    <div className="forms">
-                        <input type="number"
-                        placeholder="Phone number"
-                        name="phone"
-                        defaultValue={userData[0]?.phone || ''}
-                        {...register("phone", {
-                            required: "Параметр обязателен",
-                            minLength: {
-                                value: 9,  
-                                message: "Номер не полный"
-                            },
-                            maxLength: {
-                                value:11,
-                                message: "Перебор !!!"
-                            }
-                        })} />
-                    {errors.phone && <span className="error" role="alert">{errors.phone?.message}</span>}
-    
-                    </div>
-    
-                    <div className="forms">
-                        <input type="text"
-                        placeholder="Skills"
-                        name="skills"
-                        defaultValue={userData[0]?.skills || ''}
-                        {...register("skills", {
-                            required: "Параметр обязателен"
-                            
-                        })} />
-                    </div>
-    
-                </div>
-                <button 
-                    className="butoon" 
-                    type="submit"
-                >
-                    {userData[0]?.skills ? 'Обновить данные' : 'Submit Form'}
-                </button>
-                
-            </form>
-            
-        </div>
-
-    )
 
 }
 
-    
-    
+
+
 
 
 export default Registration
