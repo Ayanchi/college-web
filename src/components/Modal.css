@@ -11,6 +11,7 @@ body {
   background-color: #150b50; 
   padding: 20px 100px 20px 100px;
 }
+
 .backgraund-galaxy{
   display: table-cell;
   height: 105vh;
@@ -19,6 +20,7 @@ body {
   position: absolute;
   top: 0;
   width: 100%;
+}
 
 .timer {
   position: relative;
