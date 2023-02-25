@@ -42,8 +42,6 @@ input{
     color: #FFFFFF;
 }
 
-
-
 @media (max-width: 790px){
     .form{
         width: fit-content;

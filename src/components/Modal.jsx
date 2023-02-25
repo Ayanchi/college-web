@@ -1,4 +1,3 @@
-import MainHeader from "./header/MainHeader"
 import "../components/Modal.css"
 import Galaxy from "../assets/galaxy.jpg"
 import Timer from "./timer/timer"
@@ -19,19 +18,22 @@ function Modal() {
                 innerHeight: '100%'
                 }}>
             </div>
-            <div className="MainHeader">
-                <MainHeader />
-            </div>  
+            
             <div className="timer">
                 <div className="stattup-text">
-                    <h1>STARTUPОМАНИЯ</h1>
-                    <h2>МЕЖДУНАРОДНЫЙ УНИВЕРСИТЕТ АЛА-ТОО</h2>
+                    
+                    <img src="logo_site.png" style={{maxWidth: '100%'}} alt="STARTUPОМАНИЯ" />
+                    
                 </div>
                 <div className="obshug">
                     <Timer />
+                    
                     <div className="whichDateStart">
-                        <span className="time-spending">Время проведения:</span> <br />
-                        <span className="time-spending">с 10.03 по 28.04</span>
+                        <span className="time-spending">ВРЕМЯ ПРОВЕДЕНИЯ:<br/></span> 
+                        <span className="time-spending">C 17.03 ПО 28.04</span>
+                    </div>
+                    <div className="wonnaStartUp">
+                        <GoogleButtom/>
                     </div>
                 </div>
                 
@@ -40,14 +42,11 @@ function Modal() {
             <div className="Apply">
                 <div className="addApply">
                     <p className="shark-text">
-                        Найди команду и стань акулой бизнеса с нами!
+                        Найди команду и стань акулой бизнеса c нами!
                     </p>
-                    <div className="wonnaStartUp">
-                        <GoogleButtom/>
+                    <div className="stages">
+                        <Location />
                     </div>
-                        <div className="stages">
-                            <Location />
-                        </div>
                 </div>
             </div>
         </div>

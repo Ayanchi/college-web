@@ -3,13 +3,17 @@ body{
   padding: 0px;
 }
 
+.obshug {
+  text-align: center;
+}
+
 .applyBlock{
   background-color: #150b50; 
   padding: 20px 100px 20px 100px;
 }
 .backgraund-galaxy{
   display: table-cell;
-  height: 819px;
+  height: 105vh;
   left: 0;
   pointer-events: none;
   position: absolute;
@@ -25,7 +29,7 @@ body{
 
 }
 .timerCclock{
-  margin-bottom: 230px;
+  margin-bottom: 40px;
 }
 h1{
   font-family: Roboto, Arial;
@@ -51,20 +55,22 @@ h2{
   word-wrap: break-word;
 }
 .time-spending{
-  font-size: 26.0pt;
+  font-size: 2rem;
   color: aliceblue;
-  font-weight: 400;
+  font-weight: 700;
+  text-shadow: -2px -2px 0 #000000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 .addApply{
-  margin-top: 150px;
+  margin-top: 50px;
 }
 .whichDateStart{
   text-align: center;
 }
+
 .wonnaStartUp{
   background-color: transparent;
-  border: 1px solid rgb(255, 255, 255);
-  padding: 8px 50px;
+  /* border: 1px solid rgb(255, 255, 255); */
+  padding: 2rem 50px;
   font-family: Roboto, Arial;
   color: aliceblue;
   font-size: 13pt;
@@ -77,7 +83,7 @@ h2{
 
 
 .addApply{
-  margin-top: 150px;
+  margin-top: 50px;
 }
 .shark-text{
   margin-bottom: 50px;
@@ -190,13 +196,13 @@ a{
 }
 @media (max-width: 530px){
   .backgraund-galaxy{
-    height: 100%;
+    height: 105vh;
   }
   .timerCclock{
-    margin-bottom: 111px;
+    margin-bottom: 42px;
   }
   .time-spending{
-    font-size: 24.0pt;
+    font-size: 1.5rem;
   }
   .shark-text{
     font-size: 25px;
@@ -226,7 +232,7 @@ a{
     padding: 20px 3px 20px 3px;
   }
   .addApply{
-    margin-top: 330px;
+    margin-top: 160px;
   }
  
 }

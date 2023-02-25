@@ -2,13 +2,18 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
 .getTime{
-    background-color: #150b50;
     height: 43px;
     border-radius: 20px;
     padding-top: 17px;
     margin-bottom: 15px;
 }
+
+.getTime p{
+    font-size: 3rem;
+}
+
 .box{
     margin: 0px 25px;
     text-align: center;
@@ -16,16 +21,16 @@
     font-weight: 700;
     font-size: 25px;
 }
+
 span{
     font-family: Roboto, Arial;
     font-weight: 700;
     color: #b2ff00;
 }
+
 #day, #hour, #minute ,#second{
     margin: 0;
 }
-
-
 
 @media (max-width: 790px){
     .box{

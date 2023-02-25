@@ -32,12 +32,12 @@ function GoogleButtom(){
     if(user) {
         return(  
             <div>
-                <Button onClick={() => setModal(true)}>Подать заявку</Button>
+                <Button onClick={() => setModal(true)}>АНКЕТА УЧАСТНИКА</Button>
                 <Stack spacing={2} direction="row">
                     <Button 
                         variant="contained"
                         onClick={logout}>  
-                            Sing out
+                            ВЫЙТИ
                     </Button>
                 </Stack>
             </div>
@@ -45,13 +45,12 @@ function GoogleButtom(){
     }else{
         return(
             <div>
-                <div className="little">Зарегистрируйтесь через GOOGLE</div>
-                <Stack spacing={2} direction="row">
-                    <Button 
+                <Button 
                         variant="contained"
+                        style={{backgroundColor: '#b2ff00', color: '#150b50', 'font-weight': '800'}}
                         onClick={signInWithGoogle}>
-                        Sing in with GOOGLE</Button>
-                </Stack>
+                        ПРИНЯТЬ УЧАСТИЕ</Button>
+
             </div>
         )
     }
