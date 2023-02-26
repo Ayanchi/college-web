@@ -4,10 +4,8 @@
 }
 
 .getTime{
-    height: 43px;
     border-radius: 20px;
     padding-top: 17px;
-    margin-bottom: 15px;
 }
 
 .getTime p{
@@ -21,6 +19,7 @@
     font-weight: 700;
     font-size: 25px;
 }
+
 
 span{
     font-family: Roboto, Arial;

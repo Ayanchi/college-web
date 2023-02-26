@@ -7,3 +7,10 @@
     margin: 0 auto;
     padding: 15px 10px;
 }
+
+body {
+    font-family: Arial;
+}
+.stattup-text img {
+    margin: 0 auto;
+}

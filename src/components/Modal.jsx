@@ -2,9 +2,13 @@ import "../components/Modal.css"
 import Timer from "./timer/timer"
 import Location from "./stages/stage"
 import GoogleButtom from "./google-register/Google-buttom"
+import {ModalContext} from '../App'
+import {useContext} from 'react'
 
 
 function Modal() {
+
+    const [modal, setModal] = useContext(ModalContext)
 
   return(
     <div className="modal">
@@ -71,7 +75,7 @@ function Modal() {
                     Нет команды не беда. Мы поможем.
                 </p>
                 <div className="wonnaTeam-button">
-                    <a href="https://docs.google.com/forms/" aria-label="Хочу найти команду">
+                    <a onClick={() => setModal(true)} href="#" aria-label="Хочу найти команду">
                         Хочу найти команду
                     </a>
                 </div>

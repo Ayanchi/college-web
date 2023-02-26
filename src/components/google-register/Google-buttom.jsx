@@ -8,8 +8,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { ModalContext } from '../../App'
 
 function GoogleButtom() {
-
-
     const signInWithGoogle = async () => {
         try {
             await signInWithPopup(auth, googleProvider)
@@ -23,7 +21,6 @@ function GoogleButtom() {
     const logout = async () => {
         try {
             await signOut(auth)
-            setUser(false)
         } catch (error) {
             console.log(error)
         }
@@ -34,10 +31,28 @@ function GoogleButtom() {
     if (user) {
         return (
             <div>
-                <Button onClick={() => setModal(true)}>АНКЕТА УЧАСТНИКА</Button>
+                <Button 
+                    onClick={() => setModal(true)}
+                    style={{
+                        backgroundColor: '#b2ff00', 
+                        color: '#150b50', 
+                        fontWeight : '800', 
+                        margin: '0 auto 20px auto', 
+                        display: 'inline-block'
+                    }}
+                >
+                    АНКЕТА УЧАСТНИКА
+                </Button>
                 <Stack spacing={2} direction="row">
                     <Button
                         variant="contained"
+                        style={{
+                            backgroundColor: '#b2ff00', 
+                            color: '#150b50', 
+                            fontWeight : '800', 
+                            margin: '0 auto', 
+                            display: 'inline-block'
+                        }}
                         onClick={logout}>  
                             ВЫЙТИ
                     </Button>
@@ -49,7 +64,7 @@ function GoogleButtom() {
             <div>
                 <Button 
                         variant="contained"
-                        style={{backgroundColor: '#b2ff00', color: '#150b50', 'font-weight': '800'}}
+                        style={{backgroundColor: '#b2ff00', color: '#150b50', fontWeight: '800'}}
                         onClick={signInWithGoogle}>
                         ПРИНЯТЬ УЧАСТИЕ</Button>
 

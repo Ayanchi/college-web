@@ -6,7 +6,29 @@ import { useForm } from "react-hook-form";
 import { ModalContext } from "../../App"
 
 const Registration = (props) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: async () => await getData()
+      });
+
+    async function getData() {
+        const q = query(collection(database, "users"), where("idUser", "==", props.current.uid), limit(1));
+        const data = await getDocs(q)
+        const filterForm = data.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }));
+
+        if (filterForm.length > 0)
+            return filterForm[0]
+        else 
+            return {
+                name: '',
+                surename: '',
+                phone: '',
+                skills: ''
+            }
+    }
+
     const [userData, setUserData] = useState([])
     const [isSending, setisSending] = useState(true)
     const [modal, setModal] = useContext(ModalContext)
@@ -54,7 +76,7 @@ const Registration = (props) => {
                 <button className="closebutton" onClick={() => setModal(false)}>x</button>
                 <form className="modal-form" onSubmit={handleSubmit(onSubmitForm)}>
                     <h3 className="formTitle">
-                        Регистрация
+                        Анкета участника
                     </h3>
                     <div className="inputs">
                         <div className="forms">
