@@ -83,6 +83,7 @@ h2 {
   margin: 0 auto;
   width: 400px;
   min-height: 143px;
+  max-width: 100%;
 }
 
 
@@ -206,7 +207,11 @@ h3 {
   margin-top: 0px;
 }
 
-
+@media (max-width: 1024px){
+  .addApply {
+    margin-top: 160px;
+  }
+}
 
 @media (max-width: 790px) {
   .applyBlock {
@@ -219,7 +224,6 @@ h3 {
 
   .stage-content {
     width: 200px;
-    height: 300px;
     margin: 40px auto;
   }
 
@@ -230,6 +234,9 @@ h3 {
 @media (max-width: 530px){
   .backgraund-galaxy{
     height: 105vh;
+  }
+  .wonnaStartUp{
+    padding: 2rem 0px;
   }
   .timerCclock{
     margin-bottom: 42px;
@@ -276,7 +283,7 @@ h3 {
     padding: 20px 3px 20px 3px;
   }
   .addApply{
-    margin-top: 160px;
+    margin-top: 210px;
   }
 
   .noTeam {
