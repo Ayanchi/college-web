@@ -44,7 +44,7 @@ function App() {
       <ModalContext.Provider value={[modal, setModal]}>
       <Routes>
         <Route path="" element={<Main/>}/>
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/profile" element={<Profile setModal={true}/>}/>
       </Routes>
 
         <Modal

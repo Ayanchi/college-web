@@ -64,7 +64,8 @@ const Registration = (props) => {
                 phone: data.phone,
                 skills: data.skills
             });
-            setisSending(false)
+            setisSending(false),
+            setModal(true)
         } catch (error) {
             console.log(error)
         }

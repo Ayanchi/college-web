@@ -1,12 +1,18 @@
 import React from 'react';
 import ProfileHeader from "../components/Profile-comp/ProfileHeader"
-import ProfilePhoto from '../components/Profile-comp/ProfilePhoto';
+import { auth } from "../app/firebase";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import ProfileEdit from '../components/Profile-comp/ProfileEdit';
+
 
 const Profile = () => {
+    const [user] = useAuthState(auth)
+
     return (
         <div>
             <ProfileHeader/>
-            <ProfilePhoto/>
+            {user ? <ProfileEdit current={user}/> : 'Необходимо войти в систему!!!'}
+            
         </div>
     );
 };
