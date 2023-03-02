@@ -2,6 +2,7 @@ import "../components/Modal.css"
 import Timer from "./timer/timer"
 import Location from "./stages/stage"
 import GoogleButtom from "./google-register/Google-buttom"
+import ProfilePhoto from "./Profile-comp/ProfilePhoto"
 import {ModalContext} from '../App'
 import {useContext} from 'react'
 
@@ -86,8 +87,13 @@ function Modal() {
                 AIU STARTUP HUB 
             </div>
         </div>
-
+        <div className="profile">
+            <ProfilePhoto />
         </div>
+
+        
+
+    </div>
     )
 }
 

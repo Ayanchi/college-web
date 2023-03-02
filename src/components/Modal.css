@@ -206,6 +206,11 @@ h3 {
   line-height: 1.2;
   margin-top: 0px;
 }
+.profButton{
+  margin-top: 50px;
+  font-size: 40px;
+  background-color: #16b355b0;
+}
 
 @media (max-width: 1024px){
   .addApply {
