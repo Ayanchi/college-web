@@ -1,55 +1,51 @@
 import { useState, useEffect } from 'react'
-import { storage } from '../../app/firebase'
+import { storage, auth } from '../../app/firebase'
 import { ref, uploadBytes, list, getDownloadURL } from 'firebase/storage'
-import { v4 as uuidv4 } from 'uuid'
 import "../CSS/ProfilePhoto.css"
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import { getDoc } from 'firebase/firestore'
-
-
+import {useAuthState} from 'react-firebase-hooks/auth'
 
 const ProfilePhoto = (props) => {
-
-
   const [imageUpLoad, setImageUpLoad] = useState(null)
   const [imageList, setImageList] = useState(null)
-
+  const [user] = useAuthState(auth)
 
   const uploadImage = () => {
-    console.log(`images/${imageUpLoad.name + uuidv4()}`)
-    const imageRef = ref(storage, `images/${imageUpLoad.name + uuidv4()}`)
-    uploadBytes(imageRef, imageUpLoad).then(() => {    
-      getDownloadURL(imageRef).then((url) => {
-        //getDoc((prev) => {...prev, img:url})
-        //console.log(imageUpLoad)
-        console.log(url)
-        setImageList(url)
+    if (user) {
+      const imageRef = ref(storage, `images/profile/${user?.email}/profile`)
+      uploadBytes(imageRef, imageUpLoad[0]).then(() => {    
+        getDownloadURL(imageRef).then((url) => {
+          setImageList(url)
+        }).catch(error => { 
+          console.log(error.message, 'you get error img url')
+        })
+        setImageUpLoad(null)
       }).catch(error => {
-        console.log(error.message, 'you get error img url')
+          console.log(error.message)
       })
-    setImageUpLoad(null)
-    }).catch(error => {
-        console.log(error.message)
-    })
+    }
   }
 
-  const imageListRef = ref(storage, 'images/')
+  const imageListRef = ref(storage, `images/profile/${user?.email}/`)
 
   useEffect(() => {
-    list(imageListRef).then((response) => {
-      console.log(response)
-      response.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImageList(url)
+    console.log(imageListRef)
+    if (user) {
+      list(imageListRef).then((response) => {
+        console.log(response)
+        response.items.forEach((item) => {
+          getDownloadURL(item).then((url) => {
+            setImageList(url)
+          })
         })
       })
-    })
-  }, [])
+    }
+  }, [user])
 
-
+  if (user) {
     return(
-        <div className='photoProfile--'>
+        <div className='photoProfile'>
             <Avatar
                 alt="Remy Sharp"
                 src={imageList}
@@ -57,13 +53,16 @@ const ProfilePhoto = (props) => {
             />
             <input type="file" 
                 onChange={(e) => {
-                setImageUpLoad(e.target.files)
+                  setImageUpLoad(e.target.files)
                 }}/>
-            <button onClick={uploadImage} >add img</button>
-
-           
+            <button onClick={uploadImage}>Add img</button>
         </div>
     )
+  } else {
+    return (
+      <div>Нужна регистрация пользователя</div>
+    )
+  }
 }
 
 export default ProfilePhoto
