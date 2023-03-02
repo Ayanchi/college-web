@@ -1,0 +1,9 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.links{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}

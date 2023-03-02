@@ -1,11 +1,13 @@
 import './App.css'
 import Main from './pages/autorization/Main'
+import Profile from "./pages/Profile"
 import {useState, createContext} from 'react'
 import {Modal, Box} from '@mui/material';
 import Registration from './components/apply/GetApply'
 import { auth } from "./app/firebase";
 import './App.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Routes, Route } from "react-router-dom"
 
 const ModalContext = createContext()
 export {ModalContext}
@@ -40,7 +42,11 @@ function App() {
   return (
     <div className="App">
       <ModalContext.Provider value={[modal, setModal]}>
-        <Main />
+      <Routes>
+        <Route path="" element={<Main/>}/>
+        <Route path="/profile" element={<Profile/>}/>
+      </Routes>
+
         <Modal
           open={modal}
           onClose={handleClose}
