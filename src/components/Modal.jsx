@@ -16,7 +16,6 @@ function Modal() {
         <div className="applyBlock">
             <div className="backgraund-galaxy"
                 style={{backgroundPosition: 'center center',
-                // backgroundImage: `url(${Galaxy})`,
                 backgroundSize: 'cover',
                 transform: `translate3d(${0}px, ${0}px, ${0}px)`,
                 innerHeight: '100%'

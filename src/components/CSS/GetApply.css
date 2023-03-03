@@ -102,7 +102,7 @@ textarea {
 .closebutton {
     position: relative;
     font-family: cursive;
-    right: -160px;
+    text-align: right;
     top: -45px;
     font-size: 40px;
     font-weight: 600;

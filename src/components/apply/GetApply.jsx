@@ -7,9 +7,9 @@ import { useForm } from "react-hook-form";
 import { ModalContext } from "../../App"
 
 const Registration = (props) => {
-    const {register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: async () => await getData()
-      });
+    });
 
     async function getData() {
         const q = query(collection(database, "users"), where("idUser", "==", props.current.uid), limit(1));
@@ -21,7 +21,7 @@ const Registration = (props) => {
 
         if (filterForm.length > 0)
             return filterForm[0]
-        else 
+        else
             return {
                 name: '',
                 surename: '',
@@ -66,7 +66,8 @@ const Registration = (props) => {
                 skills: data.skills,
                 imgUrl: props.current.imageList
             });
-            setisSending(false)
+            setisSending(false),
+            setModal(true)
         } catch (error) {
             console.log(error)
         }
