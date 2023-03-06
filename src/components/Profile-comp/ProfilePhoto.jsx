@@ -72,7 +72,14 @@ const ProfilePhoto = (props) => {
   }
 
   const rmPhoto = () => {
-    console.log(response)
+    const fileReff = imageListRef.child(`profile/`) 
+    fileReff.delete()
+      .then(() => {
+        console.log('File deleted successfully');
+      })
+      .catch((error) => {
+        console.error('Error deleting file:', error);
+      })
   }
 
 
