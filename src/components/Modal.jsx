@@ -42,7 +42,7 @@ function Modal() {
                 
             </div>
 
-            <div className="Apply">
+            {/* <div className="Apply">
                 <div className="addApply">
                     <p className="shark-text">
                         Найди команду и стань акулой бизнеса c нами!
@@ -51,9 +51,9 @@ function Modal() {
                         <Location />
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
-        <div className="map">
+        {/* <div className="map">
             <h3>Место проведения</h3>
             <div className="college-text">
                 <p className="street">Кыргызстан, г. Бишкек, ул. Анкара 1/8а</p>
@@ -85,7 +85,7 @@ function Modal() {
             <div className="hub">
                 AIU STARTUP HUB 
             </div>
-        </div>
+        </div> */}
 
         </div>
     )
