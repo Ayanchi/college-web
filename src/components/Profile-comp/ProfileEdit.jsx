@@ -68,7 +68,7 @@ const ProfileEdit = (props) => {
         }
     }
 
-    if (isSending) {
+    if (isSending && props?.profile) {
         return (
             <div>
                 <div className="container">

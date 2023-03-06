@@ -5,16 +5,33 @@ import "../CSS/ProfilePhoto.css"
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import {useAuthState} from 'react-firebase-hooks/auth'
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+
+const style = {
+  position: 'absolute',
+  top: '45%',
+  left: '30%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+}
 
 const ProfilePhoto = (props) => {
   const [imageUpLoad, setImageUpLoad] = useState(null)
   const [imageList, setImageList] = useState(null)
   const [user] = useAuthState(auth)
+  const [avatar, setAvatar] = useState(false)
+  //const handleClose = () => setAvatar(false)
 
   const uploadImage = () => {
     if (user) {
       const imageRef = ref(storage, `images/profile/${user?.email}/profile`)
-      uploadBytes(imageRef, imageUpLoad[0]).then(() => {    
+      uploadBytes(imageRef, imageUpLoad[0]).then(() => {  
+          
         getDownloadURL(imageRef).then((url) => {
           setImageList(url)
         }).catch(error => { 
@@ -25,12 +42,14 @@ const ProfilePhoto = (props) => {
           console.log(error.message)
       })
     }
+    setAvatar(true)
+ 
   }
 
   const imageListRef = ref(storage, `images/profile/${user?.email}/`)
 
   useEffect(() => {
-    console.log(imageListRef)
+    //console.log(imageListRef)
     if (user) {
       list(imageListRef).then((response) => {
         console.log(response)
@@ -43,26 +62,52 @@ const ProfilePhoto = (props) => {
     }
   }, [user])
 
-  if (user) {
+  const prePreview = () => {
+    uploadImage()
+    setAvatar(true)
+  }
+
+  const goNext = () =>{
+    setAvatar(false)
+  }
+
+  const rmPhoto = () => {
+    console.log(response)
+  }
+
+
     return(
         <div className='photoProfile'>
-            <Avatar
+          <Avatar
+              alt="Remy Sharp"
+              src={imageList}
+              sx={{ width: 200, height: 200 }}
+          />
+          <input type="file" 
+              onChange={(e) => {
+                setImageUpLoad(e.target.files)
+              }}/>
+          <button onClick={prePreview}>Preview photo</button>
+
+          <Modal
+            open={avatar}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Avatar
                 alt="Remy Sharp"
                 src={imageList}
                 sx={{ width: 200, height: 200 }}
-            />
-            <input type="file" 
-                onChange={(e) => {
-                  setImageUpLoad(e.target.files)
-                }}/>
-            <button onClick={uploadImage}>Add img</button>
-        </div>
-    )
-  } else {
-    return (
-      <div>Нужна регистрация пользователя</div>
-    )
-  }
+              />
+              <button onClick={goNext}>Add img</button>
+              <br />
+              <button onClick={rmPhoto}>go back</button>
+            </Box>
+        </Modal>
+    </div>
+  )
+
 }
 
 export default ProfilePhoto
