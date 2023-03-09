@@ -5,7 +5,6 @@ import {useState, createContext} from 'react'
 import {Modal, Box} from '@mui/material';
 import Registration from './components/apply/GetApply'
 import { auth } from "./app/firebase";
-import './App.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Routes, Route } from "react-router-dom"
 
