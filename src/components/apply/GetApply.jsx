@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from "react"
 import { database } from "../../app/firebase"
-import { storage } from "../../app/firebase"
 import { getDocs, collection, setDoc, doc, query, where, limit } from "firebase/firestore"
 import "../CSS/GetApply.css"
 import { useForm } from "react-hook-form";
@@ -57,14 +56,13 @@ const Registration = (props) => {
 
     const onSubmitForm = async (data) => {
         try {
-            await setDoc(doc(database, "users", props.current.email, storage), {
+            await setDoc(doc(database, "users", props.current.email), {
                 idUser: props.current.uid,
                 email: props.current.email,
                 name: data.name,
                 surename: data.surename,
                 phone: data.phone,
-                skills: data.skills,
-                imgUrl: props.current.imageList
+                skills: data.skills
             });
             setisSending(false),
             setModal(true)

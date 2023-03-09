@@ -1,0 +1,159 @@
+import { ModalIdea } from "./ProfileHeader"
+import { useContext, useState, useEffect } from "react"
+import { database } from "../../app/firebase";
+import { getDocs, collection, setDoc, doc, query, where, limit, addDoc } from "firebase/firestore"
+import React from "react"
+import { useForm } from "react-hook-form";
+import "../CSS/ProfileIdea.css"
+
+const ProfileIdea = (props) => {
+
+    const [idea, setIdea] = useContext(ModalIdea)
+    const [isUser, setIsUser] = useState([])
+    const [selectedValue, setSelectedValue] = useState('default')
+    const [checked, setChecked] = useState(false)
+
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+       
+    })
+
+    function handleSelectChange(e) {
+        setSelectedValue(e.target.value);
+    }
+
+    const q = collection(database, "ideas");
+
+    /*async function getIdea() {
+        const data = await getDocs(q)
+        const filterForm = data.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }));
+
+        if (filterForm.length > 0)
+            return filterForm[0]
+        else
+            return {
+                author: '',
+                yourIdea: '',
+                checkbox: '',
+                select: ''
+            }
+    }*/
+
+    useEffect(() => {
+        const getFormList = async () => {
+            try {
+                const q = collection(database, "ideas");
+                const data = await getDocs(q)
+                const filterForm = data.docs.map((doc) => ({
+                    ...doc.data(),
+                    id: doc.id,
+                }))
+                setIsUser(filterForm)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getFormList()
+    }, [])
+
+    const onSubmitForm = async (data) => {
+        try {
+            console.log(data)
+            await addDoc(collection(database, "ideas"), {
+                // idUser: props.current.uid,
+                // email: props.current.email,
+                 author: data.author,
+                // checkbox: checked,
+                // select: data.select,
+                // yourIdea: data.yourIdea,
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
+    return(
+        <div className="ideaModal">
+            <button className="closebuttonIdea" onClick={() => setIdea(false)}>X</button>
+            <form className="idea-form" onSubmit={handleSubmit(onSubmitForm)}>
+                <div className="mainInputs">
+                    <div className="firstInput">
+                        <input 
+                            name="author" 
+                            type="text" 
+                            placeholder="Ваше имя" 
+                            defaultValue={isUser[0]?.name || ""}
+                            {...register('author', {
+                                required: "Параметр обязателен",
+                                maxLength: {
+                                    value: 15,
+                                    message: 'Ваше имя должно быть меньше 20 символов'
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: 'Ваше имя должно быть больше 3 символов'
+                                },
+                            })}
+                        />
+                        {errors.author && <span className="error" role="alert">{errors.author?.message}</span>}
+                    </div>
+                    <textarea 
+                        name="yourIdea" 
+                        type="text" 
+                        placeholder="Ваша идея" 
+                        className="yourIdea">
+                    </textarea>
+                </div>
+
+                <div className="flex justify-center">
+                    <div>
+                    <input
+                        className="mt-[0.3rem] mr-2 h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-[rgba(0,0,0,0.25)] outline-none before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] after:absolute after:z-[2] after:-mt-[0.1875rem] after:h-5 after:w-5 after:rounded-full after:border-none after:bg-white after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] checked:bg-primary checked:after:absolute checked:after:z-[2] checked:after:-mt-[3px] checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full checked:after:border-none checked:after:bg-primary checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] checked:after:transition-[background-color_0.2s,transform_0.2s] checked:after:content-[''] hover:cursor-pointer focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[3px_-1px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-5 focus:after:w-5 focus:after:rounded-full focus:after:content-[''] checked:focus:border-primary checked:focus:bg-primary checked:focus:before:ml-[1.0625rem] checked:focus:before:scale-100 checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s]"
+                        type="checkbox"
+                        role="switch"
+                        id="flexSwitchCheckDefault" 
+                        name="checkbox"
+                        checked={checked}
+                        onChange={(e) => setChecked(e.target.checked)}
+
+                        />
+                        
+                        <label
+                        className="inline-block pl-[0.15rem] hover:cursor-pointer"
+                        htmlFor="flexSwitchCheckDefault"
+                        >показать или спрятать 
+                        </label>
+                    </div>
+                </div>
+                
+                <div className="select">
+                <p>
+                    <select size="3" name="select" value={selectedValue} onChange={handleSelectChange}>
+                        <option disabled>Выберите факультет</option>
+                        <option value="default">другое...</option>
+                        <option value="программист">программист</option>
+                        <option value="дизайн">дизайн</option>
+                        <option value="маркетинг">маркетинг</option>
+                    </select>
+                </p>
+                </div>
+
+                <button
+                    className="b-center b-block focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                    type="submit"
+                >
+                    создать
+                </button>
+            </form>
+        </div>
+    )
+}
+
+export default ProfileIdea
