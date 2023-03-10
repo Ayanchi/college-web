@@ -2,11 +2,15 @@ import React from 'react';
 import { signOut } from "firebase/auth";
 import { auth } from "../../app/firebase";
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useState, createContext } from 'react';
 import "../CSS/ProfileHeader.css"
 import CheckSindingIdea from './CheckSending';
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+
 
 const style = {
     position: 'absolute',
@@ -27,6 +31,7 @@ export {ModalIdea}
 const ProfileHeader = () => {
 
     const [idea, setIdea] = useState(false)
+    const [value, setValue] = useState(0);
 
     const navigate = useNavigate()
 
@@ -43,6 +48,7 @@ const ProfileHeader = () => {
     
 
     return (
+      
         <div className='wrapper'>
             <div className="container">
                 <header className='header'>
@@ -50,37 +56,52 @@ const ProfileHeader = () => {
                         LOGO
                     </div>
                     <div className="links">
-                        <div className="link">
-                            <button onClick={logout}>
-                                log out
-                            </button>
-                        </div>
-                        <div className="link">
-                            <ModalIdea.Provider value={[idea, setIdea]}>
-                                <button onClick={() => setIdea(true)}>
-                                    add an idea
-                                </button>
-                                <Modal
-                                    open={idea}
-                                    aria-labelledby="modal-modal-title"
-                                    aria-describedby="modal-modal-description"
-                                >
-                                    <Box sx={style}>
-                                        <CheckSindingIdea />
-                                    </Box>
-                                </Modal>
-                            </ModalIdea.Provider>
-                        </div>
-                        
-                        <div className="link">
-                            <button>
-                                All ideas
-                            </button>
-                        </div>
+                        <Box sx={{ width: 500 }}>
+                            <BottomNavigation
+                                showLabels
+                                value={value}
+                                onChange={(event, newValue) => {
+                                setValue(newValue);
+                                }}
+                            >
+                                    
+                                <BottomNavigationAction label="log out" onClick={logout} />
+
+                                
+                                <ModalIdea.Provider value={[idea, setIdea]}>
+                                    <BottomNavigation
+                                    showLabels
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                    setValue(newValue);
+                                    }}
+                                    >
+                                    
+                                    <BottomNavigationAction label="add an idea" onClick={() => setIdea(true)}/>
+                                    <Modal
+                                        open={idea}
+                                        aria-labelledby="modal-modal-title"
+                                        aria-describedby="modal-modal-description"
+                                    >
+                                        <Box sx={style}>
+                                            <CheckSindingIdea />
+                                        </Box>
+                                    </Modal>
+                                    </BottomNavigation>
+
+                                </ModalIdea.Provider>
+                                
+                                
+                                
+                                <BottomNavigationAction label="ideas" />
+
+                            </BottomNavigation>
+                        </Box>
                     </div>
                 </header>
             </div>
         </div>
+           
     );
 };
 

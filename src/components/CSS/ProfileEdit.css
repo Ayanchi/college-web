@@ -30,3 +30,13 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
+
+@media (max-width: 800px){
+    .userInfo{
+        flex-direction: column;
+    }
+    .userPhoto{
+        margin-bottom: 100px;
+    }
+}

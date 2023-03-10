@@ -82,7 +82,6 @@ const ProfilePhoto = (props) => {
         >
           <Box sx={style}>
 
-          /////изменения
           <button className="closebuttonIdea" onClick={() => setAvatar(false)}>X</button >
 
             <Avatar
@@ -105,7 +104,10 @@ const ProfilePhoto = (props) => {
                   }
                 }}/>
               
-              <button onClick={uploadImage}>Сохранить</button>
+              <button 
+               class=" b-center b-block focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+               onClick={uploadImage}
+               >Сохранить</button>
           </Box>
       </Modal>
     </div>
