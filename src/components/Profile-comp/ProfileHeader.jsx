@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useState, createContext } from 'react';
 import "../CSS/ProfileHeader.css"
-import ProfileIdea from './ProfileIdea';
+import CheckSindingIdea from './CheckSending';
 
 const style = {
     position: 'absolute',
@@ -18,6 +18,7 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    borderRadius: '10px',
 }
 
 const ModalIdea = createContext()
@@ -65,7 +66,7 @@ const ProfileHeader = () => {
                                     aria-describedby="modal-modal-description"
                                 >
                                     <Box sx={style}>
-                                        <ProfileIdea/>
+                                        <CheckSindingIdea />
                                     </Box>
                                 </Modal>
                             </ModalIdea.Provider>

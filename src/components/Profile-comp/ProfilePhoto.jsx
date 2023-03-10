@@ -25,13 +25,14 @@ const ProfilePhoto = (props) => {
   const [imageList, setImageList] = useState(null)
   const [user] = useAuthState(auth)
   const [avatar, setAvatar] = useState(false)
-  //const handleClose = () => setAvatar(false)
+  const [loadImage, setLoadImage] = useState(false)
+
+  const imageListRef = ref(storage, `images/profile/${user?.email}/`)
 
   const uploadImage = () => {
     if (user) {
       const imageRef = ref(storage, `images/profile/${user?.email}/profile`)
-      uploadBytes(imageRef, imageUpLoad[0]).then(() => {  
-          
+      uploadBytes(imageRef, imageUpLoad[0]).then(() => {    
         getDownloadURL(imageRef).then((url) => {
           setImageList(url)
         }).catch(error => { 
@@ -41,18 +42,16 @@ const ProfilePhoto = (props) => {
       }).catch(error => {
           console.log(error.message)
       })
+      const prePreview = () => {
+        setAvatar(true)
+      }
     }
-    setAvatar(true)
- 
   }
-
-  const imageListRef = ref(storage, `images/profile/${user?.email}/`)
 
   useEffect(() => {
     //console.log(imageListRef)
     if (user) {
       list(imageListRef).then((response) => {
-        console.log(response)
         response.items.forEach((item) => {
           getDownloadURL(item).then((url) => {
             setImageList(url)
@@ -63,55 +62,48 @@ const ProfilePhoto = (props) => {
   }, [user])
 
   const prePreview = () => {
-    uploadImage()
     setAvatar(true)
   }
 
-  const goNext = () =>{
-    setAvatar(false)
-  }
+  return(
+      <div className='photoProfile'>
+        <Avatar
+            alt="Remy Sharp"
+            src={imageList}
+            sx={{ width: 200, height: 200 }}
+        />
+        <button className="b-center b-block focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+           onClick={prePreview}>Редактировать изображение</button>
 
-  const rmPhoto = () => {
-    const fileReff = imageListRef.child(`profile`) 
-    fileReff.delete()
-      .then(() => {
-        console.log('File deleted successfully');
-      })
-      .catch((error) => {
-        console.error('Error deleting file:', error);
-      })
-  }
-
-
-    return(
-        <div className='photoProfile'>
-          <Avatar
+        <Modal
+          open={avatar}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Avatar
               alt="Remy Sharp"
-              src={imageList}
+              src={loadImage? loadImage : imageList}
               sx={{ width: 200, height: 200 }}
-          />
-          <input type="file" 
-              onChange={(e) => {
-                setImageUpLoad(e.target.files)
-              }}/>
-          <button onClick={prePreview}>Preview photo</button>
+            />
+              <input id="loadImage" type="file" 
+                onChange={(e) => {
+                  setImageUpLoad(e.target.files)
+                  const file = document.getElementById("loadImage").files[0];
+                  const reader = new FileReader();
 
-          <Modal
-            open={avatar}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Avatar
-                alt="Remy Sharp"
-                src={imageList}
-                sx={{ width: 200, height: 200 }}
-              />
-              <button onClick={goNext}>Add img</button>
-              <br />
-              <button onClick={rmPhoto}>go back</button>
-            </Box>
-        </Modal>
+                  reader.addEventListener('load', () => {
+                    setLoadImage(reader.result)
+                  });
+
+                  if (file) {
+                    reader.readAsDataURL(file);
+                  }
+                }}/>
+              
+              <button onClick={uploadImage}>Сохранить</button>
+          </Box>
+      </Modal>
     </div>
   )
 
