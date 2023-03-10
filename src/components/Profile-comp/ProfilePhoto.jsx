@@ -42,9 +42,9 @@ const ProfilePhoto = (props) => {
       }).catch(error => {
           console.log(error.message)
       })
-      const prePreview = () => {
-        setAvatar(true)
-      }
+      //////// изменения
+      setAvatar(false)
+      
     }
   }
 
@@ -81,6 +81,10 @@ const ProfilePhoto = (props) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
+
+          /////изменения
+          <button className="closebuttonIdea" onClick={() => setAvatar(false)}>X</button >
+
             <Avatar
               alt="Remy Sharp"
               src={loadImage? loadImage : imageList}
