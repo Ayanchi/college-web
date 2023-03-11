@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { database } from "../../app/firebase"
-import { getDocs, collection, setDoc, doc, query, where, limit, addDoc } from "firebase/firestore"
+import { getDocs, collection, query, where, limit,  setDoc } from "firebase/firestore"
 import { useForm } from "react-hook-form";
 import ProfilePhoto from './ProfilePhoto';
 import { ModalContext } from "../../App"
@@ -54,7 +54,7 @@ const ProfileEdit = (props) => {
 
     const onSubmitForm = async (data) => {
         try {
-            await addDoc(collection(database, "users", props.current.email), {
+            await setDoc(doc(database, "users", props.current.email), {
                 idUser: props.current.uid,
                 email: props.current.email,
                 name: data.name,
