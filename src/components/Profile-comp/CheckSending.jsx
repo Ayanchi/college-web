@@ -13,21 +13,20 @@ const CheckSindingIdea = () => {
     const [idea, setIdea] = useContext(ModalIdea)
 
 
-
-    if(user){
-        return(
+    if (user) {
+        return (
             <div>
-            <ProfileIdea />
+                <ProfileIdea current={user} />
             </div>
 
         )
-        
-    }else{
-        return(
-        <div>
-            <button className="closebuttonIdea" onClick={() => setIdea(false)}>X</button >
-            <div className="youNeedReges">вам нужно войти в акк GOOGLE</div>
-        </div>
+
+    } else {
+        return (
+            <div>
+                <button className="closebuttonIdea" onClick={() => setIdea(false)}>X</button >
+                <div className="youNeedReges">вам нужно войти в акк GOOGLE</div>
+            </div>
         )
     }
 }

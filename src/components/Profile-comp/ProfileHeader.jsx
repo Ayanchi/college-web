@@ -3,6 +3,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../app/firebase";
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
+import { Link } from "react-router-dom"
 import Modal from '@mui/material/Modal';
 import { useState, createContext } from 'react';
 import "../CSS/ProfileHeader.css"
@@ -22,7 +23,7 @@ const style = {
 }
 
 const ModalIdea = createContext()
-export {ModalIdea}
+export { ModalIdea }
 
 const ProfileHeader = () => {
 
@@ -40,14 +41,16 @@ const ProfileHeader = () => {
         }
     }
 
-    
+
 
     return (
         <div className='wrapper'>
             <div className="container">
                 <header className='header'>
                     <div className="logo">
-                        LOGO
+                        <Link to="/">
+                            LOGO
+                        </Link>
                     </div>
                     <div className="links">
                         <div className="link">
@@ -71,11 +74,11 @@ const ProfileHeader = () => {
                                 </Modal>
                             </ModalIdea.Provider>
                         </div>
-                        
+
                         <div className="link">
-                            <button>
+                            <Link to="/ideas">
                                 All ideas
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </header>

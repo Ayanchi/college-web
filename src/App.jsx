@@ -1,6 +1,7 @@
 import './App.css'
 import Main from './pages/autorization/Main'
 import Profile from "./pages/Profile"
+import Ideas from './pages/Ideas'
 import {useState, createContext} from 'react'
 import {Modal, Box} from '@mui/material';
 import Registration from './components/apply/GetApply'
@@ -44,6 +45,7 @@ function App() {
       <Routes>
         <Route path="" element={<Main/>}/>
         <Route path="/profile" element={<Profile setModal={true}/>}/>
+        <Route path="/ideas" element={<Ideas/>}/>
       </Routes>
 
         <Modal
@@ -53,7 +55,7 @@ function App() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            {user ? <Registration current={user}/> : 'Необходимо войти в систему!!!'}
+          {user ? <Registration current={user}/> : 'Необходимо войти в систему!!!'}
           </Box>
         </Modal>
       </ModalContext.Provider>
