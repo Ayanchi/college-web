@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDocs, collection, } from "firebase/firestore"
+import { getDocs, collection, query, where, doc } from "firebase/firestore"
 import { database } from '../../app/firebase';
 import { storage, auth } from '../../app/firebase'
 import { ref, list, getDownloadURL } from 'firebase/storage'
@@ -8,17 +8,23 @@ import Avatar from '@mui/material/Avatar';
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import "../CSS/AllIdeas.css"
+import { style } from '@mui/system';
+import { Box } from '@mui/material';
+
 
 const AllIdeas = () => {
     const [isUser, setIsUser] = useState([])
-    const [imageUpLoad, setImageUpLoad] = useState(null)
     const [imageList, setImageList] = useState(null)
     const [user] = useAuthState(auth)
     const [avatar, setAvatar] = useState(false)
-    const [loadImage, setLoadImage] = useState(false)
-    const [selectedValue, setSelectedValue] = useState()
-    const [allSelectValues, setAllSelectValues] = useState()
+    const [selectedValue, setSelectedValue] = useState("все")
+    const [allSelectValues, setAllSelectValues] = useState(['все', 'другое...', 'дизайн', 'маркетинг', 'программист'])
     const imageListRef = ref(storage, `images/profile/${user?.email}/`)
+
+    const whiteSpace = {
+        'white-space': 'nowrap'
+    };
+
     useEffect(() => {
 
         if (user) {
@@ -34,45 +40,65 @@ const AllIdeas = () => {
     const prePreview = () => {
         setAvatar(true)
     }
-    
-    ////////////////////////////////////////////////
-    useEffect(() => {
-        const getFormList = async () => {
-            try {
-                const q = collection(database, "ideas");
-                const data = await getDocs(q)
-                const filterForm = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }))
-                setIsUser(filterForm)
 
+    ////////////////////////////////////////////////
+
+    useEffect(() => {
+        const getFormList = async (user) => {
+            try {
+                if (selectedValue == allSelectValues[0]) {
+                    const q = query(collection(database, "ideas"));
+                    const data = await getDocs(q)
+                    const filterForm = data.docs.map((doc) => ({
+                        ...doc.data(),
+                        id: doc.id,
+                    }))
+                    setIsUser(filterForm)
+                } else {
+                    const q = query(collection(database, "ideas"), where("select", "==", selectedValue));
+                    const data = await getDocs(q)
+                    const filterForm = data.docs.map((doc) => ({
+                        ...doc.data(),
+                        id: doc.id,
+                    }))
+                    setIsUser(filterForm)
+                }
             } catch (error) {
                 console.log(error)
             }
         }
         getFormList()
-    }, [])
+    }, [selectedValue])
 
-    useEffect(() => {
-        function uniqValues() {
-            let res = []
-            let uniqSelectRes = []
-            isUser.map((el) => {
-                res.push(el.select)
-                uniqSelectRes = res.filter(function (item, pos) {
-                    return res.indexOf(item) == pos;
-                })
-                console.log(uniqSelectRes);
-                return setAllSelectValues(uniqSelectRes)
-            })
-        }
-        uniqValues()
-    }, [])
+    // useEffect(() => {
+    //     function uniqValues() {
+    //         let res = []
+    //         let uniqSelectRes = []
+    //         isUser.map((el) => {
+    //             res.push(el.select)
+    //             uniqSelectRes = res.filter(function (item, pos) {
+    //                 return res.indexOf(item) == pos;
+    //             })
+    //             console.log(uniqSelectRes);
+    //             return setAllSelectValues(uniqSelectRes)
+    //         })
+    //     }
+    //     uniqValues()
+    // }, [])
 
     function handleSelectChange(e) {
         setSelectedValue(e.target.value)
     }
+
+    // function changeVisibility(sid) {
+    //     var elem = document.getElementById(sid);
+    //     var typedisp = elem.getAttribute("style")
+    //     typedisp = typedisp === 'white-space: nowrap;' ? 'white-space: normal;' : 'white-space: nowrap;';
+    //     elem.setAttribute("style", typedisp)
+    //     console.log(elem);
+    // }
+    //onClick={changeVisibility(item.id)}
+
     return (
         <div>
             <div className="ideasSort">
@@ -95,7 +121,7 @@ const AllIdeas = () => {
                         <div className="ideaTitle">
                             {item.title}
                         </div>
-                        <div className="ideaDescr">
+                        <div id={item.id} style={{ whiteSpace: "nowrap" }} className="ideaDescr" >
                             {item.description}
                         </div>
                     </div>
@@ -108,8 +134,9 @@ const AllIdeas = () => {
                         </div>
                     </div>
                 </div>
-            ))}
-        </div>
+            ))
+            }
+        </div >
     );
 };
 

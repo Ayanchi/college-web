@@ -4,12 +4,33 @@
     border-radius: 40px;
     padding: 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .ideaImage{
-    border: 1px solid rgb(0, 4, 28);
-    border-radius: 50%;
+    width: 10%;
 }
 .ideaImage img{
+    border: 1px solid rgb(0, 4, 28);
+    border-radius: 50%;
     width: 100%;
+}
+.aboutIdea{
+    width: 40%;
+}
+.ideaDescr{
+
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    background: #fc0; /* Цвет фона */
+    padding: 5px; /* Поля вокруг текста */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+}
+.ideaActivity{
+    text-align: end;
+    width: 20%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.likes{
+    margin-right: 20px;
 }
