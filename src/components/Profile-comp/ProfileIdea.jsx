@@ -1,7 +1,7 @@
 import { ModalIdea } from "./ProfileHeader"
 import { useContext, useState, useEffect } from "react"
 import { database } from "../../app/firebase";
-import { getDocs, collection, addDoc, doc } from "firebase/firestore"
+import { getDocs, collection, setDoc, doc } from "firebase/firestore"
 import React from "react"
 import { useForm } from "react-hook-form";
 import "../CSS/ProfileIdea.css"
@@ -30,24 +30,6 @@ const ProfileIdea = (props) => {
 
     const q = collection(database, "ideas");
 
-    /*async function getIdea() {
-        const data = await getDocs(q)
-        const filterForm = data.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-        }));
-
-        if (filterForm.length > 0)
-            return filterForm[0]
-        else
-            return {
-                author: '',
-                yourIdea: '',
-                checkbox: '',
-                select: ''
-            }
-    }*/
-
     useEffect(() => {
         const getFormList = async () => {
             try {
@@ -67,7 +49,8 @@ const ProfileIdea = (props) => {
 
     const onSubmitForm = async (data) => {
         try {
-            await addDoc(collection(database, "ideas"), {
+            console.log(props.current.email)
+            await setDoc(doc(collection(database, "ideas"), props.current.email), {
                 author: data.author,
                 checkbox: checked,
                 select: selectedValue,
