@@ -148,7 +148,7 @@ const Registration = (props) => {
                                 name="skills"
                                 defaultValue={userData[0]?.skills || ''}
                                 {...register("skills", {
-                                    required: "Параметр обязателен"
+                                    
                                 })}>
                             </textarea>
                             {errors.skills && <span className="error" role="alert">{errors.skills?.message}</span>}
