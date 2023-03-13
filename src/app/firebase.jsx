@@ -14,7 +14,10 @@ const firebaseConfig = {
   measurementId: "G-N1K858RZDF"
 };
 
+
 // Erzhany
+
+
 // const firebaseConfig = {
 //   apiKey: "AIzaSyDF0bFadz3S5DxrxVmufjqaVI8EAx0l6iU",
 //   authDomain: "react-firtebase.firebaseapp.com",

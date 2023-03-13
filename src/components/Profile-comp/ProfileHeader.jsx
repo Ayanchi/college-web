@@ -2,14 +2,15 @@ import React from 'react';
 import { signOut } from "firebase/auth";
 import { auth } from "../../app/firebase";
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import { Link } from "react-router-dom"
 import Modal from '@mui/material/Modal';
 import { useState, createContext } from 'react';
 import "../CSS/ProfileHeader.css"
 import CheckSindingIdea from './CheckSending';
-import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
+import { display } from '@mui/system';
 
 
 const style = {
@@ -26,7 +27,7 @@ const style = {
 }
 
 const ModalIdea = createContext()
-export {ModalIdea}
+export { ModalIdea }
 
 const ProfileHeader = () => {
 
@@ -45,7 +46,7 @@ const ProfileHeader = () => {
         }
     }
 
-    
+
 
     return (
       
@@ -53,10 +54,12 @@ const ProfileHeader = () => {
             <div className="container">
                 <header className='header'>
                     <div className="logo">
-                        LOGO
+                        <Link to="/">
+                            LOGO
+                        </Link>
                     </div>
                     <div className="links">
-                        <Box sx={{ width: 500 }}>
+                        <Box sx={{ width: 300, display: 'flex'}}>
                             <BottomNavigation
                                 showLabels
                                 value={value}
@@ -66,17 +69,17 @@ const ProfileHeader = () => {
                             >
                                     
                                 <BottomNavigationAction label="log out" onClick={logout} />
-
+                            </BottomNavigation>
                                 
-                                <ModalIdea.Provider value={[idea, setIdea]}>
-                                    <BottomNavigation
-                                    showLabels
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                    setValue(newValue);
-                                    }}
-                                    >
-                                    
+                            <ModalIdea.Provider value={[idea, setIdea]}>
+                                <BottomNavigation
+                                showLabels
+                                value={value}
+                                onChange={(event, newValue) => {
+                                setValue(newValue);
+                                }}
+                                >
+                                
                                     <BottomNavigationAction label="add an idea" onClick={() => setIdea(true)}/>
                                     <Modal
                                         open={idea}
@@ -87,16 +90,26 @@ const ProfileHeader = () => {
                                             <CheckSindingIdea />
                                         </Box>
                                     </Modal>
-                                    </BottomNavigation>
+                                </BottomNavigation>
 
-                                </ModalIdea.Provider>
-                                
-                                
-                                
-                                <BottomNavigationAction label="ideas" />
+                            </ModalIdea.Provider>
+                            
+                            
+                            <Link to="/ideas">
+                                <BottomNavigation
+                                showLabels
+                                value={value}
+                                onChange={(event, newValue) => {
+                                setValue(newValue);
+                                }}
+                                >
+                                    <BottomNavigationAction label="All ideas" />
+                                </BottomNavigation>
+                            </Link>
 
-                            </BottomNavigation>
+                            
                         </Box>
+  
                     </div>
                 </header>
             </div>

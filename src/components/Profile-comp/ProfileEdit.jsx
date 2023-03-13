@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { database } from "../../app/firebase"
-import { getDocs, collection, setDoc, doc, query, where, limit } from "firebase/firestore"
+import { getDocs, collection, query, where, limit,  setDoc } from "firebase/firestore"
 import { useForm } from "react-hook-form";
 import ProfilePhoto from './ProfilePhoto';
 import { ModalContext } from "../../App"

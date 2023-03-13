@@ -24,7 +24,13 @@
     .header{
         flex-wrap: wrap;
     }
+
+}
+@media(max-width: 820px){
     .links{
+        margin: auto;
+    }
+    .logo{
         margin: auto;
     }
 }
