@@ -4,6 +4,7 @@ import Location from "./stages/stage"
 import GoogleButtom from "./google-register/Google-buttom"
 import {ModalContext} from '../App'
 import {useContext} from 'react'
+import { SocialIcon } from 'react-social-icons';
 
 
 function Modal() {
@@ -40,6 +41,14 @@ function Modal() {
                     </div>
                 </div>
                 
+            </div>
+
+            <div className="footer">
+                <div className="hub">
+                    <SocialIcon url="https://instagram.com/startupomania" bgColor="#b2ff00"/>
+                    <SocialIcon url="https://www.tiktok.com/@alatoostartupomania" bgColor="#b2ff00"/>
+                    <SocialIcon url="https://t.me/+qwojtIWrwjQ3YmIy" bgColor="#b2ff00"/>
+                </div>
             </div>
 
             {/* <div className="Apply">
