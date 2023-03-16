@@ -5,6 +5,7 @@
     padding: 30px;
     display: flex;
     justify-content: space-around;
+    position: relative;
 }
 .ideaImage{
     width: 10%;

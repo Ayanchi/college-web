@@ -1,0 +1,15 @@
+.users{
+    overflow: hidden;
+    width: 50px;
+    text-overflow: ellipsis;
+    font-size: 10px;
+    color: black;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+.Allusers{
+    width: 82px;
+    overflow: scroll;
+}
+.Typography{
+    color: black;
+}

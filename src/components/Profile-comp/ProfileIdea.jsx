@@ -1,10 +1,12 @@
 import { ModalIdea } from "./ProfileHeader"
 import { useContext, useState, useEffect } from "react"
-import { database } from "../../app/firebase";
+import { database, auth } from "../../app/firebase";
 import { getDocs, collection, setDoc, doc, addDoc } from "firebase/firestore"
 import React from "react"
 import { useForm } from "react-hook-form";
 import "../CSS/ProfileIdea.css"
+import { useAuthState } from 'react-firebase-hooks/auth'
+
 
 const ProfileIdea = (props) => {
 
@@ -15,6 +17,8 @@ const ProfileIdea = (props) => {
     const [isSending, setisSending] = useState(true)
     const [like, setLike] = useState([])
     const [subscribe, setSubscribe] = useState([])
+    // const [user] = useAuthState(auth)
+    // export default [user]
 
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
@@ -37,6 +41,7 @@ const ProfileIdea = (props) => {
                     ...doc.data(),
                     id: doc.id,
                 }))
+                console.log(data)
                 setIsUser(filterForm)
             } catch (error) {
                 console.log(error)

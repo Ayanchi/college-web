@@ -7,12 +7,13 @@ import "../CSS/ProfilePhoto.css"
 import Avatar from '@mui/material/Avatar';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import SubsLiks from './SubsLikes';
+import Likes from './Likes';
+import Susbscribe from './Subscribe';
 
 import "../CSS/AllIdeas.css"
 
 
-const MyIdeas = () => {
+const MyIdeas = (props) => {
     const [user] = useAuthState(auth)
     const [isUser, setIsUser] = useState([])
     const [imageList, setImageList] = useState(null)
@@ -115,7 +116,8 @@ const MyIdeas = () => {
                         </div>
                     </div>
                     <div className="ideaActivity">
-                        <SubsLiks/>
+                        <Likes current={item} />
+                        <Susbscribe current={item} />
                     </div>
                 </div>
             ))}

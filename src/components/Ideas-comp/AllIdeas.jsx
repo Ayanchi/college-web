@@ -6,8 +6,9 @@ import { ref, list, getDownloadURL } from 'firebase/storage'
 import "../CSS/ProfilePhoto.css"
 import Avatar from '@mui/material/Avatar';
 import { useAuthState } from 'react-firebase-hooks/auth'
-import SubsLiks from './SubsLikes';
 import "../CSS/AllIdeas.css"
+import Likes from './Likes';
+import Susbscribe from './Subscribe';
 
 
 
@@ -122,7 +123,8 @@ const AllIdeas = () => {
                         </div>
                     </div>
                     <div className="ideaActivity">
-                        <SubsLiks/>
+                        <Likes current={item} />
+                        <Susbscribe current={item} />
                     </div>
                 </div>
             ))
