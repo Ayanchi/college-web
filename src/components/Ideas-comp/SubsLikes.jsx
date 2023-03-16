@@ -18,7 +18,7 @@ const SubsLiks = () => {
 
     const [user] = useAuthState(auth)
 
-    const generateLikes = () =>{
+    const generateLikes = () => {
         useEffect(() => {
             setDoc(doc(database, 'ideas', user.uid),
                 {
@@ -31,12 +31,13 @@ const SubsLiks = () => {
 
     return (
         <div>
-            <Checkbox {...label} 
-                icon={<FavoriteBorder />} 
-                checkedIcon={<Favorite />} 
-                sx={{'&.Mui-checked': {
-                    color: pink[600],
-                }
+            <Checkbox {...label}
+                icon={<FavoriteBorder />}
+                checkedIcon={<Favorite />}
+                sx={{
+                    '&.Mui-checked': {
+                        color: pink[600],
+                    }
                 }}
                 onClick={generateLikes}
             />

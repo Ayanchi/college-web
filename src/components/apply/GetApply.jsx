@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import { ModalContext } from "../../App"
 
 const Registration = (props) => {
+    const [userData, setUserData] = useState([])
+    const [isSending, setisSending] = useState(true)
+    const [modal, setModal] = useContext(ModalContext)
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: async () => await getData()
     });
@@ -28,10 +31,6 @@ const Registration = (props) => {
                 skills: ''
             }
     }
-
-    const [userData, setUserData] = useState([])
-    const [isSending, setisSending] = useState(true)
-    const [modal, setModal] = useContext(ModalContext)
 
     useEffect(() => {
         const getFormList = async () => {

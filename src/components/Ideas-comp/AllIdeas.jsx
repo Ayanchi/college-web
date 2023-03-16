@@ -8,8 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import SubsLiks from './SubsLikes';
 import "../CSS/AllIdeas.css"
-
-
+import arrow from "../../assets/arrow-down.png"
 
 const AllIdeas = () => {
     const [isUser, setIsUser] = useState([])
@@ -19,9 +18,7 @@ const AllIdeas = () => {
     const [allSelectValues, setAllSelectValues] = useState(['все', 'другое...', 'дизайн', 'маркетинг', 'программист'])
     const imageListRef = ref(storage, `images/profile/${user?.email}/`)
 
-    const whiteSpace = {
-        'white-space': 'nowrap'
-    };
+
 
     useEffect(() => {
 
@@ -40,10 +37,10 @@ const AllIdeas = () => {
     ////////////////////////////////////////////////
 
     useEffect(() => {
-        const getFormList = async (user) => {
+        const getFormList = async () => {
             try {
                 if (selectedValue == allSelectValues[0]) {
-                    const q = query(collection(database, "ideas"));
+                    const q = query(collection(database, "ideas"), where("checkbox", "==", true));
                     const data = await getDocs(q)
                     const filterForm = data.docs.map((doc) => ({
                         ...doc.data(),
@@ -51,7 +48,7 @@ const AllIdeas = () => {
                     }))
                     setIsUser(filterForm)
                 } else {
-                    const q = query(collection(database, "ideas"), where("select", "==", selectedValue));
+                    const q = query(collection(database, "ideas"), where("select", "==", selectedValue), where("checkbox", "==", true));
                     const data = await getDocs(q)
                     const filterForm = data.docs.map((doc) => ({
                         ...doc.data(),
@@ -66,34 +63,10 @@ const AllIdeas = () => {
         getFormList()
     }, [selectedValue])
 
-    // useEffect(() => {
-    //     function uniqValues() {
-    //         let res = []
-    //         let uniqSelectRes = []
-    //         isUser.map((el) => {
-    //             res.push(el.select)
-    //             uniqSelectRes = res.filter(function (item, pos) {
-    //                 return res.indexOf(item) == pos;
-    //             })
-    //             console.log(uniqSelectRes);
-    //             return setAllSelectValues(uniqSelectRes)
-    //         })
-    //     }
-    //     uniqValues()
-    // }, [])
-
     function handleSelectChange(e) {
         setSelectedValue(e.target.value)
-    }
 
-    // function changeVisibility(sid) {
-    //     var elem = document.getElementById(sid);
-    //     var typedisp = elem.getAttribute("style")
-    //     typedisp = typedisp === 'white-space: nowrap;' ? 'white-space: normal;' : 'white-space: nowrap;';
-    //     elem.setAttribute("style", typedisp)
-    //     console.log(elem);
-    // }
-    //onClick={changeVisibility(item.id)}
+    }
 
     return (
         <div>
@@ -110,24 +83,33 @@ const AllIdeas = () => {
                         <Avatar
                             alt="Remy Sharp"
                             src={imageList}
-                            sx={{ width: 50, height: 50 }}
+                            sx={{ width: 70, height: 70 }}
                         />
                     </div>
                     <div className="aboutIdea">
                         <div className="ideaTitle">
                             {item.title}
                         </div>
-                        <div id={item.id} style={{ whiteSpace: "nowrap" }} className="ideaDescr" >
+                        <div id={item.id} className="ideaDescr">
                             {item.description}
                         </div>
                     </div>
                     <div className="ideaActivity">
-                        <SubsLiks/>
+                        <SubsLiks />
+                        <button className="arrow" onClick={(e) => {
+                            let elem = document.getElementById(item.id)
+                            elem?.classList.toggle("ideaDescrActive")
+                            let arrow = e.target
+                            arrow?.classList.toggle("arrowActive")
+                        }}>
+                            <img src={arrow} alt="" />
+                        </button>
+                        
                     </div>
                 </div>
             ))
             }
-        </div >
+        </div>
     );
 };
 

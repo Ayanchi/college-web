@@ -85,10 +85,6 @@ function Modal() {
                 AIU STARTUP HUB 
             </div>
         </div>
-
-
-        
-
     </div>
     )
 }

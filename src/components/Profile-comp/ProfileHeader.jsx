@@ -49,7 +49,7 @@ const ProfileHeader = () => {
 
 
     return (
-      
+
         <div className='wrapper'>
             <div className="container">
                 <header className='header'>
@@ -59,28 +59,25 @@ const ProfileHeader = () => {
                         </Link>
                     </div>
                     <div className="links">
-                        <Box sx={{ width: 300, display: 'flex'}}>
+                        <Box sx={{ width: 300, display: 'flex' }}>
                             <BottomNavigation
                                 showLabels
                                 value={value}
                                 onChange={(event, newValue) => {
-                                setValue(newValue);
+                                    setValue(newValue);
                                 }}
                             >
-                                    
                                 <BottomNavigationAction label="log out" onClick={logout} />
                             </BottomNavigation>
-                                
                             <ModalIdea.Provider value={[idea, setIdea]}>
                                 <BottomNavigation
-                                showLabels
-                                value={value}
-                                onChange={(event, newValue) => {
-                                setValue(newValue);
-                                }}
+                                    showLabels
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                        setValue(newValue);
+                                    }}
                                 >
-                                
-                                    <BottomNavigationAction label="add an idea" onClick={() => setIdea(true)}/>
+                                    <BottomNavigationAction label="add an idea" onClick={() => setIdea(true)} />
                                     <Modal
                                         open={idea}
                                         aria-labelledby="modal-modal-title"
@@ -93,28 +90,28 @@ const ProfileHeader = () => {
                                 </BottomNavigation>
 
                             </ModalIdea.Provider>
-                            
-                            
+
+
                             <Link to="/ideas">
                                 <BottomNavigation
-                                showLabels
-                                value={value}
-                                onChange={(event, newValue) => {
-                                setValue(newValue);
-                                }}
+                                    showLabels
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                        setValue(newValue);
+                                    }}
                                 >
                                     <BottomNavigationAction label="All ideas" />
                                 </BottomNavigation>
                             </Link>
 
-                            
+
                         </Box>
-  
+
                     </div>
                 </header>
             </div>
         </div>
-           
+
     );
 };
 
