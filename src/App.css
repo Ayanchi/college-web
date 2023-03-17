@@ -25,3 +25,14 @@ body {
     color: white;
     margin-top: 10px;
 }
+@media (max-width: 500px) {
+    .hub a {
+        margin-right: 0px;
+    }
+    .hub {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+}

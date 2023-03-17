@@ -20,9 +20,9 @@ const Timer = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => getTime(deadline), 1000);
+    // const interval = setInterval(() => getTime(deadline), 1000);
 
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, []);
 
   return (
