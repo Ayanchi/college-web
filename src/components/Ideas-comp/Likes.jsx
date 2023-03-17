@@ -52,9 +52,11 @@ const Likes = (props) => {
                     ...props.current,
                     like: arrayRemove(user.email)
                 })
+                console.log(props.current.id)
                 setLike(false)
                 setLikeUsersCount(likeUsersCount - 1)
                 setLikeUsers(likeUsers.splice(likeUsers.indexOf(user.email) - 1, 1))
+                console.log(likeUsers)
             }else{
                 await updateDoc(doc(database, "ideas", props.current.id), {
                     ...props.current,

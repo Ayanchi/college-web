@@ -57,6 +57,7 @@ const Susbscribe = (props) => {
                 }) 
                 setShowSubs(false)
                 setSubsUsersCount(subsUsersCount - 1)
+                console.log(subscribeUsers)
                 setSubscribeUsers(subscribeUsers.splice(subscribeUsers.indexOf(user.email) - 1, 1))
 
             }else{

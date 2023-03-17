@@ -23,7 +23,7 @@ const MyIdeas = (props) => {
     const imageListRef = ref(storage, `images/profile/${user?.email}/`)
     useEffect(() => {
 
-        if (user) {
+        if (user && user.email) {
             list(imageListRef).then((response) => {
                 response.items.forEach((item) => {
                     getDownloadURL(item).then((url) => {

@@ -18,14 +18,10 @@ const AllIdeas = () => {
     const [user] = useAuthState(auth)
     const [selectedValue, setSelectedValue] = useState("все")
     const [allSelectValues, setAllSelectValues] = useState(['все', 'другое...', 'дизайн', 'маркетинг', 'программист'])
-    const imageListRef = ref(storage, `images/profile/${user?.email}/`)
-
-    const whiteSpace = {
-        'white-space': 'nowrap'
-    };
+    const imageListRef = ref(storage, `images/profile/${user?.email}`)
 
     useEffect(() => {
-
+        console.log(imageListRef)
         if (user) {
             list(imageListRef).then((response) => {
                 response.items.forEach((item) => {
@@ -46,11 +42,21 @@ const AllIdeas = () => {
                 if (selectedValue == allSelectValues[0]) {
                     const q = query(collection(database, "ideas"));
                     const data = await getDocs(q)
-                    const filterForm = data.docs.map((doc) => ({
-                        ...doc.data(),
-                        id: doc.id,
-                    }))
-                    setIsUser(filterForm)
+                    const filterForm = data.docs.map(async (doc) => {
+                        const data = doc.data()
+                        const imageRef = ref(storage, `images/profile/${data.author}/profile`)
+                        const url = await getDownloadURL(imageRef)
+
+                        return {
+                            ...data,
+                            id: doc.id,
+                            imageUser: url
+                        }
+                    });
+                    
+                    const result = await Promise.all(filterForm)
+
+                    setIsUser(result)
                 } else {
                     const q = query(collection(database, "ideas"), where("select", "==", selectedValue));
                     const data = await getDocs(q)
@@ -110,7 +116,7 @@ const AllIdeas = () => {
                     <div className="ideaImage">
                         <Avatar
                             alt="Remy Sharp"
-                            src={imageList}
+                            src={item.imageUser}
                             sx={{ width: 50, height: 50 }}
                         />
                     </div>
