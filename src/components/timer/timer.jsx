@@ -8,9 +8,10 @@ const Timer = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const deadline = "March, 25, 2023 04:00:00 UTC";
+  const deadline = "March 25, 2023, 04:00:00 UTC";
 
   const getTime = () => {
+    
     const time = Date.parse(deadline) - Date.now();
 
     setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
@@ -20,9 +21,9 @@ const Timer = () => {
   };
 
   useEffect(() => {
-    // const interval = setInterval(() => getTime(deadline), 1000);
+     const interval = setInterval(() => getTime(deadline), 1000);
 
-    // return () => clearInterval(interval);
+     return () => clearInterval(interval);
   }, []);
 
   return (
