@@ -3,13 +3,26 @@ import Timer from "./timer/timer"
 import Location from "./stages/stage"
 import GoogleButtom from "./google-register/Google-buttom"
 import {ModalContext} from '../App'
-import {useContext} from 'react'
+import {useContext, useState, useEffect} from 'react'
 import { SocialIcon } from 'react-social-icons';
+import {getDocs, collection} from 'firebase/firestore'
+import { database } from "../app/firebase"
 
 
 function Modal() {
-
     const [modal, setModal] = useContext(ModalContext)
+    const [users, setUsers] = useState(0)
+
+    useEffect(() => {
+        try {
+            getDocs(collection(database, "users"))
+                .then(responce => {
+                    setUsers(responce?.docs?.length ? responce?.docs?.length : 0)
+                })
+        } catch(err) {
+            console.log(err)
+        }
+    }, [])
 
   return(
     <div className="modal">
@@ -49,6 +62,10 @@ function Modal() {
                     <SocialIcon url="https://www.tiktok.com/@alatoostartupomania" bgColor="#b2ff00"/>
                     <SocialIcon url="https://t.me/+qwojtIWrwjQ3YmIy" bgColor="#b2ff00"/>
                 </div>
+            </div>
+
+            <div className="count-users">
+                Количество зарегистрированных пользователей: {users}
             </div>
 
             {/* <div className="Apply">

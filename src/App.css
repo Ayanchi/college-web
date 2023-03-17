@@ -14,3 +14,14 @@ body {
 .stattup-text img {
     margin: 0 auto;
 }
+.hub a {
+    margin-right: 40px;
+}
+.hub a:last-child {
+    margin-right: 0px;
+}
+.count-users {
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
