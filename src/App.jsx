@@ -2,15 +2,15 @@ import './App.css'
 import Main from './pages/autorization/Main'
 import Profile from "./pages/Profile"
 import Ideas from './pages/Ideas'
-import {useState, createContext} from 'react'
-import {Modal, Box} from '@mui/material';
+import { useState, createContext } from 'react'
+import { Modal, Box } from '@mui/material';
 import Registration from './components/apply/GetApply'
 import { auth } from "./app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Routes, Route } from "react-router-dom"
 
 const ModalContext = createContext()
-export {ModalContext}
+export { ModalContext }
 
 function App() {
   const [modal, setModal] = useState(false)
@@ -42,11 +42,11 @@ function App() {
   return (
     <div className="App">
       <ModalContext.Provider value={[modal, setModal]}>
-      <Routes>
-        <Route path="" element={<Main/>}/>
-        <Route path="/profile" element={<Profile setModal={true}/>}/>
-        <Route path="/ideas" element={<Ideas/>}/>
-      </Routes>
+        <Routes>
+          <Route path="" element={<Main />} />
+          <Route path="/profile" element={<Profile setModal={true} />} />
+          <Route path="/ideas" element={<Ideas />} />
+        </Routes>
 
         <Modal
           open={modal}
@@ -55,7 +55,7 @@ function App() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-          {user ? <Registration current={user}/> : 'Необходимо войти в систему!!!'}
+            {user ? <Registration current={user} /> : 'Необходимо войти в систему!!!'}
           </Box>
         </Modal>
       </ModalContext.Provider>

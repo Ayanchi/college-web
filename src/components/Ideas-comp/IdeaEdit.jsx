@@ -1,65 +1,52 @@
-import { ModalIdea } from "./ProfileHeader"
-import { useContext, useState, useEffect } from "react"
-import { database } from "../../app/firebase";
-import { getDocs, collection, addDoc } from "firebase/firestore"
-import React from "react"
+import React, { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { ModalIdeaEdit } from './MyIdeas';
 import { useForm } from "react-hook-form";
-import "../CSS/ProfileIdea.css"
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { database } from "../../app/firebase";
+import { getDoc, doc, updateDoc } from "firebase/firestore"
+import "../CSS/GetApply.css"
 
 
-const ProfileIdea = (props) => {
-
-    const [idea, setIdea] = useContext(ModalIdea)
+const IdeaEdit = (props) => {
     const [isUser, setIsUser] = useState([])
-    const [selectedValue, setSelectedValue] = useState('другое...')
-    const [checked, setChecked] = useState(false)
+    const [selectedValue, setSelectedValue] = useState()
+    const [checked, setChecked] = useState()
     const [isSending, setisSending] = useState(true)
-    const [like, setLike] = useState([])
-    const [subscribe, setSubscribe] = useState([])
-    // const [user] = useAuthState(auth)
-    // export default [user]
-
-
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-
-    })
-
-
-    function handleSelectChange(e) {
-        setSelectedValue(e.target.value);
-    }
+    const [ideaEdit, setIdeaEdit] = useContext(ModalIdeaEdit)
+    const { register, handleSubmit, formState: { errors } } = useForm({})
 
     useEffect(() => {
         const getFormList = async () => {
             try {
-                const q = collection(database, "ideas");
-                const data = await getDocs(q)
-                const filterForm = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }))
-                console.log(data)
-                setIsUser(filterForm)
+                const idea = await getDoc(doc(database, 'ideas', props.id))
+
+                setIsUser([idea?.data()])
+            
+                setChecked(idea?.data().checkbox)
+                console.log(checked);
+
+
+                let select = isUser[0]?.select
+                setSelectedValue(idea?.data().select)
+
+                console.log(selectedValue);
+
+
             } catch (error) {
                 console.log(error)
             }
         }
         getFormList()
+
     }, [])
 
     const onSubmitForm = async (data) => {
         try {
-            await addDoc(collection(database, "ideas"), {
+            await updateDoc(doc(database, 'ideas', props.id), {
                 title: data.title,
                 checkbox: checked,
                 select: selectedValue,
                 description: data.description,
-                like: like,
-                subscribe: subscribe,
-                author: props.current.email
             });
             setisSending(false)
 
@@ -67,14 +54,14 @@ const ProfileIdea = (props) => {
             console.log(error)
         }
     }
-
-
-
+    function handleSelectChange(e) {
+        setSelectedValue(e.target.value);
+    }
 
     if (isSending) {
         return (
             <div className="ideaModal">
-                <button className="closebuttonIdea" onClick={() => setIdea(false)}>X</button>
+                <button className="closebuttonIdea" onClick={() => setIdeaEdit(false)}>X</button>
                 <form className="idea-form" onSubmit={handleSubmit(onSubmitForm)}>
                     <div className="mainInputs">
                         <div className="firstInput">
@@ -82,7 +69,7 @@ const ProfileIdea = (props) => {
                                 name="title"
                                 type="text"
                                 placeholder="Тема идеи"
-                                defaultValue={isUser[0]?.name || ""}
+                                defaultValue={isUser[0]?.title || ''}
                                 {...register('title', {
                                     required: "Параметр обязателен",
                                     maxLength: {
@@ -102,6 +89,7 @@ const ProfileIdea = (props) => {
                                 name="description"
                                 type="text"
                                 placeholder="Ваша идея"
+                                defaultValue={isUser[0]?.description || ''}
                                 className="yourIdea"
                                 {...register('description', {
                                     required: "Параметр обязателен",
@@ -119,7 +107,7 @@ const ProfileIdea = (props) => {
                                 role="switch"
                                 id="flexSwitchCheckDefault"
                                 name="checkbox"
-                                checked={checked}
+                                defaultChecked={checked}
                                 onChange={(e) => setChecked(e.target.checked)}
 
                             />
@@ -148,19 +136,20 @@ const ProfileIdea = (props) => {
                         className="b-center b-block focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
                         type="submit"
                     >
-                        создать
+                        Обновить данные
                     </button>
                 </form>
             </div>
         )
     } else {
         return (
-            <div className="send">
-                <button className="closebuttonIdea" onClick={() => setIdea(false)}>X</button>
-                <div className="sendingIdea">Ваша идея успешно отправленна</div>
+            <div className="modal">
+                <button className="closebutton" onClick={() => setIdeaEdit(false)}>x</button>
+                <div className="modalMessage">{isUser[0] ? "Ваши данные успешно обновлены" : "Ваши данные успешно сохранены"}</div>
             </div>
         )
     }
+
 }
 
-export default ProfileIdea
+export default IdeaEdit;
