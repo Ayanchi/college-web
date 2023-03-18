@@ -5,7 +5,6 @@ import { getDocs, collection, addDoc } from "firebase/firestore"
 import React from "react"
 import { useForm } from "react-hook-form";
 import "../CSS/ProfileIdea.css"
-import { useAuthState } from 'react-firebase-hooks/auth'
 
 
 const ProfileIdea = (props) => {
@@ -17,8 +16,6 @@ const ProfileIdea = (props) => {
     const [isSending, setisSending] = useState(true)
     const [like, setLike] = useState([])
     const [subscribe, setSubscribe] = useState([])
-    // const [user] = useAuthState(auth)
-    // export default [user]
 
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
@@ -41,7 +38,6 @@ const ProfileIdea = (props) => {
                     ...doc.data(),
                     id: doc.id,
                 }))
-                console.log(data)
                 setIsUser(filterForm)
             } catch (error) {
                 console.log(error)
@@ -61,8 +57,8 @@ const ProfileIdea = (props) => {
                 subscribe: subscribe,
                 author: props.current.email
             });
-            setisSending(false)
 
+            setisSending(false)
         } catch (error) {
             console.log(error)
         }
@@ -82,7 +78,7 @@ const ProfileIdea = (props) => {
                                 name="title"
                                 type="text"
                                 placeholder="Тема идеи"
-                                defaultValue={isUser[0]?.name || ""}
+                                // defaultValue={isUser[0]?.name || ""}
                                 {...register('title', {
                                     required: "Параметр обязателен",
                                     maxLength: {

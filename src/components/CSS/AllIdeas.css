@@ -59,7 +59,7 @@
     text-align: end;
     width: 20%;
     display: flex;
-    justify-content: end;
+    justify-content: initial;
     align-items: end;
 }
 

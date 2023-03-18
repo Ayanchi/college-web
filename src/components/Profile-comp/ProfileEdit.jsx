@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { database } from "../../app/firebase"
-import { getDocs, collection, query, where, limit,  setDoc } from "firebase/firestore"
+import { getDocs, collection, query, where, limit,  setDoc,doc  } from "firebase/firestore"
 import { useForm } from "react-hook-form";
 import ProfilePhoto from './ProfilePhoto';
 import { ModalContext } from "../../App"
@@ -169,9 +169,6 @@ const ProfileEdit = (props) => {
                     </div>
                 </div>
             </div>
-
-
-
         )
     } else {
         return (

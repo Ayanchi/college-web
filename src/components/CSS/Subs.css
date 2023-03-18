@@ -1,6 +1,6 @@
 .users{
     overflow: hidden;
-    width: 50px;
+    width: 45px;
     text-overflow: ellipsis;
     font-size: 10px;
     color: black;

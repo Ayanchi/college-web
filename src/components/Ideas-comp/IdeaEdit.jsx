@@ -13,50 +13,72 @@ const IdeaEdit = (props) => {
     const [checked, setChecked] = useState()
     const [isSending, setisSending] = useState(true)
     const [ideaEdit, setIdeaEdit] = useContext(ModalIdeaEdit)
-    const { register, handleSubmit, formState: { errors } } = useForm({})
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: async () => await getData()
+    })
+
+
+    async function getData() {
+        const idea = await getDoc(doc(database, 'ideas', props.id))
+        const responce = idea.data()
+        if (responce?.title) {
+            return {
+                title: responce.title,
+                description: responce.description,
+                checked: responce.checkbox,
+                select: responce.select
+            }
+        }
+        else
+            return {
+                title: '',
+                description: '',
+                checked: false,
+                select: ''
+            }
+    }
 
     useEffect(() => {
         const getFormList = async () => {
             try {
                 const idea = await getDoc(doc(database, 'ideas', props.id))
-
-                setIsUser([idea?.data()])
-            
-                setChecked(idea?.data().checkbox)
-                console.log(checked);
-
-
-                let select = isUser[0]?.select
-                setSelectedValue(idea?.data().select)
-
-                console.log(selectedValue);
-
+                const responce = idea.data()
+                setIsUser(responce)
+                setChecked(responce?.checkbox)
+                setSelectedValue(responce?.select)
 
             } catch (error) {
                 console.log(error)
             }
         }
         getFormList()
-
     }, [])
+
+    function handleSelectChange(e) {
+        setSelectedValue(e.target.value);
+    }
+    function checkedClick(e) {
+        let res = e.target.checked
+        setChecked(res)
+    }
 
     const onSubmitForm = async (data) => {
         try {
+
             await updateDoc(doc(database, 'ideas', props.id), {
                 title: data.title,
                 checkbox: checked,
                 select: selectedValue,
                 description: data.description,
             });
+            console.log(checked)
             setisSending(false)
 
         } catch (error) {
             console.log(error)
         }
     }
-    function handleSelectChange(e) {
-        setSelectedValue(e.target.value);
-    }
+
 
     if (isSending) {
         return (
@@ -69,7 +91,7 @@ const IdeaEdit = (props) => {
                                 name="title"
                                 type="text"
                                 placeholder="Тема идеи"
-                                defaultValue={isUser[0]?.title || ''}
+                                defaultValue={isUser?.title || ''}
                                 {...register('title', {
                                     required: "Параметр обязателен",
                                     maxLength: {
@@ -89,7 +111,7 @@ const IdeaEdit = (props) => {
                                 name="description"
                                 type="text"
                                 placeholder="Ваша идея"
-                                defaultValue={isUser[0]?.description || ''}
+                                defaultValue={isUser?.description || ''}
                                 className="yourIdea"
                                 {...register('description', {
                                     required: "Параметр обязателен",
@@ -107,11 +129,9 @@ const IdeaEdit = (props) => {
                                 role="switch"
                                 id="flexSwitchCheckDefault"
                                 name="checkbox"
-                                defaultChecked={checked}
-                                onChange={(e) => setChecked(e.target.checked)}
-
+                                defaultChecked={isUser?.checkbox}
+                                onClick={(e) => checkedClick(e)}
                             />
-
                             <label
                                 className="inline-block pl-[0.15rem] hover:cursor-pointer"
                                 htmlFor="flexSwitchCheckDefault"
@@ -149,7 +169,6 @@ const IdeaEdit = (props) => {
             </div>
         )
     }
-
 }
 
 export default IdeaEdit;

@@ -100,9 +100,22 @@ const MyIdeas = (props) => {
         let id = button.getAttribute("id")
         setIdeaId(id)
     }
-
-
-
+    function arrowFunction(str, id) {
+        if (str.split("").length > 60) {
+            return (
+                < button className="arrow" onClick={(e) => {
+                    let elem = document.getElementById(id)
+                    elem?.classList.toggle("ideaDescrActive")
+                    let arrow = e.target
+                    arrow?.classList.toggle("arrowActive")
+                }}>
+                    <img src={arrow} alt="" />
+                </button >
+            )
+        } else {
+            return (<div className='arrow'></div>)
+        }
+    }
     return (
         <div>
             <div className="ideasSort">
@@ -132,14 +145,7 @@ const MyIdeas = (props) => {
                     <div className="ideaActivity">
                         <Likes current={item} />
                         <Susbscribe current={item} />
-                        <button className="arrow" onClick={(e) => {
-                            let elem = document.getElementById(idx)
-                            elem?.classList.toggle("ideaDescrActive")
-                            let arrow = e.target
-                            arrow?.classList.toggle("arrowActive")
-                        }} >
-                            <img src={arrow} alt="" />
-                        </button>
+                        {arrowFunction(item.description, item.id)}
                         <button className="pencil" onClick={(e) => takingIdeaId(e)}>
                             <img src={pencil} alt="" />
                         </button>
@@ -157,7 +163,7 @@ const MyIdeas = (props) => {
                     <Box
                         sx={style}
                     >
-                        <IdeaEdit id={ideaId} current={user}/>
+                        <IdeaEdit id={ideaId} current={user} />
                     </Box>
                 </Modal>
             </ModalIdeaEdit.Provider>

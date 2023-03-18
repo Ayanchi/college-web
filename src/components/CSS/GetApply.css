@@ -91,7 +91,7 @@ textarea {
     background-color: transparent;
 }
 
-span{
+span {
     color: #ff0d00;
 }
 
@@ -108,6 +108,7 @@ span{
     font-family: cursive;
     text-align: right;
     top: -45px;
+    right: -150px;
     font-size: 40px;
     font-weight: 600;
     color: #0a0528;
@@ -132,20 +133,24 @@ span{
         width: 100%;
         min-height: 400px;
     }
+
     .inputs {
         position: relative;
         top: -30px;
     }
-    .butoon{
+
+    .butoon {
         margin: 0;
     }
 }
+
 .b-center {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
 }
-.b-block{
+
+.b-block {
     display: block;
 }
 
@@ -154,6 +159,7 @@ span{
         width: 80%;
         min-height: 400px;
     }
+
     .formTitle {
         position: relative;
         top: -45px;
