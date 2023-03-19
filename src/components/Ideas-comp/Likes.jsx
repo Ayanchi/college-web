@@ -90,7 +90,7 @@ const Likes = (props) => {
                     }
                     }}
                     checked={like}
-                    onChange={(e) => {
+                    onClick={(e) => {
                         setLike(e.target.checked)
                     }}
                     

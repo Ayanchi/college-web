@@ -22,7 +22,6 @@ const AllIdeas = () => {
     const imageListRef = ref(storage, `images/profile/${user?.email}`)
 
     useEffect(() => {
-        console.log(imageListRef)
         if (user) {
             list(imageListRef).then((response) => {
                 response.items.forEach((item) => {
@@ -54,7 +53,7 @@ const AllIdeas = () => {
                             imageUser: url
                         }
                     });
-                    
+
                     const result = await Promise.all(filterForm)
 
                     setIsUser(result)
@@ -77,6 +76,22 @@ const AllIdeas = () => {
     function handleSelectChange(e) {
         setSelectedValue(e.target.value)
 
+    }
+    function arrowFunction(str, id) {
+        if (str.split("").length > 60) {
+            return (
+                < button className="arrow" onClick={(e) => {
+                    let elem = document.getElementById(id)
+                    elem?.classList.toggle("ideaDescrActive")
+                    let arrow = e.target
+                    arrow?.classList.toggle("arrowActive")
+                }}>
+                    <img src={arrow} alt="" />
+                </button >
+            )
+        } else {
+            return (<div></div>)
+        }
     }
 
     return (
@@ -108,22 +123,16 @@ const AllIdeas = () => {
                             </div>
                         </div>
                         <div className="corecters">
-                            <button className="arrow" onClick={(e) => {
-                                let elem = document.getElementById(item.id)
-                                elem?.classList.toggle("ideaDescrActive")
-                                let arrow = e.target
-                                arrow?.classList.toggle("arrowActive")
-                            }}>
-                                <img src={arrow} alt="" />
-                            </button>
-
+                            {arrowFunction(item.description, item.id)}
                         </div>
                     </div>
                     <div className="ideaActivity">
                         <div className="iconsNice">
                             <Likes current={item} />
                             <Susbscribe current={item} />
+                            
                         </div>
+                        
                         
                     </div>
                 </div>

@@ -48,8 +48,6 @@
     /* Обрезаем все, что не помещается в область */
     background: #fc0;
     /* Цвет фона */
-    padding: 5px;
-    /* Поля вокруг текста */
     text-overflow: ellipsis;
     /* Добавляем многоточие */
 }
@@ -58,7 +56,7 @@
     text-align: end;
     width: 20%;
     display: flex;
-    justify-content: end;
+    justify-content: initial;
     align-items: end;
 }
 
