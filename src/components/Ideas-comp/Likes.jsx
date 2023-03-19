@@ -27,6 +27,7 @@ const Likes = (props) => {
 
     useEffect(() => {
         if(user){
+            console.log(likeUsers)
             setLikeUsersCount(props.current.like.length)
             setLikeUsers(props.current.like)
             if(props.current.like.includes(user.email)){
@@ -120,7 +121,10 @@ const Likes = (props) => {
                         horizontal: 'center',
                         }}
                     >
-                        <Typography sx={{ p: 2, color: 'black' }}>{likeUsers}</Typography>
+                        {likeUsers.map((likes) => (
+                            <Typography sx={{ p: 2, color: 'black' }}>{likes}</Typography>
+                        ))}
+                        
                     </Popover>
                     </div>
                 )}

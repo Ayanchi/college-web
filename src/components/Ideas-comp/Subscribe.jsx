@@ -114,7 +114,10 @@ const Susbscribe = (props) => {
                             horizontal: 'center',
                             }}
                         >
-                            <Typography sx={{ p: 2, color: 'black' }}>{subscribeUsers}</Typography>
+                            {subscribeUsers.map((subscribers) => (
+                                <Typography sx={{ p: 2, color: 'black' }}>{subscribers}</Typography>
+                            ))}
+                            
                         </Popover>
                     </div>
                 )}
