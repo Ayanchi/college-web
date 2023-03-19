@@ -120,7 +120,7 @@ function Modal() {
 
         {user && (
             <div className="profile">
-                <Link to="/profile">
+                <Link to="/college-web/profile">
                     <img src={profile} alt="" />
                 </Link>
             </div>

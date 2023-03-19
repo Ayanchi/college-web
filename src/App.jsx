@@ -43,9 +43,9 @@ function App() {
     <div className="App">
       <ModalContext.Provider value={[modal, setModal]}>
         <Routes>
-          <Route path="" element={<Main />} />
-          <Route path="/profile" element={<Profile setModal={true} />} />
-          <Route path="/ideas" element={<Ideas />} />
+          <Route path="/college-web/" element={<Main />} />
+          <Route path="/college-web/profile" element={<Profile setModal={true} />} />
+          <Route path="/college-web/ideas" element={<Ideas />} />
         </Routes>
 
         <Modal

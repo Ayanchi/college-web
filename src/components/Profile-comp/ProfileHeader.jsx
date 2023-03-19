@@ -39,7 +39,7 @@ const ProfileHeader = () => {
     const logout = async () => {
         try {
             await signOut(auth)
-            navigate('/')
+            navigate('/college-web/')
 
         } catch (error) {
             console.log(error)
@@ -54,7 +54,7 @@ const ProfileHeader = () => {
             <div className="container">
                 <header className='header'>
                     <div className="logo">
-                        <Link to="/profile">
+                        <Link to="/college-web/profile">
                             LOGO
                         </Link>
                     </div>
@@ -92,7 +92,7 @@ const ProfileHeader = () => {
                             </ModalIdea.Provider>
 
 
-                            <Link to="/ideas">
+                            <Link to="/college-web/ideas">
                                 <BottomNavigation
                                     showLabels
                                     value={value}

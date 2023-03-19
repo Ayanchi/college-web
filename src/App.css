@@ -32,6 +32,8 @@ body {
     text-align: center;
     color: white;
     margin-top: 10px;
+    z-index: 9999;
+    position: relative;
 }
 @media (max-width: 500px) {
     .hub a {
