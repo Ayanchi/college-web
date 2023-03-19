@@ -1,17 +1,23 @@
 import "../components/Modal.css"
 import Timer from "./timer/timer"
 import Location from "./stages/stage"
+import {Link} from 'react-router-dom'
 import GoogleButtom from "./google-register/Google-buttom"
 import {ModalContext} from '../App'
 import {useContext, useState, useEffect} from 'react'
 import { SocialIcon } from 'react-social-icons';
 import {getDocs, collection} from 'firebase/firestore'
 import { database } from "../app/firebase"
+import profile from '../assets/profile.png'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from "../app/firebase"
 
 
 function Modal() {
     const [modal, setModal] = useContext(ModalContext)
     const [users, setUsers] = useState(0)
+
+    const [user] = useAuthState(auth);
 
     useEffect(() => {
         try {
@@ -112,7 +118,13 @@ function Modal() {
             </div>
         </div> */}
 
-
+        {user && (
+            <div className="profile">
+                <Link to="/profile">
+                    <img src={profile} alt="" />
+                </Link>
+            </div>
+        )} 
         
 
     </div>

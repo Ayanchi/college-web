@@ -299,3 +299,11 @@ h3 {
   }
 }
 
+.profile {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.profile img {
+  width: 76px;
+}
