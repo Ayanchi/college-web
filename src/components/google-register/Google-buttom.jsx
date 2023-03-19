@@ -6,17 +6,28 @@ import { signInWithPopup, signOut } from "firebase/auth";
 import { googleProvider, auth } from "../../app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { ModalContext } from '../../App'
+import { getDocs, collection, query, where, limit } from "firebase/firestore"
+import { database } from "../../app/firebase"
 
 function GoogleButtom() {
+    const [modal, setModal] = React.useContext(ModalContext)
+
     const signInWithGoogle = async () => {
         try {
-            await signInWithPopup(auth, googleProvider)
+            const auth_user = await signInWithPopup(auth, googleProvider)
+            console.log(auth_user)
+            if (auth_user?.user) {
+                const q = query(collection(database, "users"), where("idUser", "==", auth_user.user.uid), limit(1));
+                const data = await getDocs(q)
+                if (data?.docs && data.docs?.length === 0) {
+                    setModal(true)
+                }
+            }
+            
         } catch (error) {
             console.log(error)
         }
     }
-
-    const [modal, setModal] = React.useContext(ModalContext)
 
     const logout = async () => {
         try {

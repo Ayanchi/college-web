@@ -24,7 +24,7 @@ const IdeaEdit = (props) => {
 
 
     async function getData() {
-        const idea = await getDoc(doc(database, 'ideas', props.current.uid))
+        const idea = await getDoc(doc(database, 'ideas', props.id))
         const responce = idea.data()
         console.log(responce)
         if (responce?.title) {
@@ -47,7 +47,7 @@ const IdeaEdit = (props) => {
     useEffect(() => {
         const getFormList = async () => {
             try {
-                const idea = await getDoc(doc(database, 'ideas', props.current.uid))
+                const idea = await getDoc(doc(database, 'ideas', props.id))
                 const responce = idea.data()
                 setIsUser(responce)
                 setChecked(responce?.checkbox)
@@ -71,7 +71,7 @@ const IdeaEdit = (props) => {
     const onSubmitForm = async (data) => {
         try {
 
-            await setDoc(doc(database, 'ideas', props.current.uid), {
+            await setDoc(doc(database, 'ideas', props.id), {
                 title: data.title,
                 checkbox: checked,
                 select: selectedValue,
