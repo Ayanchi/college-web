@@ -14,7 +14,31 @@ body {
 .stattup-text img {
     margin: 0 auto;
 }
+<<<<<<< HEAD
 .checked\:bg-primary:checked {
     --tw-bg-opacity: 1;
     background-color: rgb(59 113 202/var(--tw-bg-opacity));
+=======
+.hub a {
+    margin-right: 40px;
+}
+.hub a:last-child {
+    margin-right: 0px;
+}
+.count-users {
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
+@media (max-width: 500px) {
+    .hub a {
+        margin-right: 0px;
+    }
+    .hub {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+>>>>>>> 8519da3c6315f8668380263bd6bc6c24ff86804d
 }

@@ -194,11 +194,12 @@ h3 {
 }
 
 .footer {
-  background-color: rgb(214, 214, 214);
+    background-color: rgba(21, 11, 80, 1);
+    
 }
 
 .hub {
-  background-color: aliceblue;
+  background-color: rgba(21, 11, 80, 1);
   padding: 7px 100px 6px 100px;
   text-align: center;
   font-family: Roboto, Arial;
