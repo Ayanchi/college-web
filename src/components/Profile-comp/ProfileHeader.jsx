@@ -54,7 +54,7 @@ const ProfileHeader = () => {
             <div className="container">
                 <header className='header'>
                     <div className="logo">
-                        <Link to="/">
+                        <Link to="/profile">
                             LOGO
                         </Link>
                     </div>
@@ -67,7 +67,7 @@ const ProfileHeader = () => {
                                     setValue(newValue);
                                 }}
                             >
-                                <BottomNavigationAction label="log out" onClick={logout} />
+                                <BottomNavigationAction label="Выйти" onClick={logout} />
                             </BottomNavigation>
                             <ModalIdea.Provider value={[idea, setIdea]}>
                                 <BottomNavigation
@@ -77,7 +77,7 @@ const ProfileHeader = () => {
                                         setValue(newValue);
                                     }}
                                 >
-                                    <BottomNavigationAction label="add an idea" onClick={() => setIdea(true)} />
+                                    <BottomNavigationAction label="Добавить идею" onClick={() => setIdea(true)} />
                                     <Modal
                                         open={idea}
                                         aria-labelledby="modal-modal-title"
@@ -100,7 +100,7 @@ const ProfileHeader = () => {
                                         setValue(newValue);
                                     }}
                                 >
-                                    <BottomNavigationAction label="All ideas" />
+                                    <BottomNavigationAction label="Список идей" />
                                 </BottomNavigation>
                             </Link>
 

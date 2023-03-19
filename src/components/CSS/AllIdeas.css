@@ -16,6 +16,8 @@
 .ideaImage {
     display: flex;
     margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .ideaImage img {

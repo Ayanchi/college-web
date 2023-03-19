@@ -107,11 +107,14 @@ const AllIdeas = () => {
                 <div className="ideaContainer" key={item.id}>
                     <div className="authIdeas">
                         <div className="ideaImage">
-                            <Avatar
-                                alt="Remy Sharp"
-                                src={item.imageUser}
-                                sx={{ width: 70, height: 70 }}
-                            />
+                            <div>
+                                <Avatar
+                                    alt="Remy Sharp"
+                                    src={item.imageUser}
+                                    sx={{ width: 70, height: 70 }}
+                                />
+                            </div>
+                            <div>{item.author}</div>
                         </div>
                     
                         <div className="aboutIdea">

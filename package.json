@@ -25,14 +25,10 @@
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-hook-form": "^7.43.1",
-<<<<<<< HEAD
     "react-router-dom": "^6.8.2",
     "tw-elements": "^1.0.0-beta1",
-    "uuid": "^9.0.0"
-=======
-    "react-social-icons": "^5.15.0",
-    "tw-elements": "^1.0.0-beta1"
->>>>>>> 8519da3c6315f8668380263bd6bc6c24ff86804d
+    "uuid": "^9.0.0",
+    "react-social-icons": "^5.15.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

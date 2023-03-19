@@ -15,6 +15,9 @@ import { Modal } from '@mui/material';
 import { createContext } from "react"
 import { Box } from '@mui/system';
 import pencil from "../../assets/pencil.png"
+import { DeleteIcon } from './Delete-Icon';
+
+
 const ModalIdeaEdit = createContext()
 export { ModalIdeaEdit }
 
@@ -150,6 +153,7 @@ const MyIdeas = (props) => {
                             <button className="pencil" onClick={(e) => takingIdeaId(e)}>
                                 <img src={pencil} alt="" />
                             </button>
+                            <DeleteIcon idea={item}/>
                         </div>
                     </div>
                     <div className="ideaActivity">
