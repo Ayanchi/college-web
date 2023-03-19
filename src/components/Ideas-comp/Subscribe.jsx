@@ -57,8 +57,8 @@ const Susbscribe = (props) => {
                 }) 
                 setShowSubs(false)
                 setSubsUsersCount(subsUsersCount - 1)
-                console.log(subscribeUsers)
                 setSubscribeUsers(subscribeUsers.splice(subscribeUsers.indexOf(user.email) - 1, 1))
+                console.log(setSubscribeUsers(subscribeUsers.splice(subscribeUsers.indexOf(user.email) - 1, 1)))
 
             }else{
                 await updateDoc(doc(database, "ideas", props.current.id), {
@@ -68,7 +68,7 @@ const Susbscribe = (props) => {
                 setShowSubs(true)
                 setSubsUsersCount(subsUsersCount + 1)
                 setSubscribeUsers([...subscribeUsers, user.email])
-                console.log(subscribeUsers)
+                console.log([...subscribeUsers, user.email])
 
             }
         
@@ -98,24 +98,24 @@ const Susbscribe = (props) => {
             <PopupState variant="popover" popupId="demo-popup-popover">
                 {(popupState) => (
                     <div>
-                    <Button variant="contained" {...bindTrigger(popupState)}>
-                    <div className='users'>
-                        {subscribeUsers}
-                    </div>
-                    </Button>
-                    <Popover
-                        {...bindPopover(popupState)}
-                        anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'center',
-                        }}
-                        transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                        }}
-                    >
-                        <Typography sx={{ p: 2, color: 'black' }}>{subscribeUsers}</Typography>
-                    </Popover>
+                        <Button variant="contained" className='showUsersButton' {...bindTrigger(popupState)}>
+                            <div className='users'>
+                                {subscribeUsers}
+                            </div>
+                        </Button>
+                        <Popover
+                            {...bindPopover(popupState)}
+                            anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                            }}
+                            transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                            }}
+                        >
+                            <Typography sx={{ p: 2, color: 'black' }}>{subscribeUsers}</Typography>
+                        </Popover>
                     </div>
                 )}
             </PopupState>

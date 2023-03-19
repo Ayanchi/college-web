@@ -114,39 +114,48 @@ const MyIdeas = (props) => {
             </div>
             {isUser.map((item, idx) => (
                 <div className="ideaContainer" id={item.id} key={item.id}>
-                    <div className="ideaImage">
-                        <Avatar
-                            alt="Remy Sharp"
-                            src={imageList}
-                            sx={{ width: 50, height: 50 }}
-                        />
-                    </div>
-                    <div className="aboutIdea">
-                        <div className="ideaTitle">
-                            {item.title}
+                    <div className="authIdeas">
+                        <div className="ideaImage">
+                            <Avatar
+                                alt="Remy Sharp"
+                                src={imageList}
+                                sx={{ width: 70, height: 70 }}
+                            />
                         </div>
-                        <div id={idx} className="ideaDescr">
-                            {item.description}
+                        <div className="aboutIdea">
+                            <div className="ideaTitle">
+                                {item.title}
+                            </div>
+                            <div id={idx} className="ideaDescr">
+                                {item.description}
+                            </div>
+                        </div>
+                        <div className="corecters">
+                            <button className="arrow" onClick={(e) => {
+                                let elem = document.getElementById(idx)
+                                elem?.classList.toggle("ideaDescrActive")
+                                let arrow = e.target
+                                arrow?.classList.toggle("arrowActive")
+                            }} >
+                                <img src={arrow} alt="" />
+                            </button>
+                            <button className="pencil" onClick={(e) => takingIdeaId(e)}>
+                                <img src={pencil} alt="" />
+                            </button>
                         </div>
                     </div>
                     <div className="ideaActivity">
-                        <Likes current={item} />
-                        <Susbscribe current={item} />
-                        <button className="arrow" onClick={(e) => {
-                            let elem = document.getElementById(idx)
-                            elem?.classList.toggle("ideaDescrActive")
-                            let arrow = e.target
-                            arrow?.classList.toggle("arrowActive")
-                        }} >
-                            <img src={arrow} alt="" />
-                        </button>
-                        <button className="pencil" onClick={(e) => takingIdeaId(e)}>
-                            <img src={pencil} alt="" />
-                        </button>
-
+                        <div className="iconsNice">
+                            <Likes current={item} />
+                            <Susbscribe current={item} />
+                        </div>
                     </div>
+                    
                 </div>
+               
+                
             ))}
+            
             <ModalIdeaEdit.Provider value={[ideaEdit, setIdeaEdit]}>
 
                 <Modal

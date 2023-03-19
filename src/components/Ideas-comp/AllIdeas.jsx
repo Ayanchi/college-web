@@ -90,33 +90,40 @@ const AllIdeas = () => {
             </div>
             {isUser.map((item) => (
                 <div className="ideaContainer" key={item.id}>
-                    <div className="ideaImage">
-                        <Avatar
-                            alt="Remy Sharp"
-                            src={item.imageUser}
-                            sx={{ width: 70, height: 70 }}
-                        />
-                    </div>
-                    <div className="aboutIdea">
-                        <div className="ideaTitle">
-                            {item.title}
+                    <div className="authIdeas">
+                        <div className="ideaImage">
+                            <Avatar
+                                alt="Remy Sharp"
+                                src={item.imageUser}
+                                sx={{ width: 70, height: 70 }}
+                            />
                         </div>
-                        <div id={item.id} className="ideaDescr">
-                            {item.description}
+                    
+                        <div className="aboutIdea">
+                            <div className="ideaTitle">
+                                {item.title}
+                            </div>
+                            <div id={item.id} className="ideaDescr">
+                                {item.description}
+                            </div>
+                        </div>
+                        <div className="corecters">
+                            <button className="arrow" onClick={(e) => {
+                                let elem = document.getElementById(item.id)
+                                elem?.classList.toggle("ideaDescrActive")
+                                let arrow = e.target
+                                arrow?.classList.toggle("arrowActive")
+                            }}>
+                                <img src={arrow} alt="" />
+                            </button>
+
                         </div>
                     </div>
                     <div className="ideaActivity">
-                        <Likes current={item} />
-                        <Susbscribe current={item} />
-                        
-                        <button className="arrow" onClick={(e) => {
-                            let elem = document.getElementById(item.id)
-                            elem?.classList.toggle("ideaDescrActive")
-                            let arrow = e.target
-                            arrow?.classList.toggle("arrowActive")
-                        }}>
-                            <img src={arrow} alt="" />
-                        </button>
+                        <div className="iconsNice">
+                            <Likes current={item} />
+                            <Susbscribe current={item} />
+                        </div>
                         
                     </div>
                 </div>

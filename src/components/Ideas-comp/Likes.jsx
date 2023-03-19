@@ -56,7 +56,7 @@ const Likes = (props) => {
                 setLike(false)
                 setLikeUsersCount(likeUsersCount - 1)
                 setLikeUsers(likeUsers.splice(likeUsers.indexOf(user.email) - 1, 1))
-                console.log(likeUsers)
+                console.log(setLikeUsers(likeUsers.splice(likeUsers.indexOf(user.email) - 1, 1)))
             }else{
                 await updateDoc(doc(database, "ideas", props.current.id), {
                     ...props.current,
@@ -64,7 +64,8 @@ const Likes = (props) => {
                 })
                 setLike(true)
                 setLikeUsersCount(likeUsersCount + 1)
-                // console.log(likeUsers.splice(likeUsers.indexOf(user.email), 1))
+                console.log([...likeUsers, user.email])
+                //console.log(likeUsers.splice(likeUsers.indexOf(user.email), 1))
                 setLikeUsers([...likeUsers, user.email])
             }
             
@@ -103,7 +104,7 @@ const Likes = (props) => {
             <PopupState variant="popover" popupId="demo-popup-popover">
                 {(popupState) => (
                     <div>
-                    <Button variant="contained" {...bindTrigger(popupState)}>
+                    <Button variant="contained" className='showUsersButton' {...bindTrigger(popupState)}>
                     <div className='users'>
                         {likeUsers}
                     </div>

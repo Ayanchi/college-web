@@ -14,7 +14,6 @@
 }
 
 .ideaImage {
-    width: 10%;
     display: flex;
     margin-top: 10px;
 }
@@ -70,7 +69,7 @@
     transition: 0.5s;
     width: 15px;
     height: 15px;
-    margin: 0 0 40px 40px;
+    /* margin: 0 0 40px 40px; */
     transform: rotate(0deg);
 }
 .arrowActive{
@@ -80,4 +79,44 @@
 .pencil{
     width: 30px;
     height: 30px;
+}
+.authIdeas{
+    display: contents;
+}
+.iconsNice{
+    display: contents;
+}
+
+
+@media (max-width: 750px){
+    .ideaContainer{
+        justify-content: space-around;
+        flex-direction: column;
+    }
+    .authIdeas{
+        display: flex;
+        justify-content: space-around;
+    }
+    .ideaActivity{
+        width: auto;
+        text-align: center;
+        justify-content: center;
+        justify-content: space-around;
+        display: flex;
+    }
+    .iconsNice{
+        display: flex;
+    }
+    .img, .pencil{
+        width: 15px;
+    }
+    /* .corecters{
+        position: relative;
+        top: -82px;
+        display: flex;
+        align-items: flex-end;
+    } */
+    .ideaImage{
+        width: auto;
+    }
 }
