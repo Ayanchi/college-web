@@ -78,7 +78,6 @@ const ProfileIdea = (props) => {
                                 name="title"
                                 type="text"
                                 placeholder="Тема идеи"
-                                // defaultValue={isUser[0]?.name || ""}
                                 {...register('title', {
                                     required: "Параметр обязателен",
                                     maxLength: {

@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { ModalIdeaEdit } from './MyIdeas';
 import { useForm } from "react-hook-form";
 import { database, auth } from "../../app/firebase";
-import { getDoc, doc, setDoc } from "firebase/firestore"
+import { getDoc, doc, setDoc, updateDoc } from "firebase/firestore"
 import "../CSS/GetApply.css"
 import { useAuthState } from 'react-firebase-hooks/auth'
 
@@ -69,13 +69,15 @@ const IdeaEdit = (props) => {
     }
 
     const onSubmitForm = async (data) => {
+        console.log(props.id)
         try {
 
-            await setDoc(doc(database, 'ideas', props.id), {
+            await updateDoc(doc(database, 'ideas', props.id), {
                 title: data.title,
                 checkbox: checked,
                 select: selectedValue,
                 description: data.description,
+                author: props.current.email
             });
             console.log(checked)
             setisSending(false)

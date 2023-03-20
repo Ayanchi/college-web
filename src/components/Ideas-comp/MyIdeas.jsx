@@ -96,10 +96,10 @@ const MyIdeas = (props) => {
 
     const takingIdeaId = (e) => {
         setIdeaEdit(true)
-        let button = e.target.parentNode.parentNode.parentNode
-        let id = button.getAttribute("id")
-        console.log(id)
-        setIdeaId(id)
+        // let button = e.target.parentNode.parentNode.parentNode
+        // let id = button.getAttribute("id")
+        // console.log(id)
+        // setIdeaId(id)
     }
     function arrowFunction(str, id) {
         if (str.split("").length > 60) {
@@ -160,26 +160,32 @@ const MyIdeas = (props) => {
     
                         </div>
                     </div>
+
+
+                    <ModalIdeaEdit.Provider value={[ideaEdit, setIdeaEdit]}>
+
+                        <Modal
+                            open={ideaEdit}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description">
+
+                            <Box
+                                sx={style}>
+
+                                <IdeaEdit id={item.id} current={user}/>
+                            </Box>
+
+                        </Modal>
+
+                    </ModalIdeaEdit.Provider>
                     
                 </div>
+                
                
                 
             ))}
             
-            <ModalIdeaEdit.Provider value={[ideaEdit, setIdeaEdit]}>
-
-                <Modal
-                    open={ideaEdit}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                <Box
-                    sx={style}
-                >
-                    <IdeaEdit id={ideaId} current={user} />
-                </Box>
-                </Modal>
-            </ModalIdeaEdit.Provider>
+            
         </div>
     );
 };

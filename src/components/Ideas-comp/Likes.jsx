@@ -27,7 +27,6 @@ const Likes = (props) => {
 
     useEffect(() => {
         if(user){
-            console.log(likeUsers)
             setLikeUsersCount(props.current.like.length)
             setLikeUsers(props.current.like)
             if(props.current.like.includes(user.email)){
@@ -69,9 +68,7 @@ const Likes = (props) => {
                 //console.log(likeUsers.splice(likeUsers.indexOf(user.email), 1))
                 setLikeUsers([...likeUsers, user.email])
             }
-            
         }
-        
     }
 
     
