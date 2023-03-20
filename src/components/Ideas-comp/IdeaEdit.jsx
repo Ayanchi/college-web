@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { ModalIdeaEdit } from './MyIdeas';
 import { useForm } from "react-hook-form";
 import { database, auth } from "../../app/firebase";
-import { getDoc, doc, setDoc, updateDoc} from "firebase/firestore"
+import { getDoc, doc, setDoc, updateDoc } from "firebase/firestore"
 import "../CSS/GetApply.css"
 import { useAuthState } from 'react-firebase-hooks/auth'
 
@@ -12,7 +12,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 
 
 const IdeaEdit = (props) => {
-    const [isUser, setIsUser] = useState([])
+    const [isUser, setIsUser] = useState()
     const [selectedValue, setSelectedValue] = useState()
     const [checked, setChecked] = useState()
     const [isSending, setisSending] = useState(true)
@@ -24,9 +24,8 @@ const IdeaEdit = (props) => {
 
 
     async function getData() {
-        const idea = await getDoc(doc(database, 'ideas', props.id))
+        const idea = await getDoc(doc(database, 'ideas', props?.id))
         const responce = idea.data()
-        console.log(responce)
         if (responce?.title) {
             return {
                 title: responce.title,
@@ -34,7 +33,7 @@ const IdeaEdit = (props) => {
                 checked: responce.checkbox,
                 select: responce.select
             }
-        }else{
+        } else {
             return {
                 title: '',
                 description: '',
@@ -47,7 +46,7 @@ const IdeaEdit = (props) => {
     useEffect(() => {
         const getFormList = async () => {
             try {
-                const idea = await getDoc(doc(database, 'ideas', props.id))
+                const idea = await getDoc(doc(database, 'ideas', props?.id))
                 const responce = idea.data()
                 setIsUser(responce)
                 setChecked(responce?.checkbox)
@@ -78,7 +77,6 @@ const IdeaEdit = (props) => {
                 description: data.description,
                 author: props.current.email
             });
-            console.log(checked)
             setisSending(false)
 
         } catch (error) {
@@ -90,8 +88,9 @@ const IdeaEdit = (props) => {
     if (isSending) {
         return (
             <div className="ideaModal">
-                <button className="closebuttonIdea" onClick={() => setIdeaEdit(false)}>X</button>
                 <form className="idea-form" onSubmit={handleSubmit(onSubmitForm)}>
+                    <button className="closebuttonIdea" onClick={() => setIdeaEdit(false)}>X</button>
+
                     <div className="mainInputs">
                         <div className="firstInput">
                             <input
@@ -171,8 +170,12 @@ const IdeaEdit = (props) => {
     } else {
         return (
             <div className="modal">
-                <button className="closebutton" onClick={() => setIdeaEdit(false)}>x</button>
-                <div className="modalMessage">{isUser[0] ? "Ваши данные успешно обновлены" : "Ваши данные успешно сохранены"}</div>
+                <div className="modalClose">
+                    <button className="closebutton" onClick={() => setIdeaEdit(false)}>x</button>
+                </div>
+                <div className="modalMessage">Ваши данные успешно обновлены</div>
+
+
             </div>
         )
     }

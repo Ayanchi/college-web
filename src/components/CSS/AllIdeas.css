@@ -6,18 +6,28 @@
     display: flex;
     justify-content: space-around;
     transition: 1s;
-    padding: 10px 0 20px 0;
+    padding: 10px 20px;
 }
 
-.ideaTitle{
-    margin: 10px 0 0 0 ;
+.ideaContainer:hover {
+    box-shadow: 0 0 20px 5px rgb(146, 162, 255);
+}
+
+.ideaTitle {
+    margin: 10px 0 0 0;
 }
 
 .ideaImage {
     display: flex;
     margin-top: 10px;
+    width: 20%;
     flex-direction: column;
     align-items: center;
+}
+
+.ideaAuthor {
+    width: 100%;
+    word-wrap: break-word;
 }
 
 .ideaImage img {
@@ -39,11 +49,13 @@
     background: #fc0;
     /* Цвет фона */
     padding: 5px;
+    width: 450px;
     /* Поля вокруг текста */
     text-overflow: ellipsis;
     /* Добавляем многоточие */
 }
-.ideaDescrActive{
+
+.ideaDescrActive {
     transition: 1s;
     white-space: normal;
     overflow: hidden;
@@ -56,67 +68,153 @@
 
 .ideaActivity {
     text-align: end;
-    width: 20%;
     display: flex;
     justify-content: initial;
-    align-items: end;
 }
 
 .likes {
     margin-right: 20px;
 }
-.arrow{
+
+.arrow {
+    width: 20px;
+    height: 20px;
+
+    margin: 0 20px 0;
+}
+
+.arrowImg:hover {
+    width: 17px;
+    height: 17px;
     transition: 0.5s;
+}
+
+.arrowImg {
     width: 15px;
     height: 15px;
-    /* margin: 0 0 40px 40px; */
+    transition: 0.5s;
     transform: rotate(0deg);
 }
-.arrowActive{
+
+.arrowActive {
     transition: 0.5s;
     transform: rotate(180deg);
 }
-.pencil{
+
+.pencil:hover {
+    transition: 0.5s;
+}
+
+.pencil {
     width: 30px;
     height: 30px;
 }
-.authIdeas{
-    display: contents;
-}
-.iconsNice{
+
+.authIdeas {
     display: contents;
 }
 
+.iconsNice {
+    display: flex;
+    padding-top: 10px;
+}
 
-@media (max-width: 750px){
-    .ideaContainer{
+.corecters {
+    text-align: right;
+    width: 90px;
+    margin-top: 30px;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+}
+
+.deleteButton{
+margin: 30px 0 0 20px;
+    cursor: pointer;
+    width: 30px;
+}
+
+
+@media (max-width: 1024px) {
+    .container{
+        max-width: 789px;
+    }
+    .ideaDescr{
+        width: 90%;
+    }
+    .deleteButton{
+        margin: 20px 0 0 20px;
+    }
+    .corecters{
+        margin-top: 20px;
+    }
+}
+
+
+
+
+@media (max-width: 750px) {
+    .ideaContainer {
         justify-content: space-around;
         flex-direction: column;
     }
-    .authIdeas{
+
+    .authIdeas {
         display: flex;
         justify-content: space-around;
     }
-    .ideaActivity{
+
+    .ideaActivity {
         width: auto;
         text-align: center;
         justify-content: center;
         justify-content: space-around;
         display: flex;
     }
-    .iconsNice{
+
+    .iconsNice {
         display: flex;
     }
-    .img, .pencil{
+
+    .img,
+    .pencil {
         width: 15px;
     }
-    /* .corecters{
-        position: relative;
-        top: -82px;
-        display: flex;
-        align-items: flex-end;
-    } */
-    .ideaImage{
-        width: auto;
-    }
+
 }
+
+@media (max-width: 481px) {
+    .ideaContainer {
+        justify-content: space-between;
+    }
+
+    .ideaDescr {
+        width: 100%;
+    }
+
+    .avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .aboutIdea {
+        width: 70%;
+        transition: 1s;
+    }
+
+    .ideaAuthor {
+        font-size: 12px;
+    }
+    .arrow,
+    .pencil {
+        margin: 0 5px;
+        width: 25px;
+        height: 25px;
+    }
+    .arrowImg{
+        width: 20px;
+        height: 20px;
+    }
+    }

@@ -43,7 +43,7 @@ const MyIdeas = (props) => {
     const [imageList, setImageList] = useState(null)
     const [avatar, setAvatar] = useState(false)
     const [ideaEdit, setIdeaEdit] = useState(false)
-    const [selectedValue, setSelectedValue] = useState("все")
+    const [selectedValue, setSelectedValue] = useState("Все")
     const [allSelectValues, setAllSelectValues] = useState(['Все', 'Другое', 'Медицина', 'Бизнес', 'Правительство'])
     const imageListRef = ref(storage, `images/profile/${user?.email}/`)
     const [ideaId, setIdeaId] = useState()
@@ -99,26 +99,24 @@ const MyIdeas = (props) => {
 
     const takingIdeaId = (e) => {
         setIdeaEdit(true)
-        // let button = e.target.parentNode.parentNode.parentNode
-        // let id = button.getAttribute("id")
-        // console.log(id)
-        // setIdeaId(id)
+        let button = e.target.closest('.ideaContainer')
+        let id = button.getAttribute("id")
+        setIdeaId(id)
     }
     function arrowFunction(str, id) {
-        if (str.split("").length > 60) {
+        if (str.split("").length > 40) {
             return (
                 < button className="arrow" onClick={(e) => {
                     let elem = document.getElementById(id)
                     elem?.classList.toggle("ideaDescrActive")
-                    console.log(elem)
                     let arrow = e.target
                     arrow?.classList.toggle("arrowActive")
                 }}>
-                    <img src={arrow} alt="" />
+                    <img src={arrow} alt="" className="arrowImg" />
                 </button >
             )
         } else {
-            return (<div className='arrow'></div>)
+            return (<div></div>)
         }
     }
     return (
@@ -148,20 +146,20 @@ const MyIdeas = (props) => {
                                 {item.description}
                             </div>
                         </div>
-                        <div className="corecters">
-                            {arrowFunction(item.description, item.id)}
-                            <button className="pencil" onClick={(e) => takingIdeaId(e)}>
-                                <img src={pencil} alt="" />
-                            </button>
-                            <DeleteIcon idea={item}/>
-                        </div>
+                        
                     </div>
                     <div className="ideaActivity">
                         <div className="iconsNice">
                             <Likes current={item} />
                             <Susbscribe current={item} />
-                        
-    
+                            <div className="corecters">
+                            {arrowFunction(item.description, idx)}
+                            <button className="pencil" onClick={(e) => takingIdeaId(e)}>
+                                <img src={pencil} alt="" />
+                            </button>
+                            
+                        </div>
+                        <DeleteIcon idea={item}/>
                         </div>
                     </div>
                     
