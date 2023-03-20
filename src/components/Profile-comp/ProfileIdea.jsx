@@ -78,7 +78,6 @@ const ProfileIdea = (props) => {
                                 name="title"
                                 type="text"
                                 placeholder="Тема идеи"
-                                // defaultValue={isUser[0]?.name || ""}
                                 {...register('title', {
                                     required: "Параметр обязателен",
                                     maxLength: {
@@ -131,11 +130,11 @@ const ProfileIdea = (props) => {
                     <div className="select">
                         <p>
                             <select size="3" name="select" value={selectedValue} onChange={handleSelectChange}>
-                                <option disabled>Выберите факультет</option>
-                                <option value="другое...">другое...</option>
-                                <option value="программист">программист</option>
-                                <option value="дизайн">дизайн</option>
-                                <option value="маркетинг">маркетинг</option>
+                                <option disabled>Выберите Направление</option>
+                                <option value="Медицина">Медицина</option>
+                                <option value="Бизнес">Бизнес</option>
+                                <option value="Правительство">Правительство</option>
+                                <option value="другое...">Другое</option>
                             </select>
                         </p>
                     </div>

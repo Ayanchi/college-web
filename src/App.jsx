@@ -8,6 +8,7 @@ import Registration from './components/apply/GetApply'
 import { auth } from "./app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Routes, Route } from "react-router-dom"
+import Users from "./pages/Users"
 
 const ModalContext = createContext()
 export { ModalContext }
@@ -46,6 +47,7 @@ function App() {
           <Route path="/college-web/" element={<Main />} />
           <Route path="/college-web/profile" element={<Profile setModal={true} />} />
           <Route path="/college-web/ideas" element={<Ideas />} />
+          <Route path="/college-web/user/:id" element={<Users />} />
         </Routes>
 
         <Modal

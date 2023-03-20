@@ -44,7 +44,7 @@ const MyIdeas = (props) => {
     const [avatar, setAvatar] = useState(false)
     const [ideaEdit, setIdeaEdit] = useState(false)
     const [selectedValue, setSelectedValue] = useState("все")
-    const [allSelectValues, setAllSelectValues] = useState(['все', 'другое...', 'дизайн', 'маркетинг', 'программист'])
+    const [allSelectValues, setAllSelectValues] = useState(['Все', 'Другое', 'Медицина', 'Бизнес', 'Правительство'])
     const imageListRef = ref(storage, `images/profile/${user?.email}/`)
     const [ideaId, setIdeaId] = useState()
 
@@ -99,10 +99,10 @@ const MyIdeas = (props) => {
 
     const takingIdeaId = (e) => {
         setIdeaEdit(true)
-        let button = e.target.parentNode.parentNode.parentNode
-        let id = button.getAttribute("id")
-        console.log(id)
-        setIdeaId(id)
+        // let button = e.target.parentNode.parentNode.parentNode
+        // let id = button.getAttribute("id")
+        // console.log(id)
+        // setIdeaId(id)
     }
     function arrowFunction(str, id) {
         if (str.split("").length > 60) {

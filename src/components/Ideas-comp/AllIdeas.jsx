@@ -9,6 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import "../CSS/AllIdeas.css"
 import Likes from './Likes';
 import Susbscribe from './Subscribe';
+import profile_foto from '../../assets/DefaultUser.png'
 
 
 import arrow from "../../assets/arrow-down.png"
@@ -17,8 +18,8 @@ const AllIdeas = () => {
     const [isUser, setIsUser] = useState([])
     const [imageList, setImageList] = useState(null)
     const [user] = useAuthState(auth)
-    const [selectedValue, setSelectedValue] = useState("все")
-    const [allSelectValues, setAllSelectValues] = useState(['все', 'другое...', 'дизайн', 'маркетинг', 'программист'])
+    const [selectedValue, setSelectedValue] = useState("Все")
+    const [allSelectValues, setAllSelectValues] = useState(['Все', 'Другое', 'Медицина', 'Бизнес', 'Правительство'])
     const imageListRef = ref(storage, `images/profile/${user?.email}`)
 
     useEffect(() => {
@@ -44,8 +45,14 @@ const AllIdeas = () => {
                     const data = await getDocs(q)
                     const filterForm = data.docs.map(async (doc) => {
                         const data = doc.data()
-                        const imageRef = ref(storage, `images/profile/${data.author}/profile`)
-                        const url = await getDownloadURL(imageRef)
+                        let url
+                        try {
+                            const imageRef = ref(storage, `images/profile/${data.author}/profile`)
+                            url = await getDownloadURL(imageRef)
+                        } catch(err) {
+                            url = profile_foto
+                        }
+                        
 
                         return {
                             ...data,
@@ -103,7 +110,7 @@ const AllIdeas = () => {
                     ))}
                 </select>
             </div>
-            {isUser.map((item) => (
+            {isUser.map((item, index) => (
                 <div className="ideaContainer" key={item.id}>
                     <div className="authIdeas">
                         <div className="ideaImage">

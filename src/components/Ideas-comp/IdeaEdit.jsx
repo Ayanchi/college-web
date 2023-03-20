@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { ModalIdeaEdit } from './MyIdeas';
 import { useForm } from "react-hook-form";
 import { database, auth } from "../../app/firebase";
-import { getDoc, doc, setDoc } from "firebase/firestore"
+import { getDoc, doc, setDoc, updateDoc} from "firebase/firestore"
 import "../CSS/GetApply.css"
 import { useAuthState } from 'react-firebase-hooks/auth'
 
@@ -71,11 +71,12 @@ const IdeaEdit = (props) => {
     const onSubmitForm = async (data) => {
         try {
 
-            await setDoc(doc(database, 'ideas', props.id), {
+            await updateDoc(doc(database, 'ideas', props.id), {
                 title: data.title,
                 checkbox: checked,
                 select: selectedValue,
                 description: data.description,
+                author: props.current.email
             });
             console.log(checked)
             setisSending(false)
@@ -149,11 +150,11 @@ const IdeaEdit = (props) => {
                     <div className="select">
                         <p>
                             <select size="3" name="select" value={selectedValue} onChange={handleSelectChange}>
-                                <option disabled>Выберите факультет</option>
-                                <option value="другое...">другое...</option>
-                                <option value="программист">программист</option>
-                                <option value="дизайн">дизайн</option>
-                                <option value="маркетинг">маркетинг</option>
+                                <option disabled>Выберите Направление</option>
+                                <option value="Медицина">Медицина</option>
+                                <option value="Бизнес">Бизнес</option>
+                                <option value="Правительство">Правительство</option>
+                                <option value="Другое">Другое</option>
                             </select>
                         </p>
                     </div>
