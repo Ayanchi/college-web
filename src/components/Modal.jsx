@@ -11,7 +11,7 @@ import { database } from "../app/firebase"
 import profile from '../assets/profile.png'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "../app/firebase"
-
+import logo_site from "../assets/logo_site.png"
 
 function Modal() {
     const [modal, setModal] = useContext(ModalContext)
@@ -44,7 +44,7 @@ function Modal() {
             <div className="timer">
                 <div className="stattup-text">
                     
-                    <img src="logo_site.png" style={{maxWidth: '100%'}} alt="STARTUPОМАНИЯ" />
+                    <img src={logo_site} style={{maxWidth: '100%'}} alt="STARTUPОМАНИЯ" />
                     
                 </div>
                 <div className="obshug">

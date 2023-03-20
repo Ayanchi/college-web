@@ -16,6 +16,9 @@
     height: 200px;
     margin-bottom: 10px;
 }
+.input-tags {
+    color: black;
+}
 select{
     color: black;
 }

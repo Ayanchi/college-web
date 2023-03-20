@@ -17,6 +17,7 @@ import { Box } from '@mui/system';
 import pencil from "../../assets/pencil.png"
 import { DeleteIcon } from './Delete-Icon';
 
+export const AllUserIdeas = createContext()
 
 const ModalIdeaEdit = createContext()
 export { ModalIdeaEdit }
@@ -44,12 +45,10 @@ const MyIdeas = (props) => {
     const [avatar, setAvatar] = useState(false)
     const [ideaEdit, setIdeaEdit] = useState(false)
     const [selectedValue, setSelectedValue] = useState("все")
-    const [allSelectValues, setAllSelectValues] = useState(['Все', 'Другое', 'Медицина', 'Бизнес', 'Правительство'])
     const imageListRef = ref(storage, `images/profile/${user?.email}/`)
     const [ideaId, setIdeaId] = useState()
 
     useEffect(() => {
-
         if (user && user.email) {
             list(imageListRef).then((response) => {
                 response.items.forEach((item) => {
@@ -71,23 +70,13 @@ const MyIdeas = (props) => {
     }, [selectedValue])
     const getFormList = async (user) => {
         try {
-            if (selectedValue == allSelectValues[0]) {
-                const q = query(collection(database, "ideas"), where("author", "==", user.email));
-                const data = await getDocs(q)
-                const filterForm = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }))
-                setIsUser(filterForm)
-            } else {
-                const q = query(collection(database, "ideas"), where("author", "==", user.email), where("select", "==", selectedValue));
-                const data = await getDocs(q)
-                const filterForm = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }))
-                setIsUser(filterForm)
-            }
+            const q = query(collection(database, "ideas"), where("author", "==", user.email));
+            const data = await getDocs(q)
+            const filterForm = data.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }))
+            setIsUser(filterForm)
         } catch (error) {
             console.log(error)
         }
@@ -98,19 +87,18 @@ const MyIdeas = (props) => {
     }
 
     const takingIdeaId = (e) => {
+        let button = e.target.closest('.ideaContainer')
+        let id = button.getAttribute("id")
+        setIdeaId(id)
         setIdeaEdit(true)
-        // let button = e.target.parentNode.parentNode.parentNode
-        // let id = button.getAttribute("id")
-        // console.log(id)
-        // setIdeaId(id)
     }
+
     function arrowFunction(str, id) {
         if (str.split("").length > 60) {
             return (
                 < button className="arrow" onClick={(e) => {
                     let elem = document.getElementById(id)
                     elem?.classList.toggle("ideaDescrActive")
-                    console.log(elem)
                     let arrow = e.target
                     arrow?.classList.toggle("arrowActive")
                 }}>
@@ -123,67 +111,65 @@ const MyIdeas = (props) => {
     }
     return (
         <div>
-            <div className="ideasSort">
-                {allSelectValues ? <select size="3" name="select" onChange={handleSelectChange}>
-                    {allSelectValues?.map((el, idx) => (
-                        <option value={el} key={idx}>{el}</option>
-                    ))}
-                </select> : <></>}
-            </div>
-            {isUser.map((item, idx) => (
-                <div className="ideaContainer" id={item.id} key={item.id}>
-                    <div className="authIdeas">
-                        <div className="ideaImage">
-                            <Avatar
-                                alt="Remy Sharp"
-                                src={imageList}
-                                sx={{ width: 70, height: 70 }}
-                            />
-                        </div>
-                        <div className="aboutIdea">
-                            <div className="ideaTitle">
-                                {item.title}
-                            </div>
-                            <div id={idx} className="ideaDescr">
-                                {item.description}
-                            </div>
-                        </div>
-                        <div className="corecters">
-                            {arrowFunction(item.description, item.id)}
-                            <button className="pencil" onClick={(e) => takingIdeaId(e)}>
-                                <img src={pencil} alt="" />
-                            </button>
-                            <DeleteIcon idea={item}/>
-                        </div>
-                    </div>
-                    <div className="ideaActivity">
-                        <div className="iconsNice">
-                            <Likes current={item} />
-                            <Susbscribe current={item} />
-                        
-    
-                        </div>
-                    </div>
+                <AllUserIdeas.Provider value={[isUser, setIsUser]}>
+                <div className="ideasSort">
                     
                 </div>
-               
+                {isUser.map((item, idx) => (
+                    <div className="ideaContainer" id={item.id} key={item.id}>
+                        <div className="authIdeas">
+                            <div className="ideaImage">
+                                <Avatar
+                                    alt="Remy Sharp"
+                                    src={imageList}
+                                    sx={{ width: 70, height: 70 }}
+                                />
+                            </div>
+                            <div className="aboutIdea">
+                                <div className="ideaTitle">
+                                    {item.title}
+                                </div>
+                                <div id={idx} className="ideaDescr">
+                                    {item.description}
+                                </div>
+                            </div>
+                            <div className="corecters">
+                                {arrowFunction(item.description, item.id)}
+                                <button className="pencil" onClick={(e) => takingIdeaId(e)}>
+                                    <img src={pencil} alt="" />
+                                </button>
+                                <DeleteIcon idea={item}/>
+                            </div>
+                        </div>
+                        <div className="ideaActivity">
+                            <div className="iconsNice">
+                                <Likes current={item} />
+                                <Susbscribe current={item} />
+                            
+        
+                            </div>
+                        </div>
+                        
+                    </div>
                 
-            ))}
-            
-            <ModalIdeaEdit.Provider value={[ideaEdit, setIdeaEdit]}>
+                    
+                ))}
+                
+                <ModalIdeaEdit.Provider value={[ideaEdit, setIdeaEdit]}>
 
-                <Modal
-                    open={ideaEdit}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                <Box
-                    sx={style}
-                >
-                    <IdeaEdit id={ideaId} current={user} />
-                </Box>
-                </Modal>
-            </ModalIdeaEdit.Provider>
+                    <Modal
+                        open={ideaEdit}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                    <Box
+                        sx={style}
+                    >
+                        <IdeaEdit id={ideaId} current={user} />
+                    </Box>
+                    </Modal>
+                </ModalIdeaEdit.Provider>
+            </AllUserIdeas.Provider>
         </div>
     );
 };

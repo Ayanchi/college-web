@@ -7,10 +7,6 @@ import { getDoc, doc, setDoc, updateDoc} from "firebase/firestore"
 import "../CSS/GetApply.css"
 import { useAuthState } from 'react-firebase-hooks/auth'
 
-
-
-
-
 const IdeaEdit = (props) => {
     const [isUser, setIsUser] = useState([])
     const [selectedValue, setSelectedValue] = useState()
@@ -18,21 +14,25 @@ const IdeaEdit = (props) => {
     const [isSending, setisSending] = useState(true)
     const [ideaEdit, setIdeaEdit] = useContext(ModalIdeaEdit)
     const [user] = useAuthState(auth)
+    const [tags, setTags] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: async () => await getData()
     })
 
-
     async function getData() {
         const idea = await getDoc(doc(database, 'ideas', props.id))
         const responce = idea.data()
-        console.log(responce)
+        let tags_text = ''
+        responce?.tags?.forEach(item => {
+            tags_text += '#' + item + ' '
+        })
+        setTags(tags_text)
         if (responce?.title) {
             return {
                 title: responce.title,
                 description: responce.description,
                 checked: responce.checkbox,
-                select: responce.select
+                tags: tags_text
             }
         }else{
             return {
@@ -52,7 +52,6 @@ const IdeaEdit = (props) => {
                 setIsUser(responce)
                 setChecked(responce?.checkbox)
                 setSelectedValue(responce?.select)
-
             } catch (error) {
                 console.log(error)
             }
@@ -149,13 +148,14 @@ const IdeaEdit = (props) => {
 
                     <div className="select">
                         <p>
-                            <select size="3" name="select" value={selectedValue} onChange={handleSelectChange}>
-                                <option disabled>Выберите Направление</option>
-                                <option value="Медицина">Медицина</option>
-                                <option value="Бизнес">Бизнес</option>
-                                <option value="Правительство">Правительство</option>
-                                <option value="Другое">Другое</option>
-                            </select>
+                        <input
+                            className="input-tags"
+                            type="text"
+                            placeholder="Теги:(#медицина #бизнес)"
+                            name="tags"
+                            defaultValue={tags}
+                            {...register('tags', {})}
+                        />
                         </p>
                     </div>
 

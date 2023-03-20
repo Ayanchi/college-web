@@ -86,6 +86,9 @@
 .iconsNice{
     display: contents;
 }
+.tags-area {
+    margin-top: 30px;
+}
 
 
 @media (max-width: 750px){
@@ -119,4 +122,25 @@
     .ideaImage{
         width: auto;
     }
+}
+.search-answers {
+    background-color: white;
+    border: 1px solid black;
+    width: 200px;
+    display: none;
+}
+.search-answer:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+.search-input {
+    width: 200px;
+    border: 1px solid black;
+}
+.search-input:focus + .search-answers, .search-answers:hover {
+    display: block;
+}
+.tag-select:hover {
+    color: blueviolet;
+    cursor: pointer;
 }

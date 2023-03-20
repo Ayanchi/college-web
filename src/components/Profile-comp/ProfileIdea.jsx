@@ -48,10 +48,11 @@ const ProfileIdea = (props) => {
 
     const onSubmitForm = async (data) => {
         try {
+            const tagsIdea = data.tags.replace(/[^a-zа-яёA-ZА-ЯЁ#]/gi, '').split('#').filter(element => element !== '')
             await addDoc(collection(database, "ideas"), {
                 title: data.title,
                 checkbox: checked,
-                select: selectedValue,
+                tags: tagsIdea,
                 description: data.description,
                 like: like,
                 subscribe: subscribe,
@@ -129,13 +130,14 @@ const ProfileIdea = (props) => {
 
                     <div className="select">
                         <p>
-                            <select size="3" name="select" value={selectedValue} onChange={handleSelectChange}>
-                                <option disabled>Выберите Направление</option>
-                                <option value="Медицина">Медицина</option>
-                                <option value="Бизнес">Бизнес</option>
-                                <option value="Правительство">Правительство</option>
-                                <option value="другое...">Другое</option>
-                            </select>
+                            <input
+                                type="text"
+                                placeholder="Теги:(#медицина #бизнес)"
+                                name="tags"
+                                className="input-tags"
+                                defaultChecked={isUser?.tags}
+                                {...register('tags', {})}
+                            />
                         </p>
                     </div>
 
