@@ -82,16 +82,16 @@ const ProfileIdea = (props) => {
                                 {...register('title', {
                                     required: "Параметр обязателен",
                                     maxLength: {
-                                        value: 15,
-                                        message: 'Ваше имя должно быть меньше 20 символов'
+                                        value: 20,
+                                        message: 'Название идеи должно быть меньше 20 символов'
                                     },
                                     minLength: {
                                         value: 3,
-                                        message: 'Ваше имя должно быть больше 3 символов'
+                                        message: 'Название идеи должно быть больше 3 символов'
                                     },
                                 })}
                             />
-                            {errors.author && <span className="error" role="alert">{errors.author?.message}</span>}
+                            {errors.title && <span className="error" role="alert">{errors.title?.message}</span>}
                         </div>
                         <div className="idea">
                             <textarea
@@ -104,6 +104,7 @@ const ProfileIdea = (props) => {
                                 })}
                             >
                             </textarea>
+                            {errors.description && <span className="error" role="alert">{errors.description?.message}</span>}
                         </div>
                     </div>
 
@@ -135,7 +136,7 @@ const ProfileIdea = (props) => {
                                 placeholder="Теги:(#медицина #бизнес)"
                                 name="tags"
                                 className="input-tags"
-                                defaultChecked={isUser?.tags}
+                                defaultValue={isUser?.tags}
                                 {...register('tags', {})}
                             />
                         </p>

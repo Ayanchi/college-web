@@ -34,7 +34,7 @@ import { getStorage } from "firebase/storage"
   apiKey: "AIzaSyDMX-hk02cBNZs6c53POEpVZv3ZuLst47w",
   authDomain: "startup-5ca02.firebaseapp.com",
   projectId: "startup-5ca02",
-  storageBuScket: "startup-5ca02.appspot.com",
+  storageBucket: "startup-5ca02.appspot.com",
   messagingSenderId: "290688509998",
   appId: "1:290688509998:web:da309b144cc6a3fe4917bf"
 };*/

@@ -69,11 +69,12 @@ const IdeaEdit = (props) => {
 
     const onSubmitForm = async (data) => {
         try {
-
+            const tagsIdea = data.tags.replace(/[^a-zа-яёA-ZА-ЯЁ#]/gi, '').split('#').filter(element => element !== '')
+            console.log(data)
             await updateDoc(doc(database, 'ideas', props.id), {
                 title: data.title,
                 checkbox: checked,
-                select: selectedValue,
+                tags: tagsIdea,
                 description: data.description,
                 author: props.current.email
             });
@@ -101,16 +102,16 @@ const IdeaEdit = (props) => {
                                 {...register('title', {
                                     required: "Параметр обязателен",
                                     maxLength: {
-                                        value: 15,
-                                        message: 'Ваше имя должно быть меньше 20 символов'
+                                        value: 20,
+                                        message: 'Название идеи должно быть меньше 20 символов'
                                     },
                                     minLength: {
                                         value: 3,
-                                        message: 'Ваше имя должно быть больше 3 символов'
+                                        message: 'Название идеи должно быть больше 3 символов'
                                     },
                                 })}
                             />
-                            {errors.author && <span className="error" role="alert">{errors.author?.message}</span>}
+                            {errors.title && <span className="error" role="alert">{errors.title?.message}</span>}
                         </div>
                         <div className="idea">
                             <textarea
@@ -124,6 +125,7 @@ const IdeaEdit = (props) => {
                                 })}
                             >
                             </textarea>
+                            {errors.description && <span className="error" role="alert">{errors.description?.message}</span>}
                         </div>
                     </div>
 
@@ -148,14 +150,14 @@ const IdeaEdit = (props) => {
 
                     <div className="select">
                         <p>
-                        <input
-                            className="input-tags"
-                            type="text"
-                            placeholder="Теги:(#медицина #бизнес)"
-                            name="tags"
-                            defaultValue={tags}
-                            {...register('tags', {})}
-                        />
+                            <input
+                                type="text"
+                                placeholder="Теги:(#медицина #бизнес)"
+                                name="tags"
+                                className="input-tags"
+                                defaultValue={isUser?.tags}
+                                {...register('tags', {})}
+                            />
                         </p>
                     </div>
 

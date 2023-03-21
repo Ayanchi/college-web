@@ -68,7 +68,7 @@ const ProfileEdit = (props) => {
         }
     }
 
-    if (isSending && props?.profile) {
+    if (isSending || props?.profile) {
         return (
             <div>
                 <div className="container">
@@ -172,8 +172,7 @@ const ProfileEdit = (props) => {
         )
     } else {
         return (
-            <>
-            </>
+            <div>Ваши данные обновлены</div>
         )
     }
 };
