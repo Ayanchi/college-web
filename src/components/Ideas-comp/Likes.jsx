@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import { Link } from 'react-router-dom';
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -104,27 +105,27 @@ const Likes = (props) => {
             <PopupState variant="popover" popupId="demo-popup-popover">
                 {(popupState) => (
                     <div>
-                    <Button variant="contained" className='showUsersButton' {...bindTrigger(popupState)}>
-                    <div className='users'>
-                        {likeUsers}
-                    </div>
-                    </Button>
-                    <Popover
-                        {...bindPopover(popupState)}
-                        anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'center',
-                        }}
-                        transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                        }}
-                    >
-                        {likeUsers.map((likes, index) => (
-                            <Typography key={index} sx={{ p: 2, color: 'black' }}>{likes}</Typography>
-                        ))}
-                        
-                    </Popover>
+                        <Button variant="contained" className='showUsersButton' {...bindTrigger(popupState)}>
+                            <div className='users'>
+                                {likeUsers}
+                            </div>
+                        </Button>
+                        <Popover
+                            {...bindPopover(popupState)}
+                            anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                            }}
+                            transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                            }}
+                        >
+                            {likeUsers.map((likes, index) => (
+                                    <Typography key={index} sx={{ p: 2, color: 'black' }}>{likes}</Typography>
+                            ))}
+                            
+                        </Popover>
                     </div>
                 )}
             </PopupState>

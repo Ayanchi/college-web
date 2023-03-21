@@ -69,6 +69,7 @@ const MyIdeas = (props) => {
             }
         });
     }, [selectedValue])
+    
     const getFormList = async (user) => {
         try {
             if (selectedValue == allSelectValues[0]) {

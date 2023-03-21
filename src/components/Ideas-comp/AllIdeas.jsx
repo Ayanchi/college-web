@@ -13,6 +13,7 @@ import profile_foto from '../../assets/DefaultUser.png'
 
 
 import arrow from "../../assets/arrow-down.png"
+import { Link } from 'react-router-dom';
 
 const AllIdeas = () => {
     const [isUser, setIsUser] = useState([])
@@ -72,6 +73,7 @@ const AllIdeas = () => {
                         id: doc.id,
                     }))
                     setIsUser(filterForm)
+                    
                 }
             } catch (error) {
                 console.log(error)
@@ -115,11 +117,13 @@ const AllIdeas = () => {
                     <div className="authIdeas">
                         <div className="ideaImage">
                             <div>
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src={item.imageUser}
-                                    sx={{ width: 70, height: 70 }}
-                                />
+                                <Link to={`/college-web/user/${item.author.split('@').filter(elem => elem !== 'gmail.com')}`} >
+                                    <Avatar
+                                        alt="Remy Sharp"    
+                                        src={item.imageUser}
+                                        sx={{ width: 70, height: 70 }}
+                                    />
+                                </Link>
                             </div>
                             <div>{item.author}</div>
                         </div>
