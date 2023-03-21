@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 const Users = () => {
     const [user] = useAuthState(auth)
     const id_user = useParams()
-    console.log(id_user)
+    //console.log(id_user)
 
     return (
         <div>

@@ -68,6 +68,7 @@ const MyIdeas = (props) => {
             }
         });
     }, [selectedValue])
+    
     const getFormList = async (user) => {
         try {
             const q = query(collection(database, "ideas"), where("author", "==", user.email));

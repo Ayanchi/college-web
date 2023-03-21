@@ -11,6 +11,7 @@ import Likes from './Likes';
 import Susbscribe from './Subscribe';
 import profile_foto from '../../assets/DefaultUser.png'
 import arrow from "../../assets/arrow-down.png"
+import { Link } from 'react-router-dom';
 
 const AllIdeas = () => {
     const [isUser, setIsUser] = useState([])
@@ -130,13 +131,19 @@ const AllIdeas = () => {
                     <div className="authIdeas">
                         <div className="ideaImage">
                             <div className='avatar'>
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src={item.imageUser}
-                                    sx={{ width: 70, height: 70 }}
-                                />
+                                <Link to={`/college-web/user/${item.author.replace('@gmail.com', '')}`}>
+                                    <Avatar
+                                        alt="Remy Sharp"
+                                        src={item.imageUser}
+                                        sx={{ width: 70, height: 70 }}
+                                    />
+                                </Link>
                             </div>
-                            <div className='ideaAuthor'>{item.author}</div>
+                            <div className='ideaAuthor'>
+                                <Link to={`/college-web/user/${item.author.replace('@gmail.com', '')}`}>
+                                    {item.author}
+                                </Link>
+                            </div>
                         </div>
                     
                         <div className="aboutIdea">

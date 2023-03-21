@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { database } from "../../app/firebase"
-import { getDocs, collection, query, where, limit,  setDoc,doc  } from "firebase/firestore"
+import { getDocs, collection, query, where, limit, setDoc, doc, getDoc} from "firebase/firestore"
 import { useForm } from "react-hook-form";
 import ProfilePhoto from './ProfilePhoto';
 import { ModalContext } from "../../App"
 
 import "../CSS/ProfileEdit.css"
+import { AddLink } from '@mui/icons-material';
 
 const ProfileEdit = (props) => {
 
@@ -15,6 +16,28 @@ const ProfileEdit = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: async () => await getData()
     });
+
+    useEffect(() => {
+        // Тут мы каждому пользователю создадим ссылку
+        if (!props.current.hasOwnProperty('link')) {
+            const user_link = props.current.email.split('@')[0].replace(/[^a-zA-z0-9]/gi, '');
+            addLink(user_link)
+        }
+    }, [])
+
+    async function addLink(link) {
+        try {
+            if (link) {
+                const data = await (await getDoc(doc(database, 'users', props.current.email))).data()
+                await setDoc(doc(database, "users", props.current.email), {
+                    ...data,
+                    link: link
+                });
+            }
+        } catch(err) {
+            console.log(err)
+        }
+    }
 
     async function getData() {
         const q = query(collection(database, "users"), where("idUser", "==", props.current.uid), limit(1));
