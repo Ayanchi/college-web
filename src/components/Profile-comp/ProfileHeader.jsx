@@ -12,6 +12,9 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { display } from '@mui/system';
 
+import logOut from "../../assets/logout.png"
+import headerLogo from "../../assets/headerLogo.jpg"
+
 
 const style = {
     position: 'absolute',
@@ -55,7 +58,7 @@ const ProfileHeader = () => {
                 <header className='header'>
                     <div className="logo">
                         <Link to="/college-web/profile">
-                            LOGO
+                            <img src={headerLogo} alt="" />
                         </Link>
                     </div>
                     <div className="links">
@@ -67,7 +70,11 @@ const ProfileHeader = () => {
                                     setValue(newValue);
                                 }}
                             >
-                                <BottomNavigationAction label="Выйти" onClick={logout} />
+                                <BottomNavigationAction 
+                                icon={<img src={logOut} className='logOutImg' />} 
+                                onClick={logout} 
+                                
+                                />
                             </BottomNavigation>
                             <ModalIdea.Provider value={[idea, setIdea]}>
                                 <BottomNavigation

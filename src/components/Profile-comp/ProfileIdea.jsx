@@ -58,14 +58,11 @@ const ProfileIdea = (props) => {
                 subscribe: subscribe,
                 author: props.current.email
             });
-
             setisSending(false)
         } catch (error) {
             console.log(error)
         }
     }
-
-
 
 
     if (isSending) {

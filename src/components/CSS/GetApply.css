@@ -109,6 +109,7 @@ span {
     text-align: right;
     top: -45px;
     right: -150px;
+    width: 40px;
     font-size: 40px;
     font-weight: 600;
     color: #0a0528;
@@ -126,6 +127,10 @@ span {
     top: -30px;
     font-size: 18px;
     font-weight: 500;
+}
+.modalClose{
+    text-align: right;
+    width: 180px;
 }
 
 @media (max-width: 790px) {

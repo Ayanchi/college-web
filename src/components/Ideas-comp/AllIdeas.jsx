@@ -22,6 +22,11 @@ const AllIdeas = () => {
     const [similarAnswers, setSimilarAnswers] = useState([])
     const [searchValue, setSearchValue] = useState('')
 
+    const style = {
+        width: "100%",
+        height: "100%"
+    }
+
     useEffect(() => {
         if (user) {
             list(imageListRef).then((response) => {
@@ -71,19 +76,21 @@ const AllIdeas = () => {
 
     }
     function arrowFunction(str, id) {
-        if (str.split("").length > 60) {
+        const width = document.querySelector(".ideaDescr")?.offsetWidth;
+        let res = Math.floor(width / 7.5)
+        if (str.split("").length > res) {
             return (
-                < button className="arrow" onClick={(e) => {
+                <button className="arrow" onClick={(e) => {
                     let elem = document.getElementById(id)
                     elem?.classList.toggle("ideaDescrActive")
                     let arrow = e.target
                     arrow?.classList.toggle("arrowActive")
                 }}>
-                    <img src={arrow} alt="" />
+                    <img src={arrow} alt="" className="arrowImg" />
                 </button >
             )
         } else {
-            return (<div></div>)
+            return (<></>)
         }
     }
 
@@ -122,14 +129,14 @@ const AllIdeas = () => {
                 <div className="ideaContainer" key={index}>
                     <div className="authIdeas">
                         <div className="ideaImage">
-                            <div>
+                            <div className='avatar'>
                                 <Avatar
                                     alt="Remy Sharp"
                                     src={item.imageUser}
                                     sx={{ width: 70, height: 70 }}
                                 />
                             </div>
-                            <div>{item.author}</div>
+                            <div className='ideaAuthor'>{item.author}</div>
                         </div>
                     
                         <div className="aboutIdea">
@@ -165,21 +172,21 @@ const AllIdeas = () => {
                 <div className="ideaContainer" key={item.id}>
                     <div className="authIdeas">
                         <div className="ideaImage">
-                            <div>
+                            <div className='avatar'>
                                 <Avatar
                                     alt="Remy Sharp"
                                     src={item.imageUser}
-                                    sx={{ width: 70, height: 70 }}
+                                    sx={style}
                                 />
                             </div>
-                            <div>{item.author}</div>
+                            <div className='ideaAuthor'>{item.author}</div>
                         </div>
-                    
+
                         <div className="aboutIdea">
                             <div className="ideaTitle">
                                 {item.title}
                             </div>
-                            <div id={item.id} className="ideaDescr">
+                            <div id={index} className="ideaDescr">
                                 {item.description}
                             </div>
                             <div className="tags-area">
@@ -191,11 +198,12 @@ const AllIdeas = () => {
                                 }
                             </div>
                         </div>
-                        <div className="corecters">
-                            {arrowFunction(item.description, item.id)}
-                        </div>
                     </div>
+
                     <div className="ideaActivity">
+                        <div className="corecters">
+                            {arrowFunction(item.description, index)}
+                        </div>
                         <div className="iconsNice">
                             <Likes current={item} />
                             <Susbscribe current={item} />

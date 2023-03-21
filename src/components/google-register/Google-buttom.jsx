@@ -15,7 +15,6 @@ function GoogleButtom() {
     const signInWithGoogle = async () => {
         try {
             const auth_user = await signInWithPopup(auth, googleProvider)
-            console.log(auth_user)
             if (auth_user?.user) {
                 const q = query(collection(database, "users"), where("idUser", "==", auth_user.user.uid), limit(1));
                 const data = await getDocs(q)

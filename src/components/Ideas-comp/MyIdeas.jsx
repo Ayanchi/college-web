@@ -94,7 +94,7 @@ const MyIdeas = (props) => {
     }
 
     function arrowFunction(str, id) {
-        if (str.split("").length > 60) {
+        if (str.split("").length > 40) {
             return (
                 < button className="arrow" onClick={(e) => {
                     let elem = document.getElementById(id)
@@ -102,11 +102,11 @@ const MyIdeas = (props) => {
                     let arrow = e.target
                     arrow?.classList.toggle("arrowActive")
                 }}>
-                    <img src={arrow} alt="" />
+                    <img src={arrow} alt="" className="arrowImg" />
                 </button >
             )
         } else {
-            return (<div className='arrow'></div>)
+            return (<div></div>)
         }
     }
     return (
@@ -135,10 +135,12 @@ const MyIdeas = (props) => {
                             </div>
                             <div className="corecters">
                                 {arrowFunction(item.description, item.id)}
-                                <button className="pencil" onClick={(e) => takingIdeaId(e)}>
-                                    <img src={pencil} alt="" />
-                                </button>
-                                <DeleteIcon idea={item}/>
+                                <div>
+                                    <button className="pencil" onClick={(e) => takingIdeaId(e)}>
+                                        <img src={pencil} alt="" />
+                                    </button>
+                                    <DeleteIcon idea={item}/>
+                                </div>
                             </div>
                         </div>
                         <div className="ideaActivity">
