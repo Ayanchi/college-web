@@ -69,7 +69,7 @@ const IdeaEdit = (props) => {
 
     const onSubmitForm = async (data) => {
         try {
-            const tagsIdea = data.tags.replace(/[^a-zа-яёA-ZА-ЯЁ#]/gi, '').split('#').filter(element => element !== '')
+            const tagsIdea = data.tags.replace(/[^a-zа-яёA-ZА-ЯЁ0-9#]/gi, '').split('#').filter(element => element !== '')
             console.log(data)
             await updateDoc(doc(database, 'ideas', props.id), {
                 title: data.title,

@@ -76,10 +76,10 @@ const AllIdeas = () => {
         setSelectedValue(e.target.value)
 
     }
-    function arrowFunction(str, id) {
+    function arrowFunction(str, id, option) {
         const width = document.querySelector(".ideaDescr")?.offsetWidth;
         let res = Math.floor(width / 7.5)
-        if (str.split("").length > res) {
+        if (str.split("").length > res || option) {
             return (
                 <button className="arrow" onClick={(e) => {
                     let elem = document.getElementById(id)
@@ -102,13 +102,21 @@ const AllIdeas = () => {
     useEffect(() => {
         const search = searchValue
         let similar = []
+        const maxResults = 6 // max count search results
         const filter_array = isUser.filter(item => {
+            const lowerCaseSearch = search.toLowerCase()
+            const lowerCaseItem = item.title.toLowerCase()
+
             let tags_text = ''
-            item?.tags?.forEach(item => {
-                tags_text += '#' + item + ' '
-                if (item.includes(search)) similar.push(item)
+            item?.tags?.forEach(items => {
+                if (similar.length >= maxResults) return
+                tags_text += '#' + items + ' '
+                if (items.toLowerCase().includes(lowerCaseSearch)) similar.push(items)
             })
-           return tags_text.includes(search) || item.title.includes(search)
+
+            const lowerCaseTags = tags_text.toLowerCase()
+            
+            return lowerCaseTags.includes(lowerCaseSearch) || lowerCaseItem.includes(lowerCaseSearch)
         })
         setSearchResult(filter_array)
         setSimilarAnswers(similar)
@@ -131,17 +139,12 @@ const AllIdeas = () => {
                     <div className="authIdeas">
                         <div className="ideaImage">
                             <div className='avatar'>
-                                <Link to={`/college-web/user/${item.author.replace('@gmail.com', '')}`}>
+                                <Link to={`/college-web/user/${item.author.split('@')[0].replace(/[^a-zA-z0-9]/gi, '')}`}>
                                     <Avatar
                                         alt="Remy Sharp"
                                         src={item.imageUser}
                                         sx={{ width: 70, height: 70 }}
                                     />
-                                </Link>
-                            </div>
-                            <div className='ideaAuthor'>
-                                <Link to={`/college-web/user/${item.author.replace('@gmail.com', '')}`}>
-                                    {item.author}
                                 </Link>
                             </div>
                         </div>
@@ -163,7 +166,7 @@ const AllIdeas = () => {
                             </div>
                         </div>
                         <div className="corecters">
-                            {arrowFunction(item.description, item.id)}
+                            {arrowFunction(item.description, item.id, true)}
                         </div>
                     </div>
                     <div className="ideaActivity">
@@ -209,7 +212,7 @@ const AllIdeas = () => {
 
                     <div className="ideaActivity">
                         <div className="corecters">
-                            {arrowFunction(item.description, index)}
+                            {arrowFunction(item.description, index, true)}
                         </div>
                         <div className="iconsNice">
                             <Likes current={item} />
