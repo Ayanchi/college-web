@@ -24,14 +24,16 @@ function IdeasContent() {
                     <TabContext value={value}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <TabList onChange={handleChange} aria-label="lab API tabs example">
-                                <Tab label="Мои идеи" value="1" />
-                                <Tab label="Все идеи" value="2" />
+                               
+                                <Tab label="Все идеи" value="1" />
+                                <Tab label="Мои идеи" value="2" />
+
                             </TabList>
                         </Box>
-                        <TabPanel value="1">
+                        <TabPanel value="2">
                             <MyIdeas current={user}/>
                         </TabPanel>
-                        <TabPanel value="2">
+                        <TabPanel value="1">
                             <AllIdeas/>
                         </TabPanel>
                     </TabContext>

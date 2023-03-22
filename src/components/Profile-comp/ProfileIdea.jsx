@@ -12,7 +12,7 @@ const ProfileIdea = (props) => {
     const [idea, setIdea] = useContext(ModalIdea)
     const [isUser, setIsUser] = useState([])
     const [selectedValue, setSelectedValue] = useState('другое...')
-    const [checked, setChecked] = useState(false)
+    const [checked, setChecked] = useState(true)
     const [isSending, setisSending] = useState(true)
     const [like, setLike] = useState([])
     const [subscribe, setSubscribe] = useState([])

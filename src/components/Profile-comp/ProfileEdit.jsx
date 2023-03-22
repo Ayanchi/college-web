@@ -83,7 +83,8 @@ const ProfileEdit = (props) => {
                 name: data.name,
                 surename: data.surename,
                 phone: data.phone,
-                skills: data.skills
+                skills: data.skills,
+                userLink: data.userLink
             });
                 setIsSending(false)
         } catch (error) {
@@ -165,6 +166,22 @@ const ProfileEdit = (props) => {
                                                 }
                                             })} />
                                         {errors.phone && <span className="error" role="alert">{errors.phone?.message}</span>}
+
+                                    </div>
+                                    <div className="forms">
+                                        <label>Ссылка на социальную сеть</label>
+                                        <input type="link"
+                                            placeholder="Социальная сеть"
+                                            name="userLink"
+                                            className="userLink"
+                                            defaultValue={userData[0]?.userLink || ''}
+                                            {...register("userLink" ,{
+                                                maxLength: {
+                                                    value: 30,
+                                                    message: "Ссылка превышает колличество символов"
+                                                }
+                                        })} />
+                                        {errors.userLink && <span className="error" role="alert">{errors.userLink?.message}</span>}
 
                                     </div>
 

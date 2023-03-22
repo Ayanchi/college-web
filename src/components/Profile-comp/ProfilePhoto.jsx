@@ -97,7 +97,7 @@ const ProfilePhoto = (props) => {
               src={loadImage? loadImage : imageList}
               sx={{ width: 200, height: 200 }}
             />
-              <label for="files" className="btn">Выбрать изображение</label>
+              <label htmlFor="files" className="btn">Выбрать изображение</label>
               <input id="loadImage" type="file" name="files" 
                 onChange={(e) => {
                   setImageUpLoad(e.target.files)

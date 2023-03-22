@@ -140,9 +140,7 @@ const AllIdeas = () => {
                                 </Link>
                             </div>
                             <div className='ideaAuthor'>
-                                <Link to={`/college-web/user/${item.author.replace('@gmail.com', '')}`}>
-                                    {item.author}
-                                </Link>
+                                
                             </div>
                         </div>
                     

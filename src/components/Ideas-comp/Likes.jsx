@@ -56,8 +56,10 @@ const Likes = (props) => {
                 console.log(props.current.id)
                 setLike(false)
                 setLikeUsersCount(likeUsersCount - 1)
-                setLikeUsers(likeUsers.splice(likeUsers.indexOf(user.email) - 1, 1))
-                console.log(setLikeUsers(likeUsers.splice(likeUsers.indexOf(user.email) - 1, 1)))
+                setLikeUsers(likeUsers.splice(likeUsers.indexOf(user.email) , 1))
+                //console.log(user.email)
+                console.log(setLikeUsers(likeUsers.splice(likeUsers.length-1)))
+                console.log(likeUsers.indexOf(user.email))
             }else{
                 await updateDoc(doc(database, "ideas", props.current.id), {
                     ...props.current,
@@ -65,9 +67,10 @@ const Likes = (props) => {
                 })
                 setLike(true)
                 setLikeUsersCount(likeUsersCount + 1)
-                console.log([...likeUsers, user.email])
+                console.log(likeUsers.indexOf(likeUsers.length))
                 //console.log(likeUsers.splice(likeUsers.indexOf(user.email), 1))
                 setLikeUsers([...likeUsers, user.email])
+                console.log([...likeUsers, user.email])
             }
             
         }
@@ -124,10 +127,11 @@ const Likes = (props) => {
                             {likeUsers.map((likes, index) => {
                                 
                                 return (
-                                    <Link to={`/college-web/user/${likes.split('@')[0].replace(/[^a-zA-z0-9]/gi, '')}`} key={index}>
+                                    <Link to={`/college-web/user/${String(likes).split('@')[0].replace(/[^a-zA-z0-9]/gi, '')}`} key={index}>
                                         <Typography sx={{ p: 2, color: 'black' }}>{likes}</Typography>
                                     </Link>
                                 )
+
                             })}
                             
                         </Popover>

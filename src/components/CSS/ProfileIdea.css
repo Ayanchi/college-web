@@ -1,4 +1,4 @@
-.mainInputs input{    
+.mainInputs input, .select input{    
     margin-top: 10px;
     border: 1px solid #150b50;
     border-radius: 20px;
@@ -34,6 +34,7 @@ p{
     font-weight: 600;
     color: #0a0528;
 }
+
 
 
 

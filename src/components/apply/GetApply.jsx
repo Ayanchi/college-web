@@ -9,6 +9,7 @@ const Registration = (props) => {
     const [userData, setUserData] = useState([])
     const [isSending, setisSending] = useState(true)
     const [modal, setModal] = useContext(ModalContext)
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: async () => await getData()
     });
@@ -61,7 +62,8 @@ const Registration = (props) => {
                 name: data.name,
                 surename: data.surename,
                 phone: data.phone,
-                skills: data.skills
+                skills: data.skills,
+                userLink: data.userLink
             });
             setisSending(false),
             setModal(true)
@@ -138,6 +140,24 @@ const Registration = (props) => {
                                     }
                                 })} />
                             {errors.phone && <span className="error" role="alert">{errors.phone?.message}</span>}
+
+                        </div>
+                            
+
+                        <div className="forms">
+                            <label>Ссылка на социальную сеть</label>
+                            <input type="text"
+                                placeholder="Социальная сеть"
+                                name="userLink"
+                                className="userLink"
+                                defaultValue={userData[0]?.userLink || ''}
+                                {...register("userLink" ,{
+                                    maxLength: {
+                                        value: 30,
+                                        message: "Ссылка превышает колличество символов"
+                                    }
+                            })} />
+                            {errors.userLink && <span className="error" role="alert">{errors.userLink?.message}</span>}
 
                         </div>
 
