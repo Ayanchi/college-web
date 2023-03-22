@@ -11,9 +11,10 @@ import CheckSindingIdea from './CheckSending';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { display } from '@mui/system';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { lightGreen } from '@mui/material/colors';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Person4RoundedIcon from '@mui/icons-material/Person4Rounded';
+
 
 
 
@@ -92,7 +93,7 @@ const ProfileHeader = () => {
                                     }}
                                 >
                                     <BottomNavigationAction 
-                                    icon={<GroupAddIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} />
+                                    icon={<Person4RoundedIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} />
                                 </BottomNavigation>
                             </Link>
 

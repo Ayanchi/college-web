@@ -1,7 +1,5 @@
 import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { doc, collection, query, where, limit, updateDoc, arrayUnion, arrayRemove  } from '@firebase/firestore';
 import { database, auth } from '../../app/firebase';
 import { useEffect } from 'react';
@@ -12,6 +10,9 @@ import "../CSS/Subs.css"
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import Typography from '@mui/material/Typography';
 import Popover from '@mui/material/Popover';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -82,8 +83,8 @@ const Susbscribe = (props) => {
                 onClick={submitSubs}>
                 <Checkbox
                     {...label}
-                    icon={<BookmarkBorderIcon />}
-                    checkedIcon={<BookmarkIcon />}
+                    icon={<GroupAddOutlinedIcon />}
+                    checkedIcon={<GroupAddIcon />}
                     checked={showSubs}
                     onChange={(e) => {
                         setShowSubs(e.target.checked)
