@@ -11,6 +11,12 @@ import CheckSindingIdea from './CheckSending';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { display } from '@mui/system';
+import { lightGreen } from '@mui/material/colors';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Person4RoundedIcon from '@mui/icons-material/Person4Rounded';
+
+
+
 
 import logOut from "../../assets/logout.png"
 import headerLogo from "../../assets/headerLogo.jpg"
@@ -48,6 +54,7 @@ const ProfileHeader = () => {
             console.log(error)
         }
     }
+    const primary = lightGreen[500];
 
 
 
@@ -57,28 +64,41 @@ const ProfileHeader = () => {
             <div className="container">
                 <header className='header'>
                     <div className="logo">
-                        <Link to="/college-web/profile">
+                        <Link to="/college-web">
                             <img src={headerLogo} alt="" />
                         </Link>
                     </div>
                     <div className="links">
                         <Box sx={{ width: 300, display: 'flex' }}>
                             <BottomNavigation
-                                showLabels
+                                
                                 value={value}
                                 onChange={(event, newValue) => {
                                     setValue(newValue);
                                 }}
                             >
                                 <BottomNavigationAction 
-                                icon={<img src={logOut} className='logOutImg' />} 
+                                icon={<LogoutIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} 
                                 onClick={logout} 
                                 
                                 />
                             </BottomNavigation>
+
+                            <Link to = "/college-web/profile">
+                                <BottomNavigation
+                                    
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                        setValue(newValue);
+                                    }}
+                                >
+                                    <BottomNavigationAction 
+                                    icon={<Person4RoundedIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} />
+                                </BottomNavigation>
+                            </Link>
+
                             <ModalIdea.Provider value={[idea, setIdea]}>
                                 <BottomNavigation
-                                    showLabels
                                     value={value}
                                     onChange={(event, newValue) => {
                                         setValue(newValue);
@@ -101,7 +121,6 @@ const ProfileHeader = () => {
 
                             <Link to="/college-web/ideas">
                                 <BottomNavigation
-                                    showLabels
                                     value={value}
                                     onChange={(event, newValue) => {
                                         setValue(newValue);

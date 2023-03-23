@@ -78,6 +78,7 @@ const MyIdeas = (props) => {
                 id: doc.id,
             }))
             setIsUser(filterForm)
+            console.log(isUser)
         } catch (error) {
             console.log(error)
         }

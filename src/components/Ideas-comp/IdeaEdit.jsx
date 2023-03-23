@@ -94,6 +94,7 @@ const IdeaEdit = (props) => {
 
                     <div className="mainInputs">
                         <div className="firstInput">
+                            <div className="title-idea">Создание идеи</div>
                             <input
                                 name="title"
                                 type="text"
@@ -102,8 +103,8 @@ const IdeaEdit = (props) => {
                                 {...register('title', {
                                     required: "Параметр обязателен",
                                     maxLength: {
-                                        value: 20,
-                                        message: 'Название идеи должно быть меньше 20 символов'
+                                        value: 50,
+                                        message: 'Название идеи должно быть меньше 50 символов'
                                     },
                                     minLength: {
                                         value: 3,
@@ -143,7 +144,7 @@ const IdeaEdit = (props) => {
                             <label
                                 className="inline-block pl-[0.15rem] hover:cursor-pointer"
                                 htmlFor="flexSwitchCheckDefault"
-                            >показать или спрятать идею
+                            >ВИдимость идеи
                             </label>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ const ProfileIdea = (props) => {
     const [idea, setIdea] = useContext(ModalIdea)
     const [isUser, setIsUser] = useState([])
     const [selectedValue, setSelectedValue] = useState('другое...')
-    const [checked, setChecked] = useState(false)
+    const [checked, setChecked] = useState(true)
     const [isSending, setisSending] = useState(true)
     const [like, setLike] = useState([])
     const [subscribe, setSubscribe] = useState([])
@@ -72,6 +72,7 @@ const ProfileIdea = (props) => {
                 <form className="idea-form" onSubmit={handleSubmit(onSubmitForm)}>
                     <div className="mainInputs">
                         <div className="firstInput">
+                            <div className="title-idea">Создание идеи</div>
                             <input
                                 name="title"
                                 type="text"
@@ -79,8 +80,8 @@ const ProfileIdea = (props) => {
                                 {...register('title', {
                                     required: "Параметр обязателен",
                                     maxLength: {
-                                        value: 20,
-                                        message: 'Название идеи должно быть меньше 20 символов'
+                                        value: 50,
+                                        message: 'Название идеи должно быть меньше 50 символов'
                                     },
                                     minLength: {
                                         value: 3,
@@ -121,7 +122,7 @@ const ProfileIdea = (props) => {
                             <label
                                 className="inline-block pl-[0.15rem] hover:cursor-pointer"
                                 htmlFor="flexSwitchCheckDefault"
-                            >показать или спрятать идею
+                            >Видимость идеи
                             </label>
                         </div>
                     </div>

@@ -2,7 +2,9 @@
     display: flex;
     justify-content: space-between;
 }
-
+.links .css-1gh6k7f-MuiBottomNavigationAction-label {
+    opacity: 1 !important;
+}
 .links {
     display: flex;
     justify-content: space-between;
@@ -18,7 +20,7 @@
 }
 
 .links span {
-    color: black;
+    color: #8bc34a;
     font-size: 0.875rem;
 
 }

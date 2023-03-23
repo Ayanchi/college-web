@@ -18,15 +18,15 @@ import { getStorage } from "firebase/storage"
 // Erzhany
 
 
-/*const firebaseConfig = {
-  apiKey: "AIzaSyDF0bFadz3S5DxrxVmufjqaVI8EAx0l6iU",
-  authDomain: "react-firtebase.firebaseapp.com",
-  projectId: "react-firtebase",
-  storageBucket: "react-firtebase.appspot.com",
-  messagingSenderId: "570948240941",
-  appId: "1:570948240941:web:a1c46ac151c3958b999aa4",
-  measurementId: "G-G92GS5798C"
-};*/
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDF0bFadz3S5DxrxVmufjqaVI8EAx0l6iU",
+//   authDomain: "react-firtebase.firebaseapp.com",
+//   projectId: "react-firtebase",
+//   storageBucket: "react-firtebase.appspot.com",
+//   messagingSenderId: "570948240941",
+//   appId: "1:570948240941:web:a1c46ac151c3958b999aa4",
+//   measurementId: "G-G92GS5798C"
+// };
 
 // Artur
 

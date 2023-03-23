@@ -40,15 +40,12 @@ const ProfileEdit = (props) => {
     }
 
     async function getData() {
-        const q = query(collection(database, "users"), where("idUser", "==", props.current.uid), limit(1));
-        const data = await getDocs(q)
-        const filterForm = data.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-        }));
+        const q = query(doc(database, "users", props.current.email));
+        const data = await getDoc(q)
+        const user_data = data.data()
 
-        if (filterForm.length > 0)
-            return filterForm[0]
+        if (user_data?.name)
+            return user_data
         else
             return {
                 name: '',
@@ -60,20 +57,15 @@ const ProfileEdit = (props) => {
     useEffect(() => {
         const getFormList = async () => {
             try {
-                const q = query(collection(database, "users"));
-                const data = await getDocs(q)
-                const filterForm = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }))
-                setUserData(filterForm)
+                const q = query(doc(database, "users", props.current.email));
+                const data = await getDoc(q)
+                setUserData(data.data())
             } catch (error) {
                 console.log(error)
             }
         }
         getFormList()
     }, [])
-
 
     const onSubmitForm = async (data) => {
         try {
@@ -83,7 +75,9 @@ const ProfileEdit = (props) => {
                 name: data.name,
                 surename: data.surename,
                 phone: data.phone,
-                skills: data.skills
+                skills: data.skills,
+                userLink: data.userLink,
+                link: userData.link
             });
                 setIsSending(false)
         } catch (error) {
@@ -165,6 +159,22 @@ const ProfileEdit = (props) => {
                                                 }
                                             })} />
                                         {errors.phone && <span className="error" role="alert">{errors.phone?.message}</span>}
+
+                                    </div>
+                                    <div className="forms">
+                                        <label>Ссылка на социальную сеть</label>
+                                        <input type="link"
+                                            placeholder="Социальная сеть"
+                                            name="userLink"
+                                            className="userLink"
+                                            defaultValue={userData[0]?.userLink || ''}
+                                            {...register("userLink" ,{
+                                                maxLength: {
+                                                    value: 30,
+                                                    message: "Ссылка превышает колличество символов"
+                                                }
+                                        })} />
+                                        {errors.userLink && <span className="error" role="alert">{errors.userLink?.message}</span>}
 
                                     </div>
 

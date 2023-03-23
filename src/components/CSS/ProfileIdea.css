@@ -1,4 +1,4 @@
-.mainInputs input{    
+.mainInputs input, .select input{    
     margin-top: 10px;
     border: 1px solid #150b50;
     border-radius: 20px;
@@ -15,6 +15,11 @@
 .yourIdea{
     height: 200px;
     margin-bottom: 10px;
+}
+.title-idea {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
 }
 .input-tags {
     color: black;
@@ -34,6 +39,7 @@ p{
     font-weight: 600;
     color: #0a0528;
 }
+
 
 
 
