@@ -31,15 +31,18 @@ p{
     margin-top: 40px;
     margin-bottom: 20px;
 }
-.closebuttonIdea{
-    margin-left: 316px;
-    font-family: cursive;
+.send{
     text-align: right;
+}
+.closebuttonIdea{
+    font-family: cursive;
     font-size: 25px;
     font-weight: 600;
     color: #0a0528;
 }
-
+.sendingIdea{
+    text-align: center;
+}
 
 
 

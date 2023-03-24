@@ -33,7 +33,7 @@ const style = {
     bgcolor: 'white',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    padding: '0 30px 30px',
     color: 'black'
 };
 
@@ -114,9 +114,6 @@ const MyIdeas = (props) => {
     return (
         <div>
                 <AllUserIdeas.Provider value={[isUser, setIsUser]}>
-                <div className="ideasSort">
-                    
-                </div>
                 {isUser.map((item, idx) => (
                     <div className="ideaContainer" id={item.id} key={item.id}>
                         <div className="authIdeas">
@@ -136,7 +133,7 @@ const MyIdeas = (props) => {
                                 </div>
                             </div>
                             <div className="corecters">
-                                {arrowFunction(item.description, item.id)}
+                                {arrowFunction(item.description, idx)}
                                 <div>
                                     <button className="pencil" onClick={(e) => takingIdeaId(e)}>
                                         <img src={pencil} alt="" />
@@ -149,8 +146,6 @@ const MyIdeas = (props) => {
                             <div className="iconsNice">
                                 <Likes current={item} />
                                 <Susbscribe current={item} />
-                            
-        
                             </div>
                         </div>
                         

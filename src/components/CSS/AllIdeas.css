@@ -59,6 +59,7 @@
     text-overflow: ellipsis;
     /* Добавляем многоточие */
 }
+
 .ideaDescr:first-letter {
     text-transform: uppercase
 }
@@ -120,6 +121,7 @@
 .authIdeas {
     display: contents;
 }
+
 .tags-area {
     margin-top: 30px;
 }
@@ -142,11 +144,12 @@
     height: 80px;
     margin-bottom: 20px;
 }
+
 .deleteButton img {
     width: 25px;
 }
 
-.deleteButton{
+.deleteButton {
     margin: 10px 0;
     cursor: pointer;
     width: 30px;
@@ -154,48 +157,64 @@
     justify-content: center;
 }
 
+.teamCreate {
+    width: 50px;
+    height: 50px;
+    padding: 13px 10px 10px;
+
+}
 
 @media (max-width: 1024px) {
-    .container{
+    .container {
         max-width: 789px;
     }
-    .ideaDescr{
+
+    .ideaDescr {
         width: 90%;
     }
-    .deleteButton{
+
+    .deleteButton {
         margin: 20px 0 0 20px;
     }
-    .corecters{
+
+    .corecters {
         margin-top: 20px;
     }
+
     .authIdeas {
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
     }
+
     .ideaContainer {
         flex-direction: column;
         align-items: center;
     }
+
     .iconsNice {
         display: flex;
     }
+
     .avatar {
         margin-bottom: 10px;
     }
+
     .aboutIdea {
         width: 100% !important;
         transition: 1s;
     }
+
     .ideaTitle {
         margin-bottom: 10px;
         font-size: 20px;
         font-weight: 600;
     }
+
     .corecters {
         justify-content: center;
     }
-    
+
 }
 
 
@@ -219,6 +238,7 @@
     .pencil {
         width: 15px;
     }
+
     .ideaImage {
         width: 100%;
     }
@@ -230,6 +250,7 @@
         justify-content: space-between;
     }
 }
+
 .search-answers {
     background-color: white;
     width: 200px;
@@ -237,10 +258,12 @@
     position: absolute;
     z-index: 9000;
 }
+
 .search-answer:hover {
     background-color: grey;
     cursor: pointer;
 }
+
 .search-input {
     margin-top: 10px;
     border: 1px solid #150b50;
@@ -254,16 +277,19 @@
     color: #0a0528;
     font-weight: 500;
 }
-.search-input:focus + .search-answers, .search-answers:hover {
+
+.search-input:focus+.search-answers,
+.search-answers:hover {
     display: block;
 }
+
 .tag-select:hover {
     color: blueviolet;
     cursor: pointer;
 }
 
 .ideaDescr {
-    width: 100%;
+    width: 700px;
 }
 
 .aboutIdea {
@@ -274,6 +300,7 @@
 .ideaAuthor {
     font-size: 12px;
 }
+
 .arrow,
 .pencil {
     margin: 0 5px;
@@ -281,7 +308,8 @@
     height: 25px;
     margin-bottom: 15px;
 }
-.arrowImg{
+
+.arrowImg {
     width: 20px;
     height: 20px;
 }

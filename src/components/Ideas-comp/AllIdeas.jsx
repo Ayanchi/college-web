@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext} from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { getDocs, collection, query, where, doc } from "firebase/firestore"
 import { database } from '../../app/firebase';
 import { storage, auth } from '../../app/firebase'
@@ -7,13 +7,36 @@ import "../CSS/ProfilePhoto.css"
 import Avatar from '@mui/material/Avatar';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import "../CSS/AllIdeas.css"
+import { Modal } from '@mui/material';
+import { Box } from '@mui/system';
+
 import Likes from './Likes';
 import Susbscribe from './Subscribe';
 import profile_foto from '../../assets/DefaultUser.png'
 import arrow from "../../assets/arrow-down.png"
 import { Link } from 'react-router-dom';
+import TeamCreate from './TeamCreate';
+import addIcon from "../../assets/addButton (2).png"
+
+export const CreatingTeam = createContext()
+
+
+const style2 = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'white',
+    border: '2px solid #000',
+    boxShadow: 24,
+    padding: '0 30px 30px',
+    color: 'black'
+};
+
 
 const AllIdeas = () => {
+    const [teamModal, setTeamModal] = useState(false)
     const [isUser, setIsUser] = useState([])
     const [imageList, setImageList] = useState(null)
     const [user] = useAuthState(auth)
@@ -22,6 +45,7 @@ const AllIdeas = () => {
     const [searchResult, setSearchResult] = useState([])
     const [similarAnswers, setSimilarAnswers] = useState([])
     const [searchValue, setSearchValue] = useState('')
+    const [ideaId, setIdeaId] = useState()
 
     const style = {
         width: "100%",
@@ -51,10 +75,9 @@ const AllIdeas = () => {
                     try {
                         const imageRef = ref(storage, `images/profile/${data.author}/profile`)
                         url = await getDownloadURL(imageRef)
-                    } catch(err) {
+                    } catch (err) {
                         url = profile_foto
                     }
-
                     return {
                         ...data,
                         id: doc.id,
@@ -115,17 +138,23 @@ const AllIdeas = () => {
             })
 
             const lowerCaseTags = tags_text.toLowerCase()
-            
+
             return lowerCaseTags.includes(lowerCaseSearch) || lowerCaseItem.includes(lowerCaseSearch)
         })
         setSearchResult(filter_array)
         setSimilarAnswers(similar)
     }, [searchValue])
 
+    function takingId(id) {
+        console.log(id);
+        setTeamModal(true)
+        setIdeaId(id)
+    }
+
     return (
         <div>
             <div className="ideasSort">
-                <input className='search-input' name="search" placeholder="Поиск" value={searchValue} onChange={searchIdea}/>
+                <input className='search-input' name="search" placeholder="Поиск" value={searchValue} onChange={searchIdea} />
                 <div className='search-answers'>
                     {similarAnswers.map((item, index) => {
                         return (<div key={index} className='search-answer' onClick={() => {
@@ -134,8 +163,8 @@ const AllIdeas = () => {
                     })}
                 </div>
             </div>
-            {searchResult.length == 0 && isUser.map((item, index) => (
-                <div className="ideaContainer" key={index}>
+            {searchResult.length == 0 && isUser.map((item, idx) => (
+                <div className="ideaContainer" key={idx}>
                     <div className="authIdeas">
                         <div className="ideaImage">
                             <div className='avatar'>
@@ -148,16 +177,16 @@ const AllIdeas = () => {
                                 </Link>
                             </div>
                         </div>
-                    
+
                         <div className="aboutIdea">
                             <div className="ideaTitle">
                                 {item.title}
                             </div>
-                            <div id={item.id} className="ideaDescr">
+                            <div id={idx} className="ideaDescr">
                                 {item.description}
                             </div>
                             <div className="tags-area">
-                                Теги: 
+                                Теги:
                                 {
                                     item?.tags?.map((item, index) => {
                                         return (<span key={index} className='tag-select' onClick={() => setSearchValue(item)}>{' #' + item + ' '}</span>)
@@ -166,18 +195,24 @@ const AllIdeas = () => {
                             </div>
                         </div>
                         <div className="corecters">
-                            {arrowFunction(item.description, item.id, true)}
+                            {arrowFunction(item.description, idx, true)}
                         </div>
                     </div>
                     <div className="ideaActivity">
                         <div className="iconsNice">
                             <Likes current={item} />
                             <Susbscribe current={item} />
+                            <div className="teamCreate">
+                            <button onClick={() => takingId(item.id)}>
+                                    <img src={addIcon} alt="createTeam" />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             ))
             }
+            
             {searchResult.length > 0 && searchResult.map((item, index) => (
                 <div className="ideaContainer" key={item.id}>
                     <div className="authIdeas">
@@ -200,7 +235,7 @@ const AllIdeas = () => {
                                 {item.description}
                             </div>
                             <div className="tags-area">
-                                Теги: 
+                                Теги:
                                 {
                                     item?.tags?.map(item => {
                                         return (<span className='tag-select' onClick={() => setSearchValue(item)}>{' #' + item + ' '}</span>)
@@ -217,11 +252,31 @@ const AllIdeas = () => {
                         <div className="iconsNice">
                             <Likes current={item} />
                             <Susbscribe current={item} />
+                            <div className="teamCreate">
+                                <button onClick={() => takingId(item.id)}>
+                                    <img src={addIcon} alt="createTeam" />
+                                </button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             ))
             }
+            <CreatingTeam.Provider value={[teamModal, setTeamModal]}>
+
+                <Modal
+                    open={teamModal}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box
+                        sx={style2}
+                    >
+                        <TeamCreate id={ideaId}  current={user} />
+                    </Box>
+                </Modal>
+            </CreatingTeam.Provider>
         </div>
     );
 };

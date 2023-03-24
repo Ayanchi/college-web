@@ -66,7 +66,7 @@ const Registration = (props) => {
                 userLink: data.userLink
             });
             setisSending(false),
-            setModal(true)
+                setModal(true)
         } catch (error) {
             console.log(error)
         }
@@ -75,7 +75,9 @@ const Registration = (props) => {
     if (isSending) {
         return (
             <div className="form">
-                <button className="closebutton" onClick={() => setModal(false)}>x</button>
+                <div className="closebutton">
+                    <button onClick={() => setModal(false)}>x</button>
+                </div>
                 <form className="modal-form" onSubmit={handleSubmit(onSubmitForm)}>
                     <h3 className="formTitle">
                         Анкета участника
@@ -132,17 +134,17 @@ const Registration = (props) => {
                                     required: "Параметр обязателен",
                                     minLength: {
                                         value: 8,
-                                        message: "Номер не полный"
+                                        message: "Недействительные параметры"
                                     },
                                     maxLength: {
                                         value: 18,
-                                        message: "Перебор !!!"
+                                        message: "Недействительные параметры"
                                     }
                                 })} />
                             {errors.phone && <span className="error" role="alert">{errors.phone?.message}</span>}
 
                         </div>
-                            
+
 
                         <div className="forms">
                             <label>Ссылка на социальную сеть</label>
@@ -151,12 +153,12 @@ const Registration = (props) => {
                                 name="userLink"
                                 className="userLink"
                                 defaultValue={userData[0]?.userLink || ''}
-                                {...register("userLink" ,{
+                                {...register("userLink", {
                                     maxLength: {
                                         value: 30,
                                         message: "Ссылка превышает колличество символов"
                                     }
-                            })} />
+                                })} />
                             {errors.userLink && <span className="error" role="alert">{errors.userLink?.message}</span>}
 
                         </div>
@@ -168,7 +170,7 @@ const Registration = (props) => {
                                 name="skills"
                                 defaultValue={userData[0]?.skills || ''}
                                 {...register("skills", {
-                                    
+
                                 })}>
                             </textarea>
                             {errors.skills && <span className="error" role="alert">{errors.skills?.message}</span>}
@@ -186,7 +188,9 @@ const Registration = (props) => {
     } else {
         return (
             <div className="modal">
-                <button className="closebutton" onClick={() => setModal(false)}>x</button>
+                <div className="closebutton">
+                    <button onClick={() => setModal(false)}>x</button>
+                </div>
                 <div className="modalMessage">{userData[0] ? "Ваши данные успешно обновлены" : "Ваши данные успешно сохранены"}</div>
             </div>
         )
