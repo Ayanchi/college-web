@@ -47,10 +47,12 @@ const Susbscribe = (props) => {
         }
         
     }, [])
+
     
     const submitSubs = async () => {        
         if(user){
             if(subscribeUsers.includes(user.email)){
+                //console.log(doc(database, "ideas", props.current.id))
                 
                 await updateDoc(doc(database, "ideas", props.current.id), {
                     ...props.current,
@@ -75,6 +77,8 @@ const Susbscribe = (props) => {
         
         }
     }   
+
+
 
 
     return(

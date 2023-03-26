@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { ModalIdeaEdit } from './MyIdeas';
 import { useForm } from "react-hook-form";
 import { database, auth } from "../../app/firebase";
-import { getDoc, doc, setDoc, updateDoc } from "firebase/firestore"
+import { getDoc, doc, updateDoc } from "firebase/firestore"
 import "../CSS/GetApply.css"
 import { useAuthState } from 'react-firebase-hooks/auth'
 

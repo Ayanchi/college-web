@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { getDoc, addDoc, doc } from 'firebase/firestore';
+import { getDocs, setDoc, doc, query, where, collection, getDoc, onSnapshot } from 'firebase/firestore';
 import { database } from '../../app/firebase';
 import { CreatingTeam } from "./AllIdeas"
 
@@ -10,14 +10,27 @@ const TeamCreate = (props) => {
     const { handleSubmit, formState: { errors } } = useForm({})
     const [teamModal, setTeamModal] = useContext(CreatingTeam)
     const [info, setInfo] = useState([])
-
+    const [checkUser, setCheckUser] = useState(true)
+    console.log(checkUser)
+    console.log(info)
     useEffect(() => {
         const getFormList = async () => {
             try {
-                const idea = await getDoc(doc(database, 'ideas', props?.id))
-                const responce = idea.data()
-                setInfo(responce)
-                console.log(info);
+                const q = query(collection(database, "ideas"), where("id", "==", props.id));
+                // onSnapshot(q, (querySnapshot) => {
+                //     const ideasData = []
+                //     querySnapshot.docs.map((doc) => {
+                //         ideasData.push(doc.data())
+                //     })
+                //     setInfo(ideasData)
+                // })
+                
+                const idea = await getDocs(q)
+                const filterForm = idea.docs.map((doc) => ({
+                    ...doc.data()
+                }))
+                setInfo(filterForm)
+                console.log(filterForm)
             } catch (error) {
                 console.log(error)
             }
@@ -27,12 +40,10 @@ const TeamCreate = (props) => {
 
     const onSubmitForm = async (data) => {
         try {
-            await addDoc(doc(database, 'teams'), {
-                title: data.title,
-                checkbox: checked,
-                tags: tagsIdea,
-                description: data.description,
-                author: props.current.email
+            await setDoc(doc(database, 'teams', props.current.email), {
+                author: props.current.email,
+                
+                
             });
             setisSending(false)
 
@@ -40,6 +51,14 @@ const TeamCreate = (props) => {
             console.log(error)
         }
     }
+
+    const valuelUsers = async() => {
+        if (checkUser && true){
+
+        }
+    }
+    
+    
 
 
 
@@ -51,27 +70,40 @@ const TeamCreate = (props) => {
                         <button className="closebuttonIdea" onClick={() => setTeamModal(false)} >X</button>
                     </div>
                     <div className="mainInputs">
-                        <div className="firstInput">
-                            <div className="title-idea">Создание команды</div>
-                            <div className="ideaTitle">
-                                {info?.title}
-                            </div>
-                        </div>
-                        <div className="idea">
-                            <div className="infoDescr">
-                                {info?.description}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="select">
-                        {info?.subscribe.map((el) => (
+                        {info.map((il) => (
                             <>
-                                <input type="checkbox" />
-                                <div>{el}</div>
+                                <div className="firstInput">
+                                    <div className="title-idea">Создание команды</div>
+                                    <div className="ideaTitle">
+                                        {il.title}
+                                    </div>
+                                </div>
+                                <div className="idea">
+                                    <div className="infoDescr">
+                                        {il.description}
+                                    </div>
+                                </div>
+                                {il.subscribe.map((el) => (
+                                    <>
+                                        <div className="select" style={{display:'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                            <div>
+                                                <input 
+                                                    type="checkbox"
+                                                    checked={checkUser}
+                                                    onChange = {(e) => setCheckUser(e.target.checked)}/>
+                                            </div>
+                                            <div>{el}</div>
+                                        </div>
+                                    </>
+
+                                ))}
                             </>
                         ))}
+                        
+
                     </div>
+
+                    
 
                     <button
                         className="b-center b-block focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
@@ -86,7 +118,7 @@ const TeamCreate = (props) => {
         return (
             <div className="modal">
                 <div className="modalClose">
-                    <button className="closebutton" >x</button>
+                    <button className="closebutton" onClick={() => setTeamModal(false)} >x</button>
                 </div>
                 <div className="modalMessage">Ваши данные успешно обновлены</div>
             </div>

@@ -1,0 +1,11 @@
+.joinsIdeas{
+    margin-top: 50px;
+    
+}
+.usersIdeasContent{
+    border-radius: 15px;
+    border: 2px solid #2563eb;
+    max-height: 200px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}

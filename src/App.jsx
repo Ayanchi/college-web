@@ -13,8 +13,10 @@ import Users from "./pages/Users"
 const ModalContext = createContext()
 export { ModalContext }
 
+
 function App() {
   const [modal, setModal] = useState(false)
+  const [idea, setIdea] = useState(false)
 
   const [user] = useAuthState(auth)
 

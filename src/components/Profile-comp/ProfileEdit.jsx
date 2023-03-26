@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { database } from "../../app/firebase"
-import { getDocs, collection, query, where, limit, setDoc, doc, getDoc } from "firebase/firestore"
+import { query, setDoc, doc, getDoc } from "firebase/firestore"
 import { useForm } from "react-hook-form";
 import ProfilePhoto from './ProfilePhoto';
 import { ModalContext } from "../../App"
-
 import "../CSS/ProfileEdit.css"
-import { AddLink } from '@mui/icons-material';
+import { TeamsPage } from '../Ideas-comp/TeamsPage';
+
 
 const ProfileEdit = (props) => {
 
@@ -204,7 +204,11 @@ const ProfileEdit = (props) => {
                                 {userData[0]?.name ? 'Обновить данные' : 'Сохранить данные'}
                             </button>
                         </form>
+
                     </div>
+                </div>
+                <div className="teamPart">
+                    <TeamsPage current={props.current.email}/>
                 </div>
             </div>
         </div>

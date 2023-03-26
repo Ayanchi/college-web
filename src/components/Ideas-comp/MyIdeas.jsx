@@ -83,10 +83,7 @@ const MyIdeas = (props) => {
             console.log(error)
         }
     }
-
-    function handleSelectChange(e) {
-        setSelectedValue(e.target.value)
-    }
+    
 
     const takingIdeaId = (e) => {
         let button = e.target.closest('.ideaContainer')
@@ -113,7 +110,7 @@ const MyIdeas = (props) => {
     }
     return (
         <div>
-                <AllUserIdeas.Provider value={[isUser, setIsUser]}>
+            <AllUserIdeas.Provider value={[isUser, setIsUser]}>
                 {isUser.map((item, idx) => (
                     <div className="ideaContainer" id={item.id} key={item.id}>
                         <div className="authIdeas">
