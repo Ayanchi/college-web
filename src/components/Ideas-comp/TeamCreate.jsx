@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { getDocs, setDoc, doc, query, where, collection, getDoc, onSnapshot } from 'firebase/firestore';
 import { database } from '../../app/firebase';
 import { CreatingTeam } from "./AllIdeas"
+import { async } from '@firebase/util';
 
 
 const TeamCreate = (props) => {
@@ -11,8 +12,14 @@ const TeamCreate = (props) => {
     const [teamModal, setTeamModal] = useContext(CreatingTeam)
     const [info, setInfo] = useState([])
     const [checkUser, setCheckUser] = useState(true)
-    console.log(checkUser)
-    console.log(info)
+    const [memberArray, setMemberArray] = useState([checkUser])
+
+    
+
+    //console.log(checkUser)
+    //console.log(info)
+
+
     useEffect(() => {
         const getFormList = async () => {
             try {
@@ -27,10 +34,11 @@ const TeamCreate = (props) => {
                 
                 const idea = await getDocs(q)
                 const filterForm = idea.docs.map((doc) => ({
-                    ...doc.data()
+                    ...doc.data(),
+                    //subscribe: checkUser
                 }))
                 setInfo(filterForm)
-                console.log(filterForm)
+                //console.log(filterForm)
             } catch (error) {
                 console.log(error)
             }
@@ -39,11 +47,13 @@ const TeamCreate = (props) => {
     }, [])
 
     const onSubmitForm = async (data) => {
+        
+
         try {
             await setDoc(doc(database, 'teams', props.current.email), {
                 author: props.current.email,
-                
-                
+                members: memberArray, 
+
             });
             setisSending(false)
 
@@ -52,14 +62,31 @@ const TeamCreate = (props) => {
         }
     }
 
-    const valuelUsers = async() => {
+    // useEffect(() => {
+    //     const getTeamFormList = async () => {
+    //         try{
+    //             const q = query(collection(database, "teams"), where("author", "==", props.current.email));
+    //             const teamData = await getDocs(q)
+    //             const filterForm = teamData.docs.map((doc) => ({
+    //                 ...doc.data(),
+    //                 members: checkUser
+    //             }))
+    //         }catch (error){
+    //             console.log(error)
+    //         }
+    //     }
+    //     getTeamFormList()
+    // })
+
+
+    const valuelUsers = async () => {
         if (checkUser && true){
+
+        }else{
 
         }
     }
     
-    
-
 
 
     if (isSending) {
@@ -79,7 +106,7 @@ const TeamCreate = (props) => {
                                     </div>
                                 </div>
                                 <div className="idea">
-                                    <div className="infoDescr">
+                                    <div className="infoDescr" style={{overflowWrap: 'anywhere'}}>
                                         {il.description}
                                     </div>
                                 </div>

@@ -90,14 +90,14 @@ export function TeamsPage (props) {
     //     }
     // }
     const deleteSubscribeUser = async () => {
-        const q = collection(database, "ideas").where("subscribe", "array-contains", props.current);
+        const q = query(collection(database, "ideas"), where("subscribe", "array-contains", props.current));
         // const data = await getDocs(q)
         // updateDoc( data.docs.map((doc) => ({
         //     ...doc.data(),
         //     subscribe: arrayRemove(props.current)
         // }))
         // )
-        q.get().then((querySnapshot) => {
+        q.getDocs().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               doc.ref.updateDoc({ subscribe: arrayRemove(props.current) });
             });

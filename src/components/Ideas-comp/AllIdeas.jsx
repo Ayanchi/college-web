@@ -264,7 +264,6 @@ const AllIdeas = () => {
             ))
             }
             <CreatingTeam.Provider value={[teamModal, setTeamModal]}>
-
                 <Modal
                     open={teamModal}
                     aria-labelledby="modal-modal-title"
