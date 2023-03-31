@@ -111,7 +111,7 @@ const ProfileEdit = (props) => {
                                     <input type="text"
                                         placeholder="Ваше имя"
                                         name="name"
-                                        defaultValue={userData[0]?.name || ''}
+                                        defaultValue={userData?.name || ''}
                                         {...register('name', {
                                             required: "Параметр обязателен",
                                             maxLength: {
@@ -131,7 +131,7 @@ const ProfileEdit = (props) => {
                                     <input type="text"
                                         placeholder="Ваша фамилия"
                                         name="surename"
-                                        defaultValue={userData[0]?.surename || ''}
+                                        defaultValue={userData?.surename || ''}
                                         {...register('surename', {
                                             required: "Параметр обязателен",
                                             maxLength: {
@@ -152,7 +152,7 @@ const ProfileEdit = (props) => {
                                         placeholder="Ваш номер"
                                         name="phone"
                                         className="number"
-                                        defaultValue={userData[0]?.phone || ''}
+                                        defaultValue={userData?.phone || ''}
                                         {...register("phone", {
                                             required: "Параметр обязателен",
                                             minLength: {
@@ -173,7 +173,7 @@ const ProfileEdit = (props) => {
                                         placeholder="Социальная сеть"
                                         name="userLink"
                                         className="userLink"
-                                        defaultValue={userData[0]?.userLink || ''}
+                                        defaultValue={userData?.userLink || ''}
                                         {...register("userLink", {
                                             maxLength: {
                                                 value: 30,
@@ -189,7 +189,7 @@ const ProfileEdit = (props) => {
                                     <textarea type="text"
                                         placeholder="Ваши способности"
                                         name="skills"
-                                        defaultValue={userData[0]?.skills || ''}
+                                        defaultValue={userData?.skills || ''}
                                         {...register("skills", {
                                             required: "Параметр обязателен"
                                         })}>

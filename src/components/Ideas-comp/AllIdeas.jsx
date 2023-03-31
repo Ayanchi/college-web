@@ -203,7 +203,7 @@ const AllIdeas = () => {
                             <Likes current={item} />
                             <Susbscribe current={item} />
                             <div className="teamCreate">
-                            <button onClick={() => takingId(item.id)}>
+                                <button onClick={() => takingId(item.id)}>
                                     <img src={addIcon} alt="createTeam" />
                                 </button>
                             </div>
@@ -212,7 +212,7 @@ const AllIdeas = () => {
                 </div>
             ))
             }
-            
+
             {searchResult.length > 0 && searchResult.map((item, index) => (
                 <div className="ideaContainer" key={item.id}>
                     <div className="authIdeas">
@@ -237,8 +237,8 @@ const AllIdeas = () => {
                             <div className="tags-area">
                                 Теги:
                                 {
-                                    item?.tags?.map(item => {
-                                        return (<span className='tag-select' onClick={() => setSearchValue(item)}>{' #' + item + ' '}</span>)
+                                    item?.tags?.map((item, idx) => {
+                                        return (<span key={idx} className='tag-select' onClick={() => setSearchValue(item)}>{' #' + item + ' '}</span>)
                                     })
                                 }
                             </div>
@@ -272,7 +272,7 @@ const AllIdeas = () => {
                     <Box
                         sx={style2}
                     >
-                        <TeamCreate id={ideaId}  current={user} />
+                        <TeamCreate id={ideaId} current={user} />
                     </Box>
                 </Modal>
             </CreatingTeam.Provider>

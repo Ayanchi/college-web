@@ -22,44 +22,23 @@ const style = {
 
 
 
-export function TeamsPage (props) {
+export function TeamsPage(props) {
 
-    const [userIdea, setUserIdea] = useState([])
     const [subscriber, setSubscriber] = useState([])
     const [IdeaEditcontext, setIdeaEditcontext] = useState(false)
     const [ideaId, setIdeaId] = useState()
     const [user] = useAuthState(auth)
-    //const [ideaEdit, setIdeaEdit] = useContext(ModalIdeaEdit)
-
-
 
     useEffect(() => {
         const getFormList = async () => {
             try {
-                const q = query(collection(database, "ideas"), where("author", "==", props.current));
+                const q = query(collection(database, "teams"), where("members", "array-contains", props.current));
                 const data = await getDocs(q)
                 const filterForm = data.docs.map((doc) => ({
                     ...doc.data()
                 }))
-                setUserIdea(filterForm)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        getFormList()
-    }, [])
-
-    useEffect(() => {
-        const getFormList = async() =>{
-            try{
-                const q = query(collection(database, "ideas"), where("subscribe", "array-contains", props.current));
-                const data = await getDocs(q)
-                const filterForm = data.docs.map((doc) => ({
-                    ...doc.data()
-                }))
-                //console.log(query(collection(database, "ideas"), where("subscribe", "==", props.current)))
                 setSubscriber(filterForm)
-            }catch(error){
+            } catch (error) {
                 console.log(error)
             }
         }
@@ -89,85 +68,58 @@ export function TeamsPage (props) {
     //         return (<div></div>)
     //     }
     // }
-    const deleteSubscribeUser = async () => {
-        const q = query(collection(database, "ideas"), where("subscribe", "array-contains", props.current));
-        // const data = await getDocs(q)
-        // updateDoc( data.docs.map((doc) => ({
-        //     ...doc.data(),
-        //     subscribe: arrayRemove(props.current)
-        // }))
-        // )
-        q.getDocs().then((querySnapshot) => {
+    const deleteSubscribeUser = async (id) => {
+        const q = query(collection(database, "ideas"), where('id', '==', id), where("subscribe", "array-contains", props.current));
+        getDocs(q).then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-              doc.ref.updateDoc({ subscribe: arrayRemove(props.current) });
+                updateDoc(doc.ref, {
+                    subscribe: arrayRemove(props.current)
+                }
+                );
             });
-          });
-        // console.log(data)
-        // await updateDoc(q,{
-            
-        //     subscribe: arrayRemove(props.current)
-        // })
+        });
     }
-
-
-
-    return(
+    return (
         <div>
-            <div className="UsersIdeas">
-                <p>Ваши идеи</p>
-                {userIdea.map((item) => (
-                    <div className="ideaTitle" key={item.id}>
-                       <div className="title">
-                            Идея: {item.title}
-                       </div>
-                       <br />
-                       <div className="description"
-                        style={{display: 'flex'}}>
-                            Тема:  
-                            <div className="textDescription"
-                            style={{overflow: 'auto', width: '500px', marginLeft: '5px'}}>
-                              {item.description}
-                            </div>
-                            
-                        </div>
-                       <div className="corecters">
-                            
-                            <div>
-                                <button className="pencil" onClick={(e) => takingIdeaId(e)} >
-                                    <img src={pencil} alt="" />
-                                </button>
-                                
-                            </div>
-                        </div>
-                    </div>
-                ))}
-
-
-            </div>
             <div className="UsersJoinIdeas">
-                <p>Идеи к которам вы присоединились</p>
-                {subscriber.map((item) => (
-                    <div className="ideaTitle" key={item.id}> 
-                        <div className="title">
-                            Идея: {item.title}
-                        </div>
-                        <br />
-                        <div className="description"
-                        style={{display: 'flex'}}>
-                            Тема:  
-                            <div className="textDescription"
-                            style={{overflow: 'auto', width: '500px', marginLeft: '5px'}}>
-                              {item.description}
+                <div className="UsersJoinIdeasTitle">Идеи к которам вы присоединились</div>
+                {subscriber.map((elem, idx) => (
+                    <div className="teamIdeaContainer" key={idx}>
+                        <div className="teamInfo">
+                            <div className="teamName">
+                                Название команды: {elem.teamName}
                             </div>
-                            
+                            <div className="title">
+                                Идея: {elem.title}
+                            </div>
+                            <br />
+                            <div className="description"
+                                style={{ display: 'flex' }}>
+                                Тема:
+                                <div className="textDescription"
+                                    style={{ overflow: 'auto', width: '500px', marginLeft: '5px', height: '130px' }}>
+                                    {elem.description}
+                                </div>
+                            </div>
+                            <div className="teamMembers">
+                                Участники:
+                                <ul className="teamDots">
+                                    {elem.members.map(meber => (
+                                        <li className="memberName">
+                                            {meber}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                         <div className="delete">
-                            <button onClick={ deleteSubscribeUser}> покинуть идею</button>
+                            <button onClick={() => deleteSubscribeUser(elem.id)}> покинуть идею</button>
                         </div>
                     </div>
                 ))}
-                
+
             </div>
         </div>
     )
+
 }
