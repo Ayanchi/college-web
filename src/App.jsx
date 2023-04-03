@@ -13,8 +13,10 @@ import Users from "./pages/Users"
 const ModalContext = createContext()
 export { ModalContext }
 
+
 function App() {
   const [modal, setModal] = useState(false)
+  const [idea, setIdea] = useState(false)
 
   const [user] = useAuthState(auth)
 
@@ -31,7 +33,7 @@ function App() {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    padding: '0 30px 30px',
     color: 'black'
   };
 

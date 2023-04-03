@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { ModalIdeaEdit } from './MyIdeas';
 import { useForm } from "react-hook-form";
 import { database, auth } from "../../app/firebase";
-import { getDoc, doc, setDoc, updateDoc } from "firebase/firestore"
+import { getDoc, doc, updateDoc } from "firebase/firestore"
 import "../CSS/GetApply.css"
 import { useAuthState } from 'react-firebase-hooks/auth'
 
@@ -90,11 +90,13 @@ const IdeaEdit = (props) => {
         return (
             <div className="ideaModal">
                 <form className="idea-form" onSubmit={handleSubmit(onSubmitForm)}>
-                    <button className="closebuttonIdea" onClick={() => setIdeaEdit(false)}>X</button>
+                    <div className="send">
+                        <button className="closebuttonIdea" onClick={() => setIdeaEdit(false)}>X</button>
+                    </div>
 
                     <div className="mainInputs">
                         <div className="firstInput">
-                            <div className="title-idea">Создание идеи</div>
+                            <div className="title-idea">Редактирование идеи</div>
                             <input
                                 name="title"
                                 type="text"
@@ -144,7 +146,7 @@ const IdeaEdit = (props) => {
                             <label
                                 className="inline-block pl-[0.15rem] hover:cursor-pointer"
                                 htmlFor="flexSwitchCheckDefault"
-                            >ВИдимость идеи
+                            >Видимость идеи
                             </label>
                         </div>
                     </div>
@@ -178,8 +180,6 @@ const IdeaEdit = (props) => {
                     <button className="closebutton" onClick={() => setIdeaEdit(false)}>x</button>
                 </div>
                 <div className="modalMessage">Ваши данные успешно обновлены</div>
-
-
             </div>
         )
     }

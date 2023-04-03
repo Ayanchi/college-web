@@ -68,7 +68,9 @@ const ProfileIdea = (props) => {
     if (isSending) {
         return (
             <div className="ideaModal">
+                <div className="send">
                 <button className="closebuttonIdea" onClick={() => setIdea(false)}>X</button>
+                </div>
                 <form className="idea-form" onSubmit={handleSubmit(onSubmitForm)}>
                     <div className="mainInputs">
                         <div className="firstInput">
