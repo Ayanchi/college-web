@@ -14,6 +14,7 @@ import { display } from '@mui/system';
 import { lightGreen } from '@mui/material/colors';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Person4RoundedIcon from '@mui/icons-material/Person4Rounded';
+import Groups2RoundedIcon from '@mui/icons-material/Groups2Rounded';
 
 
 
@@ -69,22 +70,9 @@ const ProfileHeader = () => {
                         </Link>
                     </div>
                     <div className="links">
-                        <Box sx={{ width: 300, display: 'flex' }}>
-                            <BottomNavigation
-                                
-                                value={value}
-                                onChange={(event, newValue) => {
-                                    setValue(newValue);
-                                }}
-                            >
-                                <BottomNavigationAction 
-                                icon={<LogoutIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} 
-                                onClick={logout} 
-                                
-                                />
-                            </BottomNavigation>
-
-                            <Link to = "/college-web/profile">
+                        
+                        <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent:'center' }}>
+                            <div className="linkIcons" style={{display:'flex'}}>
                                 <BottomNavigation
                                     
                                     value={value}
@@ -93,42 +81,78 @@ const ProfileHeader = () => {
                                     }}
                                 >
                                     <BottomNavigationAction 
-                                    icon={<Person4RoundedIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} />
+                                    icon={<LogoutIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} 
+                                    onClick={logout} 
+                                    
+                                    />
                                 </BottomNavigation>
-                            </Link>
 
-                            <ModalIdea.Provider value={[idea, setIdea]}>
-                                <BottomNavigation
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }}
-                                >
-                                    <BottomNavigationAction label="Добавить идею" onClick={() => setIdea(true)} />
-                                    <Modal
-                                        open={idea}
-                                        aria-labelledby="modal-modal-title"
-                                        aria-describedby="modal-modal-description"
+                                <Link to = "/college-web/profile">
+                                    <BottomNavigation
+                                        
+                                        value={value}
+                                        onChange={(event, newValue) => {
+                                            setValue(newValue);
+                                        }}
                                     >
-                                        <Box sx={style}>
-                                            <CheckSindingIdea />
-                                        </Box>
-                                    </Modal>
-                                </BottomNavigation>
+                                        <BottomNavigationAction 
+                                        icon={<Person4RoundedIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} />
+                                    </BottomNavigation>
+                                </Link>
 
-                            </ModalIdea.Provider>
-
-
-                            <Link to="/college-web/ideas">
+                                <Link to = "/college-web/table">
                                 <BottomNavigation
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }}
-                                >
-                                    <BottomNavigationAction label="Список идей" />
+                                        value={value}
+                                        onChange={(event, newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                    >
+                                        <BottomNavigationAction 
+                                            icon={<Groups2RoundedIcon sx={{ color: lightGreen[500] }} fontSize="large"/>}
+                                        />
                                 </BottomNavigation>
-                            </Link>
+                                </Link>
+                            
+                            </div>
+                            
+
+                            <div className="linkIdeas" style={{display:'flex'}}>
+                                <ModalIdea.Provider value={[idea, setIdea]}>
+                                    <BottomNavigation
+                                        value={value}
+                                        onChange={(event, newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                    >
+                                        <BottomNavigationAction label="Добавить идею" onClick={() => setIdea(true)} />
+                                        <Modal
+                                            open={idea}
+                                            aria-labelledby="modal-modal-title"
+                                            aria-describedby="modal-modal-description"
+                                        >
+                                            <Box sx={style}>
+                                                <CheckSindingIdea />
+                                            </Box>
+                                        </Modal>
+                                    </BottomNavigation>
+
+                                </ModalIdea.Provider>
+
+
+                                <Link to="/college-web/ideas">
+                                    <BottomNavigation
+                                        value={value}
+                                        onChange={(event, newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                    >
+                                        <BottomNavigationAction label="Список идей" />
+                                    </BottomNavigation>
+                                </Link>
+
+                            </div>
+
+                            
 
 
                         </Box>
