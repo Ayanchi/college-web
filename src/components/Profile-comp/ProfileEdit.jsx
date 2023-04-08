@@ -208,7 +208,7 @@ const ProfileEdit = (props) => {
                     </div>
                 </div>
                 <div className="teamPart">
-                    <TeamsPage current={props.current.email}/>
+                    <TeamsPage current={props?.current?.email}/>
                 </div>
             </div>
         </div>

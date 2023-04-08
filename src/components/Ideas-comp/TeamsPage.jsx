@@ -1,11 +1,11 @@
 import "../CSS/TeamsPage.css"
 import { useState, useEffect, useContext } from "react"
-import { query, getDocs, collection, where, updateDoc, arrayRemove, doc } from "firebase/firestore"
+import { query, getDoc, collection, where, updateDoc, arrayRemove, doc, getDocs} from "firebase/firestore"
 import { database, auth } from "../../app/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
 import pencil from "../../assets/pencil.png"
 import { ModalIdeaEdit } from "./MyIdeas"
-
+import { Link } from "react-router-dom"
 
 const style = {
     position: 'absolute',
@@ -20,10 +20,7 @@ const style = {
     color: 'black'
 };
 
-
-
 export function TeamsPage(props) {
-
     const [subscriber, setSubscriber] = useState([])
     const [IdeaEditcontext, setIdeaEditcontext] = useState(false)
     const [ideaId, setIdeaId] = useState()
@@ -35,7 +32,8 @@ export function TeamsPage(props) {
                 const q = query(collection(database, "teams"), where("members", "array-contains", props.current));
                 const data = await getDocs(q)
                 const filterForm = data.docs.map((doc) => ({
-                    ...doc.data()
+                    ...doc.data(),
+                    id: doc.id
                 }))
                 setSubscriber(filterForm)
             } catch (error) {
@@ -43,46 +41,21 @@ export function TeamsPage(props) {
             }
         }
         getFormList()
-    })
+    }, [])
 
-    const takingIdeaId = (e) => {
-        let button = e.target.closest('.ideaTitle')
-        let id = button.getAttribute("id")
-        setIdeaId(id)
-        setIdeaEditcontext(true)
-    }
-
-    // function arrowFunction(str, id) {
-    //     if (str.split("").length > 40) {
-    //         return (
-    //             < button className="arrow" onClick={(e) => {
-    //                 let elem = document.getElementById(id)
-    //                 elem?.classList.toggle("ideaDescrActive")
-    //                 let arrow = e.target
-    //                 arrow?.classList.toggle("arrowActive")
-    //             }}>
-    //                 <img src={arrow} alt="" className="arrowImg" />
-    //             </button >
-    //         )
-    //     } else {
-    //         return (<div></div>)
-    //     }
-    // }
     const deleteSubscribeUser = async (id) => {
-        const q = query(collection(database, "ideas"), where('id', '==', id), where("subscribe", "array-contains", props.current));
-        getDocs(q).then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                updateDoc(doc.ref, {
-                    subscribe: arrayRemove(props.current)
-                }
-                );
-            });
+        const docRef = doc(database, "teams", id);
+        const docSnap = await getDoc(docRef);
+        await updateDoc(docSnap.ref, {
+            members: arrayRemove(props.current)
         });
+        setSubscriber(subscriber.filter(item => item.id != id))
     }
+
     return (
         <div>
             <div className="UsersJoinIdeas">
-                <div className="UsersJoinIdeasTitle">Идеи к которам вы присоединились</div>
+                <div className="UsersJoinIdeasTitle">Ваши команды: </div>
                 {subscriber.map((elem, idx) => (
                     <div className="teamIdeaContainer" key={idx}>
                         <div className="teamInfo">
@@ -106,14 +79,16 @@ export function TeamsPage(props) {
                                 <ul className="teamDots">
                                     {elem.members.map(meber => (
                                         <li className="memberName">
-                                            {meber}
+                                            <Link to={`/college-web/user/${meber.split('@')[0].replace(/[^a-zA-z0-9]/gi, '')}`}>
+                                                {meber}
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
                         </div>
                         <div className="delete">
-                            <button onClick={() => deleteSubscribeUser(elem.id)}> покинуть идею</button>
+                            <button onClick={() => deleteSubscribeUser(elem.id)}> Покинуть команду </button>
                         </div>
                     </div>
                 ))}

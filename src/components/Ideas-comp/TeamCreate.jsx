@@ -19,23 +19,10 @@ const TeamCreate = (props) => {
     const [checkUser, setCheckUser] = useState([currentEmail])
     const [memberArray, setMemberArray] = useState([checkUser])
 
-
-    //console.log(checkUser)
-    //console.log(info)
-
-
     useEffect(() => {
         const getFormList = async () => {
             try {
                 const q = query(collection(database, "ideas"), where("id", "==", props.id));
-                // onSnapshot(q, (querySnapshot) => {
-                //     const ideasData = []
-                //     querySnapshot.docs.map((doc) => {
-                //         ideasData.push(doc.data())
-                //     })
-                //     setInfo(ideasData)
-                // })
-
                 const idea = await getDocs(q)
                 const filterForm = idea.docs.map((doc) => ({
                     ...doc.data(),
@@ -52,14 +39,15 @@ const TeamCreate = (props) => {
 
     const onSubmitForm = async (data) => {
         try {
-
+            
             await addDoc(collection(database, 'teams'), {
                 author: info[0].author,
                 creator: currentEmail,
                 title: info[0].title,
                 description: info[0].description,
                 members: checkUser,
-                teamName: data.teamName
+                teamName: data.teamName,
+                idIdea: props.id
             });
 
             setisSending(false)
@@ -69,7 +57,16 @@ const TeamCreate = (props) => {
     }
     const takingNamesOfMembers = (e) => {
         let name = e.target.nextSibling.innerText
-        setCheckUser([...checkUser, name])
+        if (e.target.checked && !checkUser.includes(name)) {
+            setCheckUser([...checkUser, name])
+        } else {
+            const index = checkUser.indexOf(name)
+            if (index) {
+                let newArray = checkUser
+                newArray.splice(index, 1)
+                setCheckUser(newArray)
+            }
+        }
     }
 
     if (isSending) {
@@ -133,7 +130,7 @@ const TeamCreate = (props) => {
                 <div className="modalClose">
                     <button className="closebutton" onClick={() => setTeamModal(false)} >x</button>
                 </div>
-                <div className="modalMessage">Ваши данные успешно обновлены</div>
+                <div className="modalMessage">Команда успешно создана</div>
             </div>
         )
     }

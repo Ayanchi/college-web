@@ -32,3 +32,16 @@
     list-style-type: circle;
     margin-top: 20px;
 }
+.teamInfo {
+    max-width: 100%;
+}
+@media (max-width: 1024px) {
+    .teamIdeaContainer {
+        display: block;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .delete {
+        margin-top: 20px
+    }
+}

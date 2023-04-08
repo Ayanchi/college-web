@@ -14,13 +14,9 @@ import { display } from '@mui/system';
 import { lightGreen } from '@mui/material/colors';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Person4RoundedIcon from '@mui/icons-material/Person4Rounded';
-
-
-
-
+import Groups2RoundedIcon from '@mui/icons-material/Groups2Rounded';
 import logOut from "../../assets/logout.png"
 import headerLogo from "../../assets/headerLogo.jpg"
-
 
 const style = {
     position: 'absolute',
@@ -94,6 +90,19 @@ const ProfileHeader = () => {
                                 >
                                     <BottomNavigationAction 
                                     icon={<Person4RoundedIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} />
+                                </BottomNavigation>
+                            </Link>
+
+                            <Link to = "/college-web/table">
+                                <BottomNavigation
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                        setValue(newValue);
+                                    }}>
+                                        
+                                        <BottomNavigationAction 
+                                            icon={<Groups2RoundedIcon sx={{ color: lightGreen[500] }} fontSize="large"/>}
+                                        />
                                 </BottomNavigation>
                             </Link>
 

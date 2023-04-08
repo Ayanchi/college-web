@@ -126,6 +126,14 @@
     margin-top: 30px;
 }
 
+.ideaDescr {
+    width: 700px;
+}
+
+.css-1sxjirn {
+    flex-wrap: wrap;
+}
+
 .iconsNice {
     display: flex;
     padding-top: 10px;
@@ -165,6 +173,9 @@
 }
 
 @media (max-width: 1024px) {
+    .css-1sxjirn {
+        justify-content: center;
+    }
     .container {
         max-width: 789px;
     }
@@ -286,10 +297,6 @@
 .tag-select:hover {
     color: blueviolet;
     cursor: pointer;
-}
-
-.ideaDescr {
-    width: 700px;
 }
 
 .aboutIdea {
