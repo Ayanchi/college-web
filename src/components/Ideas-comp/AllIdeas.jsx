@@ -129,6 +129,7 @@ const AllIdeas = () => {
         const filter_array = isUser.filter(item => {
             const lowerCaseSearch = search.toLowerCase()
             const lowerCaseItem = item.title.toLowerCase()
+            
 
             let tags_text = ''
             item?.tags?.forEach(items => {

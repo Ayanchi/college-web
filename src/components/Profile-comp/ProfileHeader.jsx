@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { signOut } from "firebase/auth";
 import { auth } from "../../app/firebase";
 import { useNavigate } from 'react-router-dom';
@@ -8,15 +8,25 @@ import Modal from '@mui/material/Modal';
 import { useState, createContext } from 'react';
 import "../CSS/ProfileHeader.css"
 import CheckSindingIdea from './CheckSending';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import { display } from '@mui/system';
-import { lightGreen } from '@mui/material/colors';
+import { green } from '@mui/material/colors';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Person4RoundedIcon from '@mui/icons-material/Person4Rounded';
 import Groups2RoundedIcon from '@mui/icons-material/Groups2Rounded';
-import logOut from "../../assets/logout.png"
 import headerLogo from "../../assets/headerLogo.jpg"
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import BatchPredictionIcon from '@mui/icons-material/BatchPrediction';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Typography } from '@mui/material';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { allowed } from '../Admin-comp/AllowedUser';
 
 const style = {
     position: 'absolute',
@@ -35,9 +45,12 @@ const ModalIdea = createContext()
 export { ModalIdea }
 
 const ProfileHeader = () => {
+    ////
 
     const [idea, setIdea] = useState(false)
     const [value, setValue] = useState(0);
+    const [user] = useAuthState(auth)
+
 
     const navigate = useNavigate()
 
@@ -50,7 +63,24 @@ const ProfileHeader = () => {
             console.log(error)
         }
     }
-    const primary = lightGreen[500];
+    ////
+
+    const [state, setState] = useState(false)
+    
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (
+          event &&
+          event.type === 'keydown' &&
+          (event.key === 'Tab' || event.key === 'Shift')
+        ) {
+          return;
+        }
+    
+        setState({ ...state, [anchor]: open });
+    };
+
+
+
 
 
 
@@ -65,82 +95,103 @@ const ProfileHeader = () => {
                         </Link>
                     </div>
                     <div className="links">
-                        <Box sx={{ width: 300, display: 'flex' }}>
-                            <BottomNavigation
-                                
-                                value={value}
-                                onChange={(event, newValue) => {
-                                    setValue(newValue);
-                                }}
+                        <Button onClick={() => setState(true)}><MenuIcon sx={{ color: green[600] }} fontSize="large"/></Button>
+                        <SwipeableDrawer
+                            anchor={'right'}
+                            open={state}
+                            onClose={() => setState(false)}
+                            onOpen={() => setState(true)}
+                        >
+                            <Box
+                                sx={{ width: 250 }}
+                                role="presentation"
+                                onClick={() => setState(false)}
                             >
-                                <BottomNavigationAction 
-                                icon={<LogoutIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} 
-                                onClick={logout} 
-                                
-                                />
-                            </BottomNavigation>
+                                <List>
+                                    <ListItem sx={{flexDirection: 'column', alignItems: 'flex-start'}}>
+                                        <ListItemButton 
+                                            value={value}
+                                            onClick={logout}
+                                        >
 
-                            <Link to = "/college-web/profile">
-                                <BottomNavigation
-                                    
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }}
-                                >
-                                    <BottomNavigationAction 
-                                    icon={<Person4RoundedIcon sx={{ color: lightGreen[500] }} fontSize="large"/>} />
-                                </BottomNavigation>
-                            </Link>
+                                            <ListItemIcon>
+                                                {<LogoutIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                disableTypography 
+                                                primary={<Typography sx={{ color: green[600] }} >Выйти</Typography> }/>
+                                        </ListItemButton>
 
-                            <Link to = "/college-web/table">
-                                <BottomNavigation
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }}>
+                                        <Link to = "/college-web/profile">
+                                            <ListItemButton value={value}>
+                                                <ListItemIcon>
+                                                    {<Person4RoundedIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                                </ListItemIcon>
+                                                <ListItemText 
+                                                primary={<Typography sx={{ color: green[600] }} >Профиль</Typography> }/>
+                                            </ListItemButton>
+                                        </Link>
+
+                                        <Link to = "/college-web/table">
+                                            <ListItemButton value={value}>
+                                                <ListItemIcon>
+                                                    {<Groups2RoundedIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                                </ListItemIcon>
+                                                <ListItemText 
+                                                primary={<Typography sx={{ color: green[600], textAlign: 'left' }}>Список участников</Typography> }/>
+                                            </ListItemButton>
+                                        </Link>
+
+                                        <ModalIdea.Provider value={[idea, setIdea]}>
+                                            <ListItemButton
+                                                value={value}
+                                                onClick={() => setIdea(true)}
+                                            >
+                                                <ListItemIcon>
+                                                    {<LightbulbIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                                </ListItemIcon>
+                                                <ListItemText 
+                                                primary={<Typography sx={{ color: green[600] }}>Добавить идею</Typography> }/>
+                                                
+                                            </ListItemButton>
+                                            <Modal
+                                                    open={idea}
+                                                    aria-labelledby="modal-modal-title"
+                                                    aria-describedby="modal-modal-description"
+                                                >
+                                                    <Box sx={style}>
+                                                        <CheckSindingIdea />
+                                                    </Box>
+                                            </Modal>
+
+                                        </ModalIdea.Provider>
+
+                                        <Link to="/college-web/ideas">
+                                            <ListItemButton>
+                                                <ListItemIcon>
+                                                    {<BatchPredictionIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                                </ListItemIcon>
+                                                <ListItemText primary={<Typography sx={{ color: green[600] }}>Идеи</Typography>}/>
+                                            </ListItemButton>
+                                        </Link>
+
+                                        {user?.email === allowed[0] && (
+                                            <Link to="/college-web/admin">
+                                                <ListItemButton>
+                                                    <ListItemIcon>
+                                                        {<AdminPanelSettingsIcon sx={{ color: green[600] }} fontSize="large" />}
+                                                    </ListItemIcon>
+                                                    <ListItemText primary={<Typography sx={{ color: green[600] }}>Администратор</Typography>}/>
+                                                </ListItemButton>
+                                            </Link>
+
+                                        )}
                                         
-                                        <BottomNavigationAction 
-                                            icon={<Groups2RoundedIcon sx={{ color: lightGreen[500] }} fontSize="large"/>}
-                                        />
-                                </BottomNavigation>
-                            </Link>
+                                    </ListItem>
+                                </List>
 
-                            <ModalIdea.Provider value={[idea, setIdea]}>
-                                <BottomNavigation
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }}
-                                >
-                                    <BottomNavigationAction label="Добавить идею" onClick={() => setIdea(true)} />
-                                    <Modal
-                                        open={idea}
-                                        aria-labelledby="modal-modal-title"
-                                        aria-describedby="modal-modal-description"
-                                    >
-                                        <Box sx={style}>
-                                            <CheckSindingIdea />
-                                        </Box>
-                                    </Modal>
-                                </BottomNavigation>
-
-                            </ModalIdea.Provider>
-
-
-                            <Link to="/college-web/ideas">
-                                <BottomNavigation
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }}
-                                >
-                                    <BottomNavigationAction label="Список идей" />
-                                </BottomNavigation>
-                            </Link>
-
-
-                        </Box>
+                            </Box>
+                        </SwipeableDrawer>
 
                     </div>
                 </header>

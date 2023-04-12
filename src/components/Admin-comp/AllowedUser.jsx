@@ -1,0 +1,1 @@
+export const allowed = ['ayanauub13@gmail.com']

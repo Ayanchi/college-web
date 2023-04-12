@@ -24,7 +24,6 @@ const ProfileIdea = (props) => {
 
     })
 
-
     function handleSelectChange(e) {
         setSelectedValue(e.target.value);
     }

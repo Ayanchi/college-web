@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useState, useEffect } from 'react';
 import { getDocs, collection, query } from 'firebase/firestore';
-import { database } from '../../../app/firebase';
+import { database } from '../../app/firebase';
 import { Link } from 'react-router-dom'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -33,9 +33,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-export default function IdeaTable(props) {
+export default function UsersTable(props) {
 
     const [usersData, setUsersData] = useState([])
+    const [searchElem, setSearchElem] = useState('')
+    const [searcherResult, setSearcherResult] = useState([])
 
     useEffect(() => {
         const getFormList = async() => {
@@ -54,20 +56,42 @@ export default function IdeaTable(props) {
         getFormList()
     }, [])
 
+    useEffect(() => {
+        const search = searchElem
+        const filter_array = usersData.filter(elem => {
+            const lowerCaseSearch = search.toLowerCase()
+            const lowerCaseName = String(elem.name).toLowerCase()
+            const lowerCaseSurename = String(elem.surename).toLowerCase()
+            console.log(lowerCaseName)
+
+            return lowerCaseName.includes(lowerCaseSearch) || lowerCaseSurename.includes(lowerCaseSearch)
+        })
+        setSearcherResult(filter_array)
+    }, [searchElem])
+
     return(
-        <div className="usersTable" style={{margin:"30 px"}}>
-              <TableContainer component={Paper}>
+        <div className="usersTable" style={{padding:"40px"}}>
+            <div className="search">
+                <input 
+                    className='search-input' 
+                    name="search" 
+                    placeholder="Поиск" 
+                    value={searchElem}
+                    onChange={(e) => setSearchElem(e.target.value)}
+                />
+            </div>
+            <br />
+              <TableContainer component={Paper} sx={{borderRadius: '20px'}}>
                 <Table sx={{ minWidth: 0 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
                             <StyledTableCell align="center">№</StyledTableCell>
                             <StyledTableCell>Участник</StyledTableCell>
-                            <StyledTableCell>Почта</StyledTableCell>
                             <StyledTableCell align="center">Баллы</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {usersData?.map((row, index) => (
+                        {searcherResult.length == 0 && usersData?.map((row, index) => (
                             <StyledTableRow key={row.email}>
                                 {row?.link 
                                 ?(
@@ -85,11 +109,6 @@ export default function IdeaTable(props) {
                                                 : 'Без имени'
                                             }
                                         </Link>
-                                    </StyledTableCell>
-                                    <StyledTableCell component="th" scope="row">
-                                        <Link to={`/college-web/user/${row?.link}`}>
-                                            {row?.id}
-                                        </Link> 
                                     </StyledTableCell>
                                     <StyledTableCell align="center">
                                         <Link to={`/college-web/user/${row?.link}`}>
@@ -109,8 +128,49 @@ export default function IdeaTable(props) {
                                             : 'Без имени'
                                         }
                                     </StyledTableCell>
-                                    <StyledTableCell component="th" scope="row">
-                                        {row?.id}
+                                    <StyledTableCell align="center">0</StyledTableCell>
+                                    </>
+                                )
+                            }
+                            </StyledTableRow>
+                        ))}
+
+                        {searcherResult.length > 0 && searcherResult?.map((row, index) => (
+                            <StyledTableRow key={row.email}>
+                                {row?.link 
+                                ?(
+                                    <>
+                                    <StyledTableCell align="center">
+                                        <Link to={`/college-web/user/${row?.link}`}>
+                                            {index + 1}
+                                        </Link>
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                        <Link to={`/college-web/user/${row?.link}`}>
+                                            {
+                                            row?.name 
+                                                ? row?.name + ' ' + row?.surename
+                                                : 'Без имени'
+                                            }
+                                        </Link>
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        <Link to={`/college-web/user/${row?.link}`}>
+                                            0
+                                        </Link>
+                                    </StyledTableCell>
+                                    </>
+                                    
+                                )
+                                : (
+                                    <>
+                                    <StyledTableCell align="center">{index + 1}</StyledTableCell>
+                                    <StyledTableCell>
+                                        {
+                                        row?.name 
+                                            ? row?.name + ' ' + row?.surename
+                                            : 'Без имени'
+                                        }
                                     </StyledTableCell>
                                     <StyledTableCell align="center">0</StyledTableCell>
                                     </>

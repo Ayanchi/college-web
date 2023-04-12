@@ -7,9 +7,12 @@ import { Modal, Box } from '@mui/material';
 import Registration from './components/apply/GetApply'
 import { auth } from "./app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate, Outlet } from "react-router-dom"
 import Users from "./pages/Users"
 import Table from './pages/Table'
+import Admin from './pages/Admin'
+import { allowed } from './components/Admin-comp/AllowedUser'
+
 
 const ModalContext = createContext()
 export { ModalContext }
@@ -43,6 +46,12 @@ function App() {
     color: 'black'
   }
 
+  const AuthRedirect = () => {
+    return(
+      user?.email === allowed[0] ? <Outlet/> : <Navigate to="/college-web/"/>
+    )
+  }
+
   return (
     <div className="App">
       <ModalContext.Provider value={[modal, setModal]}>
@@ -52,6 +61,10 @@ function App() {
           <Route path="/college-web/ideas" element={<Ideas />} />
           <Route path="/college-web/user/:id" element={<Users />} />
           <Route path="/college-web/table" element={<Table/>} />
+          <Route element={<AuthRedirect/>}>
+            <Route path='/college-web/admin' element={<Admin/>} />
+            <Route path='/college-web/' element={<Main/>} exact/>
+          </Route>
         </Routes>
 
         <Modal

@@ -11,7 +11,7 @@ const CheckSindingIdea = () => {
 
     const [user] = useAuthState(auth)
     const [idea, setIdea] = useContext(ModalIdea)
-
+    console.log(idea, setIdea)
 
     if (user) {
         return (
