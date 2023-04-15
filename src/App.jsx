@@ -2,12 +2,12 @@ import './App.css'
 import Main from './pages/autorization/Main'
 import Profile from "./pages/Profile"
 import Ideas from './pages/Ideas'
-import { useState, createContext } from 'react'
+import { useState, createContext, useEffect } from 'react'
 import { Modal, Box } from '@mui/material';
 import Registration from './components/apply/GetApply'
 import { auth } from "./app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Routes, Route, Navigate, Outlet } from "react-router-dom"
+import { Routes, Route, Router, Navigate, Outlet } from "react-router-dom"
 import Users from "./pages/Users"
 import Table from './pages/Table'
 import Admin from './pages/Admin'
@@ -22,7 +22,7 @@ function App() {
   const [modal, setModal] = useState(false)
   const [idea, setIdea] = useState(false)
 
-  const [user] = useAuthState(auth)
+  const [user, loading] = useAuthState(auth)
 
   function handleClose() {
     setModal(false)
@@ -47,24 +47,28 @@ function App() {
   }
 
   const AuthRedirect = () => {
-    return(
-      user?.email === allowed[0] ? <Outlet/> : <Navigate to="/college-web/"/>
-    )
+      return(
+       ( user?.email === allowed[0]) !== loading ? <Outlet/> : <Navigate to="/college-web/"/>
+      )
   }
+  
 
   return (
     <div className="App">
       <ModalContext.Provider value={[modal, setModal]}>
         <Routes>
+          
           <Route path="/college-web/" element={<Main />} />
           <Route path="/college-web/profile" element={<Profile setModal={true} />} />
           <Route path="/college-web/ideas" element={<Ideas />} />
           <Route path="/college-web/user/:id" element={<Users />} />
           <Route path="/college-web/table" element={<Table/>} />
           <Route element={<AuthRedirect/>}>
-            <Route path='/college-web/admin' element={<Admin/>} />
-            <Route path='/college-web/' element={<Main/>} exact/>
+            <Route path='/college-web/admin' element={<Admin/>} exact/>
+            <Route path="/college-web/" element={<Main />} />
+
           </Route>
+          
         </Routes>
 
         <Modal
