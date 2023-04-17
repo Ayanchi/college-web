@@ -51,6 +51,10 @@ function App() {
        ( user?.email === allowed[0]) !== loading ? <Outlet/> : <Navigate to="/college-web/"/>
       )
   }
+
+  function checkAdmin() {
+    return allowed.includes(user?.email)
+  }
   
 
   return (
@@ -63,12 +67,11 @@ function App() {
           <Route path="/college-web/ideas" element={<Ideas />} />
           <Route path="/college-web/user/:id" element={<Users />} />
           <Route path="/college-web/table" element={<Table/>} />
-          <Route element={<AuthRedirect/>}>
-            <Route path='/college-web/admin' element={<Admin/>} exact/>
-            <Route path="/college-web/" element={<Main />} />
-
-          </Route>
-          
+          {
+            (checkAdmin())
+            ? <Route path="/college-web/admin/" element={<Admin />} />
+            : <Route path="/college-web/admin/" element={<Main />} />
+          }
         </Routes>
 
         <Modal

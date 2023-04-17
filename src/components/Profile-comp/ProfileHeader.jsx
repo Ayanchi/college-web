@@ -81,7 +81,9 @@ const ProfileHeader = () => {
 
 
 
-
+    function checkAdmin() {
+        return allowed.includes(user?.email)
+    }
 
 
     return (
@@ -109,18 +111,6 @@ const ProfileHeader = () => {
                             >
                                 <List>
                                     <ListItem sx={{flexDirection: 'column', alignItems: 'flex-start'}}>
-                                        <ListItemButton 
-                                            value={value}
-                                            onClick={logout}
-                                        >
-
-                                            <ListItemIcon>
-                                                {<LogoutIcon sx={{ color: green[600] }} fontSize="large"/>}
-                                            </ListItemIcon>
-                                            <ListItemText 
-                                                disableTypography 
-                                                primary={<Typography sx={{ color: green[600] }} >Выйти</Typography> }/>
-                                        </ListItemButton>
 
                                         <Link to = "/college-web/profile">
                                             <ListItemButton value={value}>
@@ -175,7 +165,7 @@ const ProfileHeader = () => {
                                             </ListItemButton>
                                         </Link>
 
-                                        {user?.email === allowed[0] && (
+                                        {checkAdmin() && (
                                             <Link to="/college-web/admin">
                                                 <ListItemButton>
                                                     <ListItemIcon>
@@ -186,7 +176,18 @@ const ProfileHeader = () => {
                                             </Link>
 
                                         )}
-                                        
+                                        <ListItemButton 
+                                            value={value}
+                                            onClick={logout}
+                                        >
+
+                                            <ListItemIcon>
+                                                {<LogoutIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                disableTypography 
+                                                primary={<Typography sx={{ color: green[600] }} >Выйти</Typography> }/>
+                                        </ListItemButton>
                                     </ListItem>
                                 </List>
 
