@@ -1,1 +1,1 @@
-export const allowed = ['ayanausub13@gmail.com', 'mrartur0074@gmail.com']
+export const allowed = ['ayanausub13@gmail.com', 'mrartur0074@gmail.com','nurdinoverzhan@gmail.com']

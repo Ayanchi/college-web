@@ -90,7 +90,7 @@ export default function TeamsTable(props){
                     </TableHead>
                     <TableBody>
                         {searcherResult.length == 0 && team?.map((row, index) => (
-                            <StyledTableRow key={row.author}>
+                            <StyledTableRow key={index}>
                                 
                                 <StyledTableCell align="center">
                                         {index + 1}
@@ -108,7 +108,7 @@ export default function TeamsTable(props){
                         ))}
 
                         {searcherResult.length > 0 && searcherResult?.map((row, index) => (
-                            <StyledTableRow key={row.author}>
+                            <StyledTableRow key={index}>
                                 
                                 <StyledTableCell align="center">
                                         {index + 1}
