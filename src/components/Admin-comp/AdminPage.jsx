@@ -41,6 +41,7 @@ export default function AdminPage() {
                             <TeamsTable />
                         </TabPanel>
                     </TabContext>
+                    
                 </Box>
             </div>
         </section>
