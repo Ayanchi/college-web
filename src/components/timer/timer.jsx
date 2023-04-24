@@ -8,10 +8,10 @@ const Timer = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const deadline = "April 15, 2023, 10:00:00 UTC";
+  const deadline = "April 30, 2023, 10:00:00 UTC";
 
   const getTime = () => {
-    
+
     const time = Date.parse(deadline) - Date.now();
 
     setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
@@ -21,48 +21,48 @@ const Timer = () => {
   };
 
   useEffect(() => {
-     const interval = setInterval(() => getTime(deadline), 1000);
+    const interval = setInterval(() => getTime(deadline), 1000);
 
-     return () => clearInterval(interval);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="timerCclock">
-        <div className="time" role="timer">
-            <div className="col-4">
-                <div className="box">
-                  <div className="getTime">
-                    <p id="day">{days < 10 ? "0" + days : days}</p>
-                  </div>                  
-                  <span className="text">ДНЕЙ</span>
-                </div>
+      <div className="time" role="timer">
+        <div className="col-4">
+          <div className="box">
+            <div className="getTime">
+              <p id="day">{days < 10 ? "0" + days : days}</p>
             </div>
-            <div className="col-4">
-                <div className="box">
-                  <div className="getTime">
-                    <p id="hour">{hours < 10 ? "0" + hours : hours}</p>
-                  </div>
-                  <span className="text">ЧАСОВ</span>
-                  
-                </div>
-            </div>
-            <div className="col-4">
-                <div className="box">
-                  <div className="getTime">
-                    <p id="minute">{minutes < 10 ? "0" + minutes : minutes}</p>
-                  </div>
-                  <span className="text">МИНУТ</span>
-                </div>
-            </div>
-            <div className="col-4">
-                <div className="box">
-                  <div className="getTime">
-                    <p id="second">{seconds < 10 ? "0" + seconds : seconds}</p>
-                  </div>
-                  <span className="text">СЕКУНД</span>
-                </div>
-            </div>
+            <span className="text">ДНЕЙ</span>
+          </div>
         </div>
+        <div className="col-4">
+          <div className="box">
+            <div className="getTime">
+              <p id="hour">{hours < 10 ? "0" + hours : hours}</p>
+            </div>
+            <span className="text">ЧАСОВ</span>
+
+          </div>
+        </div>
+        <div className="col-4">
+          <div className="box">
+            <div className="getTime">
+              <p id="minute">{minutes < 10 ? "0" + minutes : minutes}</p>
+            </div>
+            <span className="text">МИНУТ</span>
+          </div>
+        </div>
+        <div className="col-4">
+          <div className="box">
+            <div className="getTime">
+              <p id="second">{seconds < 10 ? "0" + seconds : seconds}</p>
+            </div>
+            <span className="text">СЕКУНД</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
