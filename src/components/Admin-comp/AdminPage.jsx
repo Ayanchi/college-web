@@ -6,7 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { useState } from 'react';
 import TeamsTable from '../Table-comp/TeamsTable';
-
+import TeamRate from './TeamRate';
 
 
 
@@ -35,7 +35,7 @@ export default function AdminPage() {
 
                         </TabPanel>
                         <TabPanel value="2">
-
+                            <TeamRate/>
                         </TabPanel>
                         <TabPanel value="3">
                             <TeamsTable />

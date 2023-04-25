@@ -12,6 +12,7 @@ import Users from "./pages/Users"
 import Table from './pages/Table'
 import Admin from './pages/Admin'
 import { allowed } from './components/Admin-comp/AllowedUser'
+import Team from './pages/Team'
 
 
 const ModalContext = createContext()
@@ -72,6 +73,7 @@ function App() {
             ? <Route path="/college-web/admin/" element={<Admin />} />
             : <Route path="/college-web/admin/" element={<Main />} />
           }
+          <Route path='/college-web/admin/:team/' element={<Team/>}/>
         </Routes>
 
         <Modal
