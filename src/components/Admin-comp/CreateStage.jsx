@@ -1,30 +1,35 @@
-import React,{useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { ModalStages } from './Stages';
 import { useForm } from 'react-hook-form';
-import { collection, addDoc, query} from "firebase/firestore"
+import { collection, addDoc, query } from "firebase/firestore"
 import { database } from '../../app/firebase';
+import { Timestamp } from 'firebase/firestore';
 
 const CreateStage = () => {
     const [isSending, setisSending] = useState(true)
     const [create, setCreate] = useContext(ModalStages)
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const { register, handleSubmit, formState: { errors } } = useForm({
 
     })
 
     const onSubmitForm = async (data) => {
+        const timestamp = Timestamp.fromDate(selectedDate);
         try {
             await addDoc(collection(database, 'stages'), {
                 title: data.title,
                 description: data.description,
                 grade: data.grade,
-                // deadline: data.deadline
+                deadline: timestamp
             });
             setisSending(false)
         } catch (error) {
             console.log(error)
         }
     }
-
+    function handleDateChange(event) {
+        setSelectedDate(new Date(event.target.value));
+    }
 
 
 
@@ -71,6 +76,10 @@ const CreateStage = () => {
                                 })}
                             />
                             {errors.title && <span className="error" role="alert">{errors.title?.message}</span>}
+                        </div>
+                        <div className="stageDeadline">
+                            <label htmlFor="date">Select a date:</label>
+                            <input type="datetime-local" id="localdate" name="date" onChange={handleDateChange} />
                         </div>
                     </div>
 
