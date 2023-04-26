@@ -9,7 +9,6 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import "../CSS/AllIdeas.css"
 import { Modal } from '@mui/material';
 import { Box } from '@mui/system';
-
 import Likes from './Likes';
 import Susbscribe from './Subscribe';
 import profile_foto from '../../assets/DefaultUser.png'

@@ -1,0 +1,52 @@
+.stageItem {
+    padding: 50px;
+    border-bottom: 1px solid #232323;
+}
+
+.stageTItle {
+    font-family: monospace;
+    font-size: 35px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-bottom: 2px solid #000;
+}
+
+.gradeContainer{
+    width: 30%;
+}
+
+.stageDescr {
+    margin-top: 40px;
+    width: 60%;
+    font-size: 18px;
+    color: #121212;
+    font-weight: 500;
+}
+.stageGrade{
+    width: 90%;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+.stageBody{
+    display: flex;
+    justify-content: space-between;
+}
+.createButton{
+    width: 150px;
+    transition: 0.4s;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50px;
+}
+.createButton span{
+    font-size: 40px;
+}
+.createButton:hover{
+    transition: 0.4s;
+    background: #000;
+    color: white;
+}
+.sendingIdea{
+    font-size: 20px;
+    font-weight: 600;
+}
