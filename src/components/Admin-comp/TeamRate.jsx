@@ -55,7 +55,7 @@ export default function TeamRate() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell sx={"background:red;"} width="100px">
+              <TableCell sx={{background: 'red'}} width="100px">
                 Команды
               </TableCell>
 
@@ -68,9 +68,9 @@ export default function TeamRate() {
             <TableBody key={index1}>
               {/* {getTeam.map((comand) => ( */}
               <TableRow key={command.id}>
-                <TableCell sx={"background:red;"}>{command.teamName}</TableCell>
+                <TableCell sx={{background:'red'}}>{command.teamName}</TableCell>
                 {stages.map((item, index2) => (
-                  <TableCell align="center">
+                  <TableCell align="center" key={index2}>
                     <Link to={`/college-web/admin/${command.teamName}`}>
                       {command.grades[index2] ? command.grades[index2] : 0}
                     </Link>
