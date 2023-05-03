@@ -1,6 +1,5 @@
 import "../components/Modal.css"
 import Timer from "./timer/timer"
-import Location from "./stages/stage"
 import {Link} from 'react-router-dom'
 import GoogleButtom from "./google-register/Google-buttom"
 import {ModalContext} from '../App'
@@ -14,7 +13,6 @@ import { auth } from "../app/firebase"
 import logo_site from "../assets/logo_site.png"
 
 function Modal() {
-    const [modal, setModal] = useContext(ModalContext)
     const [users, setUsers] = useState(0)
 
     const [user] = useAuthState(auth);

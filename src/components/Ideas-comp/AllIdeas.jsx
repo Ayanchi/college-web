@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { getDocs, collection, query, where, doc } from "firebase/firestore"
+import { getDocs, collection, query, where } from "firebase/firestore"
 import { database } from '../../app/firebase';
 import { storage, auth } from '../../app/firebase'
 import { ref, list, getDownloadURL } from 'firebase/storage'
@@ -9,7 +9,6 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import "../CSS/AllIdeas.css"
 import { Modal } from '@mui/material';
 import { Box } from '@mui/system';
-
 import Likes from './Likes';
 import Susbscribe from './Subscribe';
 import profile_foto from '../../assets/DefaultUser.png'
@@ -95,10 +94,6 @@ const AllIdeas = () => {
         getFormList()
     }, [selectedValue])
 
-    function handleSelectChange(e) {
-        setSelectedValue(e.target.value)
-
-    }
     function arrowFunction(str, id, option) {
         const width = document.querySelector(".ideaDescr")?.offsetWidth;
         let res = Math.floor(width / 7.5)

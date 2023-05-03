@@ -16,13 +16,12 @@ import { createContext } from "react"
 import { Box } from '@mui/system';
 import pencil from "../../assets/pencil.png"
 import { DeleteIcon } from './Delete-Icon';
+import "../CSS/AllIdeas.css"
 
 export const AllUserIdeas = createContext()
 
 const ModalIdeaEdit = createContext()
 export { ModalIdeaEdit }
-
-import "../CSS/AllIdeas.css"
 
 const style = {
     position: 'absolute',
@@ -42,7 +41,6 @@ const MyIdeas = (props) => {
     const [user] = useAuthState(auth)
     const [isUser, setIsUser] = useState([])
     const [imageList, setImageList] = useState(null)
-    const [avatar, setAvatar] = useState(false)
     const [ideaEdit, setIdeaEdit] = useState(false)
     const [selectedValue, setSelectedValue] = useState("все")
     const imageListRef = ref(storage, `images/profile/${user?.email}/`)

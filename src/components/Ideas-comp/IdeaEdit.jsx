@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import { ModalIdeaEdit } from './MyIdeas';
 import { useForm } from "react-hook-form";
-import { database, auth } from "../../app/firebase";
+import { database } from "../../app/firebase";
 import { getDoc, doc, updateDoc } from "firebase/firestore"
 import "../CSS/GetApply.css"
-import { useAuthState } from 'react-firebase-hooks/auth'
 
 const IdeaEdit = (props) => {
     const [isUser, setIsUser] = useState()
@@ -13,7 +12,6 @@ const IdeaEdit = (props) => {
     const [checked, setChecked] = useState()
     const [isSending, setisSending] = useState(true)
     const [ideaEdit, setIdeaEdit] = useContext(ModalIdeaEdit)
-    const [user] = useAuthState(auth)
     const [tags, setTags] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: async () => await getData()
@@ -59,9 +57,7 @@ const IdeaEdit = (props) => {
         getFormList()
     }, [])
 
-    function handleSelectChange(e) {
-        setSelectedValue(e.target.value);
-    }
+    
     function checkedClick(e) {
         let res = e.target.checked
         setChecked(res)

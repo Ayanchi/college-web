@@ -1,10 +1,7 @@
 import "../CSS/TeamsPage.css"
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
 import { query, getDoc, collection, where, updateDoc, arrayRemove, doc, getDocs} from "firebase/firestore"
-import { database, auth } from "../../app/firebase"
-import { useAuthState } from "react-firebase-hooks/auth"
-import pencil from "../../assets/pencil.png"
-import { ModalIdeaEdit } from "./MyIdeas"
+import { database, } from "../../app/firebase"
 import { Link } from "react-router-dom"
 
 const style = {
@@ -22,9 +19,6 @@ const style = {
 
 export function TeamsPage(props) {
     const [subscriber, setSubscriber] = useState([])
-    const [IdeaEditcontext, setIdeaEditcontext] = useState(false)
-    const [ideaId, setIdeaId] = useState()
-    const [user] = useAuthState(auth)
 
     useEffect(() => {
         const getFormList = async () => {
