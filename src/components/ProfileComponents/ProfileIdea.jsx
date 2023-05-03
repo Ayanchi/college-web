@@ -1,9 +1,12 @@
-import { ModalIdea } from "./ProfileHeader"
-import { useContext, useState, useEffect } from "react"
-import { database } from "../../app/firebase";
-import { getDocs, collection, addDoc } from "firebase/firestore"
-import React from "react"
+import React, { useContext, useState, useEffect } from "react"
+
 import { useForm } from "react-hook-form";
+
+import { getDocs, collection, addDoc } from "firebase/firestore"
+import { database } from "../../app/firebase";
+
+import { ModalIdea } from "./ProfileHeader"
+
 import "../CSS/ProfileIdea.css"
 
 
@@ -23,10 +26,6 @@ const ProfileIdea = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm({
 
     })
-
-    function handleSelectChange(e) {
-        setSelectedValue(e.target.value);
-    }
 
     useEffect(() => {
         const getFormList = async () => {
@@ -68,7 +67,7 @@ const ProfileIdea = (props) => {
         return (
             <div className="ideaModal">
                 <div className="send">
-                <button className="closebuttonIdea" onClick={() => setIdea(false)}>X</button>
+                    <button className="closebuttonIdea" onClick={() => setIdea(false)}>X</button>
                 </div>
                 <form className="idea-form" onSubmit={handleSubmit(onSubmitForm)}>
                     <div className="mainInputs">

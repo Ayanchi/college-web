@@ -1,5 +1,5 @@
 import './App.css'
-import Main from './pages/autorization/Main'
+import Main from './pages/Main'
 import Profile from "./pages/Profile"
 import Ideas from './pages/Ideas'
 import { useState, createContext, useEffect } from 'react'
@@ -11,7 +11,7 @@ import { Routes, Route, Router, Navigate, Outlet } from "react-router-dom"
 import Users from "./pages/Users"
 import Table from './pages/Table'
 import Admin from './pages/Admin'
-import { allowed } from './components/Admin-comp/AllowedUser'
+import { allowed } from './components/AdminComponent/AllowedUser'
 import Team from './pages/Team'
 
 
@@ -48,34 +48,34 @@ function App() {
   }
 
   const AuthRedirect = () => {
-      return(
-       ( user?.email === allowed[0]) !== loading ? <Outlet/> : <Navigate to="/college-web/"/>
-      )
+    return (
+      (user?.email === allowed[0]) !== loading ? <Outlet /> : <Navigate to="/college-web/" />
+    )
   }
 
   function checkAdmin() {
     return allowed.includes(user?.email)
   }
-  
+
 
   return (
     <div className="App">
       <ModalContext.Provider value={[modal, setModal]}>
         <Routes>
-          
+
           <Route path="/college-web/" element={<Main />} />
           <Route path="/college-web/profile" element={<Profile setModal={true} />} />
           <Route path="/college-web/ideas" element={<Ideas />} />
           <Route path="/college-web/user/:id" element={<Users />} />
-          <Route path="/college-web/table" element={<Table/>} />
+          <Route path="/college-web/table" element={<Table />} />
           {
             (checkAdmin())
-            ? <Route path="/college-web/admin/" element={<Admin />} />
-            : <Route path="/college-web/admin/" element={<Main />} />
+              ? <Route path="/college-web/admin/" element={<Admin />} />
+              : <Route path="/college-web/admin/" element={<Main />} />
           }
-          <Route path='/college-web/admin/:team/' element={<Team/>}/>
+          <Route path='/college-web/admin/:team/' element={<Team />} />
         </Routes>
-
+        
         <Modal
           open={modal}
           onClose={handleClose}

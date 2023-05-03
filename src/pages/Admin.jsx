@@ -1,8 +1,8 @@
 import React from 'react';
-import ProfileHeader from '../components/Profile-comp/ProfileHeader';
+import ProfileHeader from '../components/ProfileComponents/ProfileHeader';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "../app/firebase"
-import AdminPage from '../components/Admin-comp/AdminPage';
+import AdminPage from '../components/AdminComponent/AdminPage';
 
 const Admin = () => {
     const [user] = useAuthState(auth)

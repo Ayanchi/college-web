@@ -1,15 +1,14 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { useState } from 'react';
+
 import TeamsTable from '../Table-comp/TeamsTable';
 import Stages from "./Stages"
 import TeamRate from "./TeamRate"
-
-
 
 
 export default function AdminPage() {

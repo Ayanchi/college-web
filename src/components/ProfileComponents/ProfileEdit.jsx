@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
+
 import { database } from "../../app/firebase"
 import { query, setDoc, doc, getDoc } from "firebase/firestore"
 import { useForm } from "react-hook-form";
+
 import ProfilePhoto from './ProfilePhoto';
-import { ModalContext } from "../../App"
-import "../CSS/ProfileEdit.css"
 import { TeamsPage } from '../Ideas-comp/TeamsPage';
+
+import { ModalContext } from "../../App"
+
+import "../CSS/ProfileEdit.css"
+
 
 
 const ProfileEdit = (props) => {
@@ -18,7 +23,6 @@ const ProfileEdit = (props) => {
     });
 
     useEffect(() => {
-        // Тут мы каждому пользователю создадим ссылку
         if (!props.current.hasOwnProperty('link')) {
             const user_link = props.current.email.split('@')[0].replace(/[^a-zA-z0-9]/gi, '');
             addLink(user_link)

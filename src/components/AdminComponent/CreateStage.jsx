@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
-import { ModalStages } from './Stages';
+
 import { useForm } from 'react-hook-form';
-import { collection, addDoc, query } from "firebase/firestore"
+import { collection, addDoc, Timestamp } from "firebase/firestore"
+
 import { database } from '../../app/firebase';
-import { Timestamp } from 'firebase/firestore';
+import { ModalStages } from './Stages';
+
 
 const CreateStage = () => {
     const [isSending, setisSending] = useState(true)
-    const [create, setCreate] = useContext(ModalStages)
+    const [creatingStage, setCreatingStage] = useContext(ModalStages)
     const [selectedDate, setSelectedDate] = useState(new Date());
     const { register, handleSubmit, formState: { errors } } = useForm({
 

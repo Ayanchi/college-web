@@ -1,11 +1,10 @@
+import React, { useContext } from "react"
+
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "../../app/firebase";
+
 import ProfileIdea from './ProfileIdea';
 import { ModalIdea } from "./ProfileHeader"
-import { useContext } from 'react';
-import React from "react"
-
-
 
 const CheckSindingIdea = () => {
 
@@ -18,9 +17,7 @@ const CheckSindingIdea = () => {
             <div>
                 <ProfileIdea current={user} />
             </div>
-
         )
-
     } else {
         return (
             <div>

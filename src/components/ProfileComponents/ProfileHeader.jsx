@@ -1,18 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useState, createContext } from 'react';
 import { signOut } from "firebase/auth";
 import { auth } from "../../app/firebase";
 import { useNavigate } from 'react-router-dom';
+
 import Box from '@mui/material/Box';
 import { Link } from "react-router-dom"
 import Modal from '@mui/material/Modal';
-import { useState, createContext } from 'react';
-import "../CSS/ProfileHeader.css"
-import CheckSindingIdea from './CheckSending';
 import { green } from '@mui/material/colors';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Person4RoundedIcon from '@mui/icons-material/Person4Rounded';
 import Groups2RoundedIcon from '@mui/icons-material/Groups2Rounded';
-import headerLogo from "../../assets/headerLogo.jpg"
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
@@ -25,8 +22,15 @@ import BatchPredictionIcon from '@mui/icons-material/BatchPrediction';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Typography } from '@mui/material';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { allowed } from '../Admin-comp/AllowedUser';
+
+import { allowed } from '../AdminComponent/AllowedUser';
+import CheckSindingIdea from './CheckSending';
+
+import headerLogo from "../../assets/headerLogo.jpg"
+
+import "../CSS/ProfileHeader.css"
 
 const style = {
     position: 'absolute',
@@ -45,12 +49,10 @@ const ModalIdea = createContext()
 export { ModalIdea }
 
 const ProfileHeader = () => {
-    ////
-
     const [idea, setIdea] = useState(false)
     const [value, setValue] = useState(0);
     const [user] = useAuthState(auth)
-
+    const [state, setState] = useState(false)
 
     const navigate = useNavigate()
 
@@ -63,19 +65,16 @@ const ProfileHeader = () => {
             console.log(error)
         }
     }
-    ////
 
-    const [state, setState] = useState(false)
-    
     const toggleDrawer = (anchor, open) => (event) => {
         if (
-          event &&
-          event.type === 'keydown' &&
-          (event.key === 'Tab' || event.key === 'Shift')
+            event &&
+            event.type === 'keydown' &&
+            (event.key === 'Tab' || event.key === 'Shift')
         ) {
-          return;
+            return;
         }
-    
+
         setState({ ...state, [anchor]: open });
     };
 
@@ -97,7 +96,7 @@ const ProfileHeader = () => {
                         </Link>
                     </div>
                     <div className="links">
-                        <Button onClick={() => setState(true)}><MenuIcon sx={{ color: green[600] }} fontSize="large"/></Button>
+                        <Button onClick={() => setState(true)}><MenuIcon sx={{ color: green[600] }} fontSize="large" /></Button>
                         <SwipeableDrawer
                             anchor={'right'}
                             open={state}
@@ -110,25 +109,25 @@ const ProfileHeader = () => {
                                 onClick={() => setState(false)}
                             >
                                 <List>
-                                    <ListItem sx={{flexDirection: 'column', alignItems: 'flex-start'}}>
+                                    <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
 
-                                        <Link to = "/college-web/profile">
+                                        <Link to="/college-web/profile">
                                             <ListItemButton value={value}>
                                                 <ListItemIcon>
-                                                    {<Person4RoundedIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                                    {<Person4RoundedIcon sx={{ color: green[600] }} fontSize="large" />}
                                                 </ListItemIcon>
-                                                <ListItemText 
-                                                primary={<Typography sx={{ color: green[600] }} >Профиль</Typography> }/>
+                                                <ListItemText
+                                                    primary={<Typography sx={{ color: green[600] }} >Профиль</Typography>} />
                                             </ListItemButton>
                                         </Link>
 
-                                        <Link to = "/college-web/table">
+                                        <Link to="/college-web/table">
                                             <ListItemButton value={value}>
                                                 <ListItemIcon>
-                                                    {<Groups2RoundedIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                                    {<Groups2RoundedIcon sx={{ color: green[600] }} fontSize="large" />}
                                                 </ListItemIcon>
-                                                <ListItemText 
-                                                primary={<Typography sx={{ color: green[600], textAlign: 'left' }}>Список участников</Typography> }/>
+                                                <ListItemText
+                                                    primary={<Typography sx={{ color: green[600], textAlign: 'left' }}>Список участников</Typography>} />
                                             </ListItemButton>
                                         </Link>
 
@@ -138,20 +137,20 @@ const ProfileHeader = () => {
                                                 onClick={() => setIdea(true)}
                                             >
                                                 <ListItemIcon>
-                                                    {<LightbulbIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                                    {<LightbulbIcon sx={{ color: green[600] }} fontSize="large" />}
                                                 </ListItemIcon>
-                                                <ListItemText 
-                                                primary={<Typography sx={{ color: green[600] }}>Добавить идею</Typography> }/>
-                                                
+                                                <ListItemText
+                                                    primary={<Typography sx={{ color: green[600] }}>Добавить идею</Typography>} />
+
                                             </ListItemButton>
                                             <Modal
-                                                    open={idea}
-                                                    aria-labelledby="modal-modal-title"
-                                                    aria-describedby="modal-modal-description"
-                                                >
-                                                    <Box sx={style}>
-                                                        <CheckSindingIdea />
-                                                    </Box>
+                                                open={idea}
+                                                aria-labelledby="modal-modal-title"
+                                                aria-describedby="modal-modal-description"
+                                            >
+                                                <Box sx={style}>
+                                                    <CheckSindingIdea />
+                                                </Box>
                                             </Modal>
 
                                         </ModalIdea.Provider>
@@ -159,9 +158,9 @@ const ProfileHeader = () => {
                                         <Link to="/college-web/ideas">
                                             <ListItemButton>
                                                 <ListItemIcon>
-                                                    {<BatchPredictionIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                                    {<BatchPredictionIcon sx={{ color: green[600] }} fontSize="large" />}
                                                 </ListItemIcon>
-                                                <ListItemText primary={<Typography sx={{ color: green[600] }}>Идеи</Typography>}/>
+                                                <ListItemText primary={<Typography sx={{ color: green[600] }}>Идеи</Typography>} />
                                             </ListItemButton>
                                         </Link>
 
@@ -171,22 +170,22 @@ const ProfileHeader = () => {
                                                     <ListItemIcon>
                                                         {<AdminPanelSettingsIcon sx={{ color: green[600] }} fontSize="large" />}
                                                     </ListItemIcon>
-                                                    <ListItemText primary={<Typography sx={{ color: green[600] }}>Администратор</Typography>}/>
+                                                    <ListItemText primary={<Typography sx={{ color: green[600] }}>Администратор</Typography>} />
                                                 </ListItemButton>
                                             </Link>
 
                                         )}
-                                        <ListItemButton 
+                                        <ListItemButton
                                             value={value}
                                             onClick={logout}
                                         >
 
                                             <ListItemIcon>
-                                                {<LogoutIcon sx={{ color: green[600] }} fontSize="large"/>}
+                                                {<LogoutIcon sx={{ color: green[600] }} fontSize="large" />}
                                             </ListItemIcon>
-                                            <ListItemText 
-                                                disableTypography 
-                                                primary={<Typography sx={{ color: green[600] }} >Выйти</Typography> }/>
+                                            <ListItemText
+                                                disableTypography
+                                                primary={<Typography sx={{ color: green[600] }} >Выйти</Typography>} />
                                         </ListItemButton>
                                     </ListItem>
                                 </List>

@@ -1,8 +1,8 @@
 import React from 'react';
-import ProfileHeader from "../components/Profile-comp/ProfileHeader"
+import ProfileHeader from "../components/ProfileComponents/ProfileHeader"
 import { auth } from "../app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import ProfileUsers from '../components/Profile-comp/ProfileUsers';
+import ProfileUsers from '../components/ProfileComponents/ProfileUsers';
 import { useParams } from 'react-router-dom';
 
 const Users = () => {

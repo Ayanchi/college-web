@@ -214,7 +214,7 @@ const AllIdeas = () => {
             }
 
             {searchResult.length > 0 && searchResult.map((item, index) => (
-                <div className="ideaContainer" key={item.id}>
+                <div className="ideaContainer" key={index}>
                     <div className="authIdeas">
                         <div className="ideaImage">
                             <div className='avatar'>

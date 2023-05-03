@@ -78,7 +78,6 @@ const MyIdeas = (props) => {
                 id: doc.id,
             }))
             setIsUser(filterForm)
-            console.log(isUser)
         } catch (error) {
             console.log(error)
         }
@@ -112,7 +111,7 @@ const MyIdeas = (props) => {
         <div>
             <AllUserIdeas.Provider value={[isUser, setIsUser]}>
                 {isUser.map((item, idx) => (
-                    <div className="ideaContainer" id={item.id} key={item.id}>
+                    <div className="ideaContainer" id={item.id} key={idx}>
                         <div className="authIdeas">
                             <div className="ideaImage">
                                 <Avatar

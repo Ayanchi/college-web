@@ -1,16 +1,17 @@
-import "../components/Modal.css"
-import Timer from "./timer/timer"
-import Location from "./stages/stage"
-import {Link} from 'react-router-dom'
-import GoogleButtom from "./google-register/Google-buttom"
-import {ModalContext} from '../App'
-import {useContext, useState, useEffect} from 'react'
+import { useContext, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { SocialIcon } from 'react-social-icons';
-import {getDocs, collection} from 'firebase/firestore'
-import { database } from "../app/firebase"
-import profile from '../assets/profile.png'
+import { getDocs, collection } from 'firebase/firestore'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from "../app/firebase"
+import { database, auth } from "../app/firebase"
+
+import Timer from "./timer/timer"
+import GoogleButtom from "./google-register/Google-buttom"
+import { ModalContext } from '../App'
+
+import "../components/Modal.css"
+
+import profile from '../assets/profile.png'
 import logo_site from "../assets/logo_site.png"
 
 function Modal() {
@@ -25,52 +26,53 @@ function Modal() {
                 .then(responce => {
                     setUsers(responce?.docs?.length ? responce?.docs?.length : 0)
                 })
-        } catch(err) {
+        } catch (err) {
             console.log(err)
         }
     }, [])
 
-  return(
-    <div className="modal">
-        <div className="applyBlock">
-            <div className="backgraund-galaxy"
-                style={{backgroundPosition: 'center center',
-                backgroundSize: 'cover',
-                transform: `translate3d(${0}px, ${0}px, ${0}px)`,
-                innerHeight: '100%'
-                }}>
-            </div>
-            
-            <div className="timer">
-                <div className="stattup-text">
-                    
-                    <img src={logo_site} style={{maxWidth: '100%'}} alt="STARTUPОМАНИЯ" />
-                    
+    return (
+        <div className="modal">
+            <div className="applyBlock">
+                <div className="backgraund-galaxy"
+                    style={{
+                        backgroundPosition: 'center center',
+                        backgroundSize: 'cover',
+                        transform: `translate3d(${0}px, ${0}px, ${0}px)`,
+                        innerHeight: '100%'
+                    }}>
                 </div>
-                <div className="obshug">
-                    <Timer />
-                    
-                    <div className="whichDateStart">
-                        <span className="time-spending">ВРЕМЯ ПРОВЕДЕНИЯ:<br/></span> 
-                        <span className="time-spending">C 17.03 ПО 28.04</span>
-                    </div>
-                    <div className="wonnaStartUp">
-                        <GoogleButtom/>
-                    </div>
-                </div>
-                
-            </div>
 
-            <div className="footer">
-                <div className="hub">
-                    <SocialIcon url="https://instagram.com/startupomania" bgColor="#b2ff00"/>
-                    <SocialIcon url="https://www.tiktok.com/@alatoostartupomania" bgColor="#b2ff00"/>
-                    <SocialIcon url="https://t.me/+qwojtIWrwjQ3YmIy" bgColor="#b2ff00"/>
-                </div>
-            </div>
+                <div className="timer">
+                    <div className="stattup-text">
 
-            <div className="count-users">
-                Количество зарегистрированных пользователей: {users}
+                        <img src={logo_site} style={{ maxWidth: '100%' }} alt="STARTUPОМАНИЯ" />
+
+                    </div>
+                    <div className="obshug">
+                        <Timer />
+
+                        <div className="whichDateStart">
+                            <span className="time-spending">ВРЕМЯ ПРОВЕДЕНИЯ:<br /></span>
+                            <span className="time-spending">C 17.03 ПО 28.04</span>
+                        </div>
+                        <div className="wonnaStartUp">
+                            <GoogleButtom />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="footer">
+                    <div className="hub">
+                        <SocialIcon url="https://instagram.com/startupomania" bgColor="#b2ff00" />
+                        <SocialIcon url="https://www.tiktok.com/@alatoostartupomania" bgColor="#b2ff00" />
+                        <SocialIcon url="https://t.me/+qwojtIWrwjQ3YmIy" bgColor="#b2ff00" />
+                    </div>
+                </div>
+                <div className="count-users">
+                    Количество зарегистрированных пользователей: {users}
+                </div>
             </div>
 
             {/* <div className="Apply">
@@ -83,8 +85,7 @@ function Modal() {
                     </div>
                 </div>
             </div> */}
-        </div>
-        {/* <div className="map">
+            {/* <div className="map">
             <h3>Место проведения</h3>
             <div className="college-text">
                 <p className="street">Кыргызстан, г. Бишкек, ул. Анкара 1/8а</p>
@@ -118,16 +119,14 @@ function Modal() {
             </div>
         </div> */}
 
-        {user && (
-            <div className="profile">
-                <Link to="/college-web/profile">
-                    <img src={profile} alt="" />
-                </Link>
-            </div>
-        )} 
-        
-
-    </div>
+            {user && (
+                <div className="profile">
+                    <Link to="/college-web/profile">
+                        <img src={profile} alt="" />
+                    </Link>
+                </div>
+            )}
+        </div>
     )
 }
 

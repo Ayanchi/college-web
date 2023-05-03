@@ -1,9 +1,12 @@
 import React, { useState, useEffect, createContext } from 'react';
+
 import { getDocs, collection } from "firebase/firestore"
 import { database } from '../../app/firebase';
+
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import CreateStage from './CreateStage';
+
 import moment from 'moment';
 
 import "../CSS/Stages.css"
@@ -26,10 +29,7 @@ const style = {
 
 const Stages = () => {
     const [stages, setStages] = useState([])
-
-    const [create, setCreate] = useState(false)
-
-
+    const [creatingStage, setCreatingStage] = useState(false)
 
     useEffect(() => {
         const getFormList = async () => {
@@ -54,9 +54,9 @@ const Stages = () => {
                 <button className='createButton' onClick={() => setCreate(true)}>
                     Создать этап
                 </button>
-                <ModalStages.Provider value={[create, setCreate]}>
+                <ModalStages.Provider value={[creatingStage, setCreatingStage]}>
                     <Modal
-                        open={create}
+                        open={creatingStage}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
