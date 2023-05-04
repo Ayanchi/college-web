@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { getDocs, collection, query, where, doc } from "firebase/firestore"
+import { getDocs, collection, query, where } from "firebase/firestore"
 import { database } from '../../app/firebase';
 import { storage, auth } from '../../app/firebase'
 import { ref, list, getDownloadURL } from 'firebase/storage'
@@ -94,10 +94,6 @@ const AllIdeas = () => {
         getFormList()
     }, [selectedValue])
 
-    function handleSelectChange(e) {
-        setSelectedValue(e.target.value)
-
-    }
     function arrowFunction(str, id, option) {
         const width = document.querySelector(".ideaDescr")?.offsetWidth;
         let res = Math.floor(width / 7.5)

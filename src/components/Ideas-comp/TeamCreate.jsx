@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { getDocs, setDoc, doc, query, where, collection, getDoc, onSnapshot, addDoc } from 'firebase/firestore';
+import { getDocs,query, where, collection,addDoc } from 'firebase/firestore';
 import { database } from '../../app/firebase';
 import { CreatingTeam } from "./AllIdeas"
-import { async } from '@firebase/util';
 import "../CSS/TeamCreate.css"
 
 
@@ -17,7 +16,6 @@ const TeamCreate = (props) => {
     const [teamModal, setTeamModal] = useContext(CreatingTeam)
     const [info, setInfo] = useState([])
     const [checkUser, setCheckUser] = useState([currentEmail])
-    const [memberArray, setMemberArray] = useState([checkUser])
 
     useEffect(() => {
         const getFormList = async () => {
@@ -26,10 +24,8 @@ const TeamCreate = (props) => {
                 const idea = await getDocs(q)
                 const filterForm = idea.docs.map((doc) => ({
                     ...doc.data(),
-                    //subscribe: checkUser
                 }))
                 setInfo(filterForm)
-                //console.log(filterForm)
             } catch (error) {
                 console.log(error)
             }

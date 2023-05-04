@@ -13,8 +13,6 @@ import Popover from '@mui/material/Popover';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 
-
-
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
@@ -52,7 +50,6 @@ const Susbscribe = (props) => {
     const submitSubs = async () => {        
         if(user){
             if(subscribeUsers.includes(user.email)){
-                //console.log(doc(database, "ideas", props.current.id))
                 
                 await updateDoc(doc(database, "ideas", props.current.id), {
                     ...props.current,

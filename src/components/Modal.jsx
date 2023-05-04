@@ -15,7 +15,6 @@ import profile from '../assets/profile.png'
 import logo_site from "../assets/logo_site.png"
 
 function Modal() {
-    const [modal, setModal] = useContext(ModalContext)
     const [users, setUsers] = useState(0)
 
     const [user] = useAuthState(auth);

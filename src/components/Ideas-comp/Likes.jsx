@@ -57,7 +57,6 @@ const Likes = (props) => {
                 setLike(false)
                 setLikeUsersCount(likeUsersCount - 1)
                 setLikeUsers(likeUsers.splice(likeUsers.indexOf(user.email) , 1))
-                //console.log(user.email)
                 console.log(setLikeUsers(likeUsers.splice(likeUsers.length-1)))
                 console.log(likeUsers.indexOf(user.email))
             }else{
@@ -68,7 +67,6 @@ const Likes = (props) => {
                 setLike(true)
                 setLikeUsersCount(likeUsersCount + 1)
                 console.log(likeUsers.indexOf(likeUsers.length))
-                //console.log(likeUsers.splice(likeUsers.indexOf(user.email), 1))
                 setLikeUsers([...likeUsers, user.email])
                 console.log([...likeUsers, user.email])
             }

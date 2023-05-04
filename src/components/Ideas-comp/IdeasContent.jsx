@@ -10,18 +10,18 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "../../app/firebase"
 
 function IdeasContent() {
-    const [value, setValue] = React.useState('1');
+    const [tabsValue, setTabsValue] = React.useState('1');
     const [user] = useAuthState(auth)
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        setTabsValue(newValue);
     };
 
     return (
         <section className='ideasContent'>
             <div className="container">
                 <Box sx={{ width: '100%', typography: 'body1' }}>
-                    <TabContext value={value}>
+                    <TabContext value={tabsValue}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <TabList onChange={handleChange} aria-label="lab API tabs example">
                                

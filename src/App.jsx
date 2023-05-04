@@ -2,12 +2,12 @@ import './App.css'
 import Main from './pages/Main'
 import Profile from "./pages/Profile"
 import Ideas from './pages/Ideas'
-import { useState, createContext, useEffect } from 'react'
+import { useState, createContext } from 'react'
 import { Modal, Box } from '@mui/material';
 import Registration from './components/apply/GetApply'
 import { auth } from "./app/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Routes, Route, Router, Navigate, Outlet } from "react-router-dom"
+import { Routes, Route, } from "react-router-dom"
 import Users from "./pages/Users"
 import Table from './pages/Table'
 import Admin from './pages/Admin'
@@ -21,9 +21,8 @@ export { ModalContext }
 
 function App() {
   const [modal, setModal] = useState(false)
-  const [idea, setIdea] = useState(false)
 
-  const [user, loading] = useAuthState(auth)
+  const [user] = useAuthState(auth)
 
   function handleClose() {
     setModal(false)
@@ -41,17 +40,6 @@ function App() {
     padding: '0 30px 30px',
     color: 'black'
   };
-
-  const modalText = {
-    mt: 2,
-    color: 'black'
-  }
-
-  const AuthRedirect = () => {
-    return (
-      (user?.email === allowed[0]) !== loading ? <Outlet /> : <Navigate to="/college-web/" />
-    )
-  }
 
   function checkAdmin() {
     return allowed.includes(user?.email)
